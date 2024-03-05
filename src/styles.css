@@ -1,2 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 @import "../node_modules/bootstrap/dist/css/bootstrap.css";
+@import "../node_modules/glightbox/dist/css/glightbox.css";
+@import "../node_modules/nouislider/dist/nouislider.min.css";
+@import "../node_modules/choices.js-addchoise/public/assets/styles/choices.css";
+@import "../node_modules/swiper/swiper-bundle.min.css";
+@import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300;400;700&amp;display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Martel+Sans:wght@300;400;800&amp;display=swap");
+@import "./assets/css/style.default.css";
+
