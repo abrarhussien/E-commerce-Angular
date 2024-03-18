@@ -1,0 +1,93 @@
+<div class="container">
+  <!-- HERO SECTION-->
+  <section class="py-5">
+    <!-- BILLING ADDRESS-->
+    <h2 class="h5 text-uppercase mb-4">Add Product</h2>
+    <form [formGroup]="product" (submit)="addProduct()">
+      <div class="row gy-3">
+        <div class="col-lg-12">
+          <label class="form-label text-sm text-uppercase" for="title"
+            >title
+          </label>
+          <input
+            class="form-control form-control-lg"
+            type="text"
+            id="title"
+            placeholder="Enter product title"
+            formControlName="title"
+          />
+        </div>
+        <div class="col-lg-12">
+          <label class="form-label text-sm text-uppercase" for="details"
+            >details
+          </label>
+          <input
+            class="form-control form-control-lg"
+            type="text"
+            id="details"
+            placeholder="Enter product details"
+            formControlName="details"
+          />
+        </div>
+        <div class="col-lg-12">
+          <label class="form-label text-sm text-uppercase" for="price"
+            >price
+          </label>
+          <input
+            class="form-control form-control-lg"
+            type="number"
+            id="price"
+            placeholder="Enter price"
+            formControlName="price"
+          />
+        </div>
+        <div class="col-lg-6 form-group">
+          <label class="form-label text-sm text-uppercase" for="category"
+            >Catgorey</label
+          >
+          <select
+            class="category"
+            id="category"
+            data-customclass="form-control form-control-lg rounded-0"
+            formControlName="category"
+            (change)="getSubs()"
+
+
+          >
+          <option *ngFor="let item of categories" [value]="item.name">{{item.name}}</option>
+
+          </select>
+        </div>
+        <div class="col-lg-6 form-group">
+          <label class="form-label text-sm text-uppercase" for="sub-category"
+            >Sub Catgorey</label
+          >
+          <select
+            class="sub-category"
+            id="sub-category"
+            data-customclass="form-control form-control-lg rounded-0"
+            formControlName="subCategory"
+          >
+          <option *ngFor="let item of subCategories" [value]="item">{{item}}</option>
+
+          </select>
+        </div>
+        <div class="col-lg-12">
+          <label class="form-label text-sm text-uppercase" for="image"
+            >image
+          </label>
+          <input
+            class="form-control form-control-lg"
+            type="text"
+            id="image"
+            formControlName="image"
+          />
+        </div>
+
+        <div class="col-lg-12 form-group">
+          <button class="btn btn-dark" type="submit">Add</button>
+        </div>
+      </div>
+    </form>
+  </section>
+</div>

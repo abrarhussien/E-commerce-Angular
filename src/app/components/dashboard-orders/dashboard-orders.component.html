@@ -1,0 +1,38 @@
+<div class="table-responsive mb-4">
+  <table class="table text-nowrap">
+    <thead class="bg-light">
+      <tr>
+        <th class="border-0 p-3" scope="col"> <strong class="text-sm text-uppercase">User</strong></th>
+        <th class="border-0 p-3" scope="col"> <strong class="text-sm text-uppercase">date</strong></th>
+        <th class="border-0 p-3" scope="col"> <strong class="text-sm text-uppercase">products</strong></th>
+        <th class="border-0 p-3" scope="col"> <strong class="text-sm text-uppercase">total price</strong></th>
+        <th class="border-0 p-3" scope="col"> <strong class="text-sm text-uppercase">status</strong></th>
+      </tr>
+    </thead>
+    <tbody class="border-0">
+      <tr *ngFor="let item of orders; index as i; ">
+        <th class="p-3 align-middle border-light">
+          <p class="mb-0 small">{{item.user}}</p>
+        </th>
+        <td class="p-3 align-middle border-light">
+          <p class="mb-0 small">{{item.date}}</p>
+        </td>
+        <td class="p-3 align-middle border-light" >
+          <ul class="mb-0 small">
+            <li *ngFor="let product of item.products">{{product}}</li>
+          </ul>
+        </td>
+        <td class="p-3 align-middle border-light">
+          <p class="mb-0 small">{{item.total}}</p>
+        </td>
+        <td class="p-3 align-middle border-light">
+          <select name="status" id="status" [value]="item.status" (change)="changeStatus($event,item.id)">
+            <option value="pending">Pending</option>
+            <option value="accepted">Accepted</option>
+            <option value="rejected">Rejected</option>
+          </select>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
