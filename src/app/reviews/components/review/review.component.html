@@ -1,0 +1,71 @@
+<div class="tab-pane " id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+  <div class="p-4 p-lg-5 bg-white">
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="d-flex mb-3" *ngFor="let item of dataReview let i = index">
+          <div class="flex-shrink-0"><img class="rounded-circle" [src]="item.user['image']" alt="" width="50" />
+          </div>
+          <div class="ms-3 flex-shrink-1">
+            <h6 class="mb-0 text-uppercase">{{ item.user['name'] }}</h6>
+            <p class="small text-muted mb-0 text-uppercase">20 May 2020</p>
+            <ul class="list-inline mb-1 text-xs">
+              <li class="list-inline-item m-0"><i class="fas fa-star text-warning"></i></li>
+              <li class="list-inline-item m-0"><i class="fas fa-star text-warning"></i></li>
+              <li class="list-inline-item m-0"><i class="fas fa-star text-warning"></i></li>
+              <li class="list-inline-item m-0"><i class="fas fa-star text-warning"></i></li>
+              <li class="list-inline-item m-0"><i class="fas fa-star-half-alt text-warning"></i></li>
+            </ul>
+            <p class="text-sm mb-0 text-muted">{{ item.reviewDetails }}</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <li class="nav-item nav-link text-uppercase cursor-pointer active"
+ id="description-tab"
+data-bs-toggle="tab" role="tab" aria-controls="description"
+aria-selected="true">Add Comment</li> -->
+
+<!-- <app-add-review></app-add-review>
+ -->
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" (click)="openModal()">
+  Add Review
+</button>
+
+<!-- Modal -->
+<div class="modal block" #exampleModal>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Review</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button>
+      </div>
+      <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
+        <div class="modal-body">
+
+          <div class="mb-3">
+            <label for="review" class="form-label">Review</label>
+
+            <!-- "myForm.controls['review'].errors?.['pattern'] -->
+            <input type="text" class="form-control" id="review" aria-describedby="emailHelp" formControlName="review">
+            <div class="text-danger"
+              *ngIf="myForm.get('review')?.invalid  && (myForm.get('review')?.dirty || myForm.get('review')?.touched)">
+              Please provide a valid Review</div>
+          </div>
+
+          <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
+
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+          <button type="submit" class="btn btn-primary" [disabled]="myForm.invalid">Add Review</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- Button trigger modal -->
