@@ -5,10 +5,22 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { CategoryComponent } from './components/category/category.component';
+import { ProductComponent } from './components/product/product.component';
+import { HeaderComponent } from './components/header/header.component';
+import { ProductDetailComponent } from './components/product-detail/product-detail.component';
+import { CartComponent } from './components/cart/cart.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CategoryComponent,
+    ProductComponent,
+    HeaderComponent,
+    ProductDetailComponent,
+    CartComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
