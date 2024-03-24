@@ -16,13 +16,5 @@ export class AppComponent implements OnInit {
     private router: Router
   ) {}
   ngOnInit(): void {}
-  logout() {
-    localStorage.removeItem('token');
-    this.router.navigate(['/login']);
-  }
-  test() {
-    this.http
-      .get('https://node-e-commerce-rlkh.onrender.com/api/v1/orders')
-      .subscribe((data: any) => console.log(data));
-  }
+
 }

@@ -42,11 +42,11 @@ export class RegisterComponent {
       // ]),
       password: new FormControl('', [
         Validators.required,
-        Validators.minLength(9),
+        Validators.minLength(6),
       ]),
       repassword: new FormControl('', [
         Validators.required,
-        Validators.minLength(9),
+        Validators.minLength(6),
       ]),
     },
     { validators: passwordMatchValidator }
