@@ -34,7 +34,7 @@ export class LoginComponent {
     ]),
     password: new FormControl('', [
       Validators.required,
-      Validators.minLength(9),
+      Validators.minLength(6),
     ]),
   });
   onSubmit(): void {
@@ -56,11 +56,11 @@ export class LoginComponent {
           return throwError(() => error);
         })
       )
-      .subscribe((reponse) => {
-        console.log('Response:', reponse);
-        localStorage.setItem('token', reponse['token']);
+      .subscribe((response) => {
+        console.log('Response:', response);
+        localStorage.setItem('token', response['token']);
         //this.cookieService.set('token', reponse['token']);
-        this.router.navigate(['/']);
+        this.router.navigate(['/home']);
       });
     this.contactForm.reset();
   }

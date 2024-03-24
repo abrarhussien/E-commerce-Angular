@@ -17,9 +17,14 @@ import { LoginComponent } from './component/login/login.component';
 import { RegisterComponent } from './component/registerr/registerr.component';
 import { AuthInterceptor } from './models/authinterceptor';
 import { provideRouter } from '@angular/router';
+import { NavBarComponent } from './component/nav-bar/nav-bar.component';
+import { ProfileComponent } from './component/profile/profile.component';
+import { HomeComponent } from './component/home/home.component';
+import { UserOrdersComponent } from './component/user-orders/user-orders.component';
+import { OrderDetailsComponent } from './component/order-details/order-details.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, RegisterComponent],
+  declarations: [AppComponent, LoginComponent, RegisterComponent, NavBarComponent, ProfileComponent, HomeComponent, UserOrdersComponent, OrderDetailsComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
