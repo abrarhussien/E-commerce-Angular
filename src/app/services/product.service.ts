@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IProduct } from '../models/product.model';
 import { BehaviorSubject, Subject, delay } from 'rxjs';
@@ -9,24 +9,44 @@ import { BehaviorSubject, Subject, delay } from 'rxjs';
 export class ProductService {
   constructor(private httpClient:HttpClient) {}
   getProducts() {
-    return this.httpClient.get<IProduct[]>('http://localhost:3000/products');
+    return this.httpClient.get<any[]>('https://node-e-commerce-rlkh.onrender.com/api/v1/products');
   }
   getProductById(id: string) {
+    console.log(id)
     return this.httpClient.get<IProduct>(
-      'http://localhost:3000/products/' + id
+      'https://node-e-commerce-rlkh.onrender.com/api/v1/products/' + id
     );
   }
   addProduct(product: IProduct) {
-    return this.httpClient.post('http://localhost:3000/products', product);
+    return this.httpClient.post('https://node-e-commerce-rlkh.onrender.com/api/v1/products', product);
   }
   editProduct(newProduct: IProduct) {
+    console.log(newProduct)
     return this.httpClient.put(
-      'http://localhost:3000/products/' + newProduct.id,
+      'https://node-e-commerce-rlkh.onrender.com/api/v1/products/' + newProduct._id,
       newProduct
     );
   }
   deleteProduct(id: string) {
-    return this.httpClient.delete('http://localhost:3000/products/' + id);
+    return this.httpClient.delete('https://node-e-commerce-rlkh.onrender.com/api/v1/products/' + id);
+  }
+  getFilteredProducts(
+    page:number,
+    limit:number,
+    search:{key:string,value:string}[],
+    sort:{by:string,direction:string}
+
+  ){
+    let queryParams= new HttpParams()
+    queryParams= queryParams.append("page",page);
+    queryParams= queryParams.append("limit",limit);
+    queryParams=queryParams.append("sort",sort.direction==="desc"?"-"+sort.by:sort.by);
+    search.map((search)=>queryParams=queryParams.append(search.key,search.value));
+
+    return this.httpClient.get('https://node-e-commerce-rlkh.onrender.com/api/v1/products',{params:queryParams})
+    //ocalhost:8001/api/v1/products?page=1&ratingsAverage[lte]=4&price[gte]=55.99&sort=-sold,price&keyword=Casual&limit=5
+
+
   }
   // productsSubject=new BehaviorSubject<IProduct[]>([
   //   {

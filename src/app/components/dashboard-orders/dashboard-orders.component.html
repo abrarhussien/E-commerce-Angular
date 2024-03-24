@@ -26,7 +26,7 @@
           <p class="mb-0 small">{{item.total}}</p>
         </td>
         <td class="p-3 align-middle border-light">
-          <select name="status" id="status" [value]="item.status" (change)="changeStatus($event,item.id)">
+          <select name="status" class="form-select" id="status" [value]="item.status" (change)="changeStatus($event,item.id)">
             <option value="pending">Pending</option>
             <option value="accepted">Accepted</option>
             <option value="rejected">Rejected</option>

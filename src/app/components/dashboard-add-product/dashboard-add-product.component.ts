@@ -2,7 +2,7 @@ import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { CategoriesService } from './../../services/categories.service';
 import { ProductService } from './../../services/product.service';
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { IProduct } from '../../models/product.model';
 
@@ -11,18 +11,30 @@ import { IProduct } from '../../models/product.model';
   templateUrl: './dashboard-add-product.component.html',
   styleUrl: './dashboard-add-product.component.css',
 })
-export class DashboardAddProductComponent implements OnDestroy {
+export class DashboardAddProductComponent implements OnDestroy ,OnInit {
   constructor(
     private productService: ProductService,
     private categoriesService: CategoriesService,
     private router: Router
   ) {}
+  ngOnInit(): void {
+    this.subscriptions.add(
+      this.categoriesService.getCategories().subscribe({
+        next: (categories:any) => {
+          this.categories = categories.data;
+        },
+        error: (err) => {
+          console.log(err.message);
+        }
+      })
+      )
+  }
 
   subscriptions = new Subscription();
 
   product = new FormGroup({
     title: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    details: new FormControl('', [
+    description: new FormControl('', [
       Validators.required,
       Validators.minLength(3),
     ]),
@@ -31,24 +43,15 @@ export class DashboardAddProductComponent implements OnDestroy {
       Validators.min(0),
       Validators.max(60),
     ]),
-    category: new FormControl('1', [Validators.required]),
-    subCategory: new FormControl('1', [Validators.required]),
-    image: new FormControl('', [Validators.required]),
+    category: new FormControl('', [Validators.required]),
+    imageCover: new FormControl('', [Validators.required]),
+    quantity:new FormControl(0,[Validators.required])
   });
 
-  categories = this.categoriesService.getCategories();
+  categories:any;
 
-  subCategories = this.categoriesService.getSubCategories(
-    //@ts-ignore
-    this.product.value.category
-  );
 
-  getSubs() {
-    this.subCategories = this.categoriesService.getSubCategories(
-      //@ts-ignore
-      this.product.value.category
-    );
-  }
+
   addProduct() {
     //@ts-ignore
     this.subscriptions.add(

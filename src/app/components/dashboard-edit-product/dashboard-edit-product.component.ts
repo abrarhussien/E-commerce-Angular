@@ -20,9 +20,9 @@ export class DashboardEditProductComponent implements OnInit, OnDestroy {
   ) {}
   subscriptions = new Subscription();
   product = new FormGroup({
-    id: new FormControl(),
+    _id: new FormControl(),
     title: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    details: new FormControl('', [
+    description: new FormControl('', [
       Validators.required,
       Validators.minLength(3),
     ]),
@@ -32,8 +32,9 @@ export class DashboardEditProductComponent implements OnInit, OnDestroy {
       Validators.max(60),
     ]),
     category: new FormControl('1', [Validators.required]),
-    subCategory: new FormControl('1', [Validators.required]),
-    image: new FormControl('', [Validators.required]),
+    imageCover: new FormControl('', [Validators.required]),
+    quantity:new FormControl(0,[Validators.required])
+
   });
 
   ngOnInit(): void {
@@ -43,47 +44,47 @@ export class DashboardEditProductComponent implements OnInit, OnDestroy {
           const id = params.get('id');
           if (id) {
             this.productService.getProductById(id).subscribe({
-              next: (product) => {
-                this.product.patchValue(product);
-
+              next: (product:any) => {
+                this.product.patchValue({...product.data, category: product.data.category._id});
               },
               error: (err) => {
-                err.message;
+                console.log(err.message);
               },
             });
           }
         },
       })
     );
-    //@ts-ignore
-  }
-
-  categories = this.categoriesService.getCategories();
-
-  //@ts-ignore
-  subCategories = this.categoriesService.getSubCategories(
-    //@ts-ignore
-    this.product?.value?.category
-  );
-
-  getSubs() {
-    //@ts-ignore
-    this.subCategories = this.categoriesService.getSubCategories(
-      //@ts-ignore
-      this.product?.value?.category
+    this.subscriptions.add(
+      this.categoriesService.getCategories().subscribe({
+        next: (categories:any) => {
+          this.categories = categories.data;
+        },
+        error: (err) => {
+          console.log(err.message);
+        },
+      })
     );
+
+    //@ts-ignore
   }
+
+  categories: any;
+
+
   editProduct() {
     //@ts-ignore
     this.subscriptions.add(
-      this.productService.editProduct(this.product.value as IProduct).subscribe({
-        next: () => {
-          this.router.navigate(['/dashboard/products']);
-        },
-        error: (err) => {
-          alert(err.message);
-        },
-      })
+      this.productService
+        .editProduct(this.product.value as IProduct)
+        .subscribe({
+          next: () => {
+            this.router.navigate(['/dashboard/products']);
+          },
+          error: (err) => {
+            alert(err.message);
+          },
+        })
     );
   }
 
