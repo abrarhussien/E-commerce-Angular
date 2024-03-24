@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
   }
   test() {
     this.http
-      .get('http://localhost:8001/api/v1/orders')
+      .get('https://node-e-commerce-rlkh.onrender.com/api/v1/orders')
       .subscribe((data: any) => console.log(data));
   }
 }

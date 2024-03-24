@@ -55,11 +55,14 @@ export class RegisterComponent {
     if (!this.contactForm.valid) return;
     const { name, email, password } = this.contactForm.value;
     this.http
-      .post<any>('http://localhost:8001/api/users/register', {
-        name,
-        email,
-        password,
-      })
+      .post<any>(
+        'https://node-e-commerce-rlkh.onrender.com/api/users/register',
+        {
+          name,
+          email,
+          password,
+        }
+      )
       .pipe(
         catchError((error) => {
           console.error('Error:', error);
