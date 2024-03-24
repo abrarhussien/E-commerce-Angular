@@ -16,6 +16,10 @@
               <li class="list-inline-item m-0"><i class="fas fa-star-half-alt text-warning"></i></li>
             </ul>
             <p class="text-sm mb-0 text-muted">{{ item.reviewDetails }}</p>
+            <div class="d-grid gap-2 d-md-block " *ngIf="userId==item.user._id">
+              <button class="btn btn-primary me-3" type="button" (click)="EditReview(item,item._id)">Edit</button>
+              <button class="btn btn-danger" type="button" (click)="deleteReview(item._id)">Delete</button>
+            </div>
           </div>
         </div>
 
@@ -30,8 +34,7 @@ aria-selected="true">Add Comment</li> -->
 
 <!-- <app-add-review></app-add-review>
  -->
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" (click)="openModal()">
+<button type="button" class="btn btn-primary" (click)="openModal() ">
   Add Review
 </button>
 
@@ -43,7 +46,7 @@ aria-selected="true">Add Comment</li> -->
         <h5 class="modal-title" id="exampleModalLabel">Add Review</h5>
         <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button>
       </div>
-      <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
+      <form [formGroup]="myForm" (ngSubmit)="addReview ? onSubmit(myForm) : onupdata(myForm)">
         <div class="modal-body">
 
           <div class="mb-3">
@@ -62,7 +65,8 @@ aria-selected="true">Add Comment</li> -->
 
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
-          <button type="submit" class="btn btn-primary" [disabled]="myForm.invalid">Add Review</button>
+          <button type="submit" class="btn btn-primary" [disabled]="myForm.invalid"
+            >{{ addReview ? 'Add Review':'Update Review' }}</button>
         </div>
       </form>
     </div>

@@ -13,7 +13,7 @@ import { ReviewModule } from '../reviews/review.module';
   declarations: [ProductComponent, ProductDetailsComponent],
   imports: [
     CommonModule,
-    FormsModule,
+   FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     ProductRoutingModule,
