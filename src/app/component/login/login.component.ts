@@ -45,7 +45,7 @@ export class LoginComponent {
 
     const { email, password } = this.contactForm.value;
     this.http
-      .post<any>('http://localhost:8001/api/users/login', {
+      .post<any>('https://node-e-commerce-rlkh.onrender.com/api/users/login', {
         email,
         password,
       })
