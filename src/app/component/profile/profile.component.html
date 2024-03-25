@@ -1,0 +1,25 @@
+<div>
+  <div *ngIf="editMode==false">
+      <h2>User Information</h2>
+  <p><strong>Name:</strong> {{ user.name }}</p>
+  <p><strong>Email:</strong> {{ user.email }}</p>
+
+  </div>
+
+
+  <!-- Edit button -->
+  <button (click)="toggleEditMode()">Edit</button>
+
+  <!-- Input fields for editing (shown only in edit mode) -->
+  <div *ngIf="editMode">
+    <label>Name:</label>
+    <input [(ngModel)]="user.name" type="text"><br>
+    <label>Email:</label>
+    <input [(ngModel)]="user.email" type="email"><br>
+    <button (click)="updateUserProfile()">Save</button>
+  </div>
+</div>
+
+
+
+<button routerLink="./orders">Orders</button>
