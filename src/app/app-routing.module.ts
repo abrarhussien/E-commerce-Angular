@@ -1,7 +1,6 @@
 import { LoginComponent } from './components/login/login.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CategoryComponent } from './components/category/category.component';
 import { ProductComponent } from './components/product/product.component';
 import { CartComponent } from './components/cart/cart.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -11,12 +10,13 @@ import { DashboardAddProductComponent } from './components/dashboard-add-product
 import { DashboardEditProductComponent } from './components/dashboard-edit-product/dashboard-edit-product.component';
 import { RegisterComponent } from './components/registerr/registerr.component';
 import { ProfileComponent } from './components/profile/profile.component';
-import { HomeComponent } from './components/home/home.component';
+
 import { UserOrdersComponent } from './components/user-orders/user-orders.component';
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
+import { HomeComponent } from './components/home/home.component';
 
 export const routes: Routes = [
-  { path: 'categories', component: CategoryComponent },
+  { path: 'home', component:  HomeComponent},
   { path: 'cart', component: CartComponent },
   { path: 'login', component: LoginComponent },
   {
@@ -37,7 +37,7 @@ export const routes: Routes = [
     path: 'registerr',
     component: RegisterComponent,
   },
-  { path: '', redirectTo: '/categories', pathMatch: 'full' },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'product', component: ProductComponent },
   {
     path: 'login',

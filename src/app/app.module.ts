@@ -6,9 +6,7 @@ import {
 
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CategoryComponent } from './components/category/category.component';
 import { ProductComponent } from './components/product/product.component';
-import { HeaderComponent } from './components/header/header.component';
 import { CartComponent } from './components/cart/cart.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -25,9 +23,9 @@ import { RegisterComponent } from './components/registerr/registerr.component';
 import { provideRouter } from '@angular/router';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { ProfileComponent } from './components/profile/profile.component';
-import { HomeComponent } from './components/home/home.component';
 import { UserOrdersComponent } from './components/user-orders/user-orders.component';
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -47,9 +45,7 @@ import { OrderDetailsComponent } from './components/order-details/order-details.
     DashboardEditProductComponent,
     DashboardAddProductComponent,
     AppComponent,
-    CategoryComponent,
     ProductComponent,
-    HeaderComponent,
     CartComponent,
     LoginComponent,
   ],
