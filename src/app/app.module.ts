@@ -5,12 +5,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { CategoryComponent } from './components/category/category.component';
-import { ProductComponent } from './components/product/product.component';
-import { HeaderComponent } from './components/header/header.component';
-import { ProductDetailComponent } from './components/product-detail/product-detail.component';
-import { CartComponent } from './components/cart/cart.component';
-import { LoginComponent } from './components/login/login.component';
+import { CategoryComponent } from './component/category/category.component';
+import { ProductComponent } from './component/product/product.component';
+import { HeaderComponent } from './component/header/header.component';
+import { ProductDetailComponent } from './component/product-detail/product-detail.component';
+import { CartComponent } from './component/cart/cart.component';
+import { LoginComponent } from './component/login/login.component';
 
 @NgModule({
   declarations: [
@@ -20,16 +20,16 @@ import { LoginComponent } from './components/login/login.component';
     HeaderComponent,
     ProductDetailComponent,
     CartComponent,
-    LoginComponent
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -1,10 +1,10 @@
-import { LoginComponent } from './components/login/login.component';
-import { ProductDetailComponent } from './components/product-detail/product-detail.component';
+import { LoginComponent } from './component/login/login.component';
+import { ProductDetailComponent } from './component/product-detail/product-detail.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CategoryComponent } from './components/category/category.component';
-import { ProductComponent } from './components/product/product.component';
-import { CartComponent } from './components/cart/cart.component';
+import { CategoryComponent } from './component/category/category.component';
+import { ProductComponent } from './component/product/product.component';
+import { CartComponent } from './component/cart/cart.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/categories', pathMatch: 'full' },
