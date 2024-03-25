@@ -9,6 +9,7 @@ import {
   Input,
   OnInit,
   ViewChild,
+  input,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
@@ -23,9 +24,13 @@ export class ReviewComponent implements OnInit {
     private reviewService: ReviewService,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder
-  ) {}
+  ) {
+    this.getCurrentUser();
+  }
   id: any;
-  userId: string = '65d8884d866dda1b8bbe52c4';
+
+  userId!: string;
+  // userId: string ="6600ef79ae7cf1ca32567fbb";
   // headers = new HttpHeaders().set('user', this.userId);
   updateData!: FormGroup;
   dataReview: Review[] = [];
@@ -36,6 +41,7 @@ export class ReviewComponent implements OnInit {
   itemEdit!: any;
   @Input() productName!: string;
   @Input() productRatingReview!: number;
+
 
   @ViewChild('exampleModal') exampleModalInput!: ElementRef;
   myForm!: FormGroup;
@@ -58,10 +64,12 @@ export class ReviewComponent implements OnInit {
   updateFormGroup: any;
 
   ngOnInit(): void {
+    ('lll');
+  
+    this.getCurrentUser();
     console.log(this.exampleModalInput);
     // console.log(this.exampleModalInput);
     this.id = this.route.snapshot.paramMap.get('id');
-    console.log(this.id);
 
     this.myForm = this.formBuilder.group({
       review: [
@@ -73,12 +81,22 @@ export class ReviewComponent implements OnInit {
         ],
       ],
     });
-    this.id = this.route.snapshot.paramMap.get('id');
+    // this.id = this.route.snapshot.paramMap.get('id');
+
+    // this.route.paramMap.subscribe((param) => {
+    //   const id = param.get(`id`);
+    //   this.deleteReview(id);
+    // });
     console.log(this.id);
     console.log(this.productName);
     this.getProductReviews();
   }
-
+  getCurrentUser() {
+    this.reviewService.getCurrentUser().subscribe((response: any) => {
+      console.log('id111', response);
+      this.userId = response._id;
+    });
+  }
   getProductReviews() {
     this.reviewService.getProductReviews(this.id).subscribe((data) => {
       this.dataReview = data;
@@ -104,25 +122,27 @@ export class ReviewComponent implements OnInit {
   //   });
   // }
 
-  deleteReview(id: string) {
-    this.reviewService.deleteProductReviews(id, this.userId).subscribe({
-      next: () => {
-        console.log('rrr', this.dataReview);
-        this.dataReview = this.dataReview.filter((review) => review._id != id);
+  deleteReview(id: any) {
+    this.reviewService.deleteProductReviews(id).subscribe({
+      next: (data) => {
+        this.dataReview = this.dataReview.filter(
+          (review) => review._id != id
+        );
       },
       error: (err) => {
-        alert(err.message);
+        console.error('Error deleting review:', err);
+      alert('Error deleting review: ' + err.message);
       },
     });
   }
 
-  confirmDelete(id: string, name: string): void {
-    const isConfirmed = confirm(`Are you sure you want to delete ${name}?`);
+  // confirmDelete(id: string, name: string): void {
+  //   const isConfirmed = confirm(`Are you sure you want to delete ${name}?`);
 
-    if (isConfirmed) {
-      this.deleteReview(id);
-    }
-  }
+  //   if (isConfirmed) {
+  //     this.deleteReview(id);
+  //   }
+  // }
 
   openModal() {
     if (this.exampleModalInput != null) {
@@ -169,7 +189,7 @@ export class ReviewComponent implements OnInit {
         user: this.userId,
       };
       this.reviewService
-        .updateoductReviews( this.dataEdit,this.idEditReview)
+        .updateoductReviews(this.dataEdit, this.idEditReview)
         .subscribe({
           next: (data) => console.log(data),
           error: (err) => console.log(err),

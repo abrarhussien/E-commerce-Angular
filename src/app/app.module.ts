@@ -5,12 +5,19 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ProductModule } from './products/product.module';
 import { ReviewModule } from './reviews/review.module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './services/authinterceptor';
+import { EditReviewComponent } from './reviews/components/edit-review/edit-review.component';
 
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, EditReviewComponent],
   imports: [BrowserModule, AppRoutingModule, ProductModule,ReviewModule],
-  providers: [],
+  providers: [ {
+    provide:HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true,
+  },],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -8,12 +8,15 @@ import { catchError } from 'rxjs';
   providedIn: 'root',
 })
 export class ProductService {
-  api = environment.apiUrl;
+  // api = environment.apiUrl;https://node-ecommerce-sr19.onrender.com
+  api = 'https://node-ecommerce-sr19.onrender.com';
   constructor(private httpclient: HttpClient) {}
 
-  getAllProducts(page: number,sortField:string,sortOrder:string) {
+  getAllProducts(page: number, sortField:string) {
     return this.httpclient
-      .get<Product[]>(`${this.api}/api/products?page=${page}&sortField=${sortField}&sortOrder=${sortOrder}`)
+      .get(
+        `${this.api}/api/v1/products?page=${page}&sort=${sortField}&limit=6`
+      )
       .pipe(
         catchError((error: any) => {
           console.error('API Error:', error);
@@ -23,7 +26,7 @@ export class ProductService {
   }
 
   getProductsById(id: string) {
-    return this.httpclient.get<Product>(`${this.api}/api/products/${id}`).pipe(
+    return this.httpclient.get<Product>(`${this.api}/api/v1/products/${id}`).pipe(
       catchError((error: any) => {
         console.error('API Error:', error);
         throw error;

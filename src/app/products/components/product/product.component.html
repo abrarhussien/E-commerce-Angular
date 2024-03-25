@@ -70,11 +70,11 @@
                   <select class="selectpicker" data-customclass="form-control form-control-sm"
                     (change)="sorting($event)">
 
-                    <option value="category-asc">Sort By Name Category Ascending</option>
-                    <option value="category-desc">Sort By Name Category Descending </option>
+                    <option value="price">Price: Low to High(Ascending)</option>
+                    <option value="-price">Price: High to Low (Descending)</option>
                     <!-- <option value="popularity">Popularity </option> -->
-                    <option value="price-asc">Price: Low to High(Ascending) </option>
-                    <option value="price-desc">Price: High to Low (Descending)</option>
+                    <option value="title">Sort By Name (Ascending) </option>
+                    <option value="-title">Sort By Name (Descending)</option>
                   </select>
 
                 </li>
@@ -82,13 +82,13 @@
             </div>
           </div>
           <div class="row">
-            <!-- PRODUCT-->
+            <!-- PRODUCT  src="assets/images/products/{{ item.image }}"-->
             <div class="col-lg-4 col-sm-6" *ngFor="let item of allProduct let i = index">
               <div class="product text-center">
                 <div class="mb-3 position-relative">
                   <div class="badge text-white bg-"></div><a class="d-block"
-                    [routerLink]="['/product-detail',item._id]"><img class="img-fluid w-100"
-                      src="assets/images/products/{{ item.image }}" alt="..."></a>
+                    [routerLink]="['/product-detail',item._id]"><img class="img-fluid w-100" [src]=" item.imageCover"
+                      alt="..."></a>
                   <div class="product-overlay">
                     <ul class="mb-0 list-inline">
                       <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-outline-dark" href="#!"><i
@@ -100,7 +100,7 @@
                     </ul>
                   </div>
                 </div>
-                <h6> <a class="reset-anchor" href="detail.html">{{ item.productName }}</a></h6>
+                <h6> <a class="reset-anchor" href="detail.html">{{ item.title }}</a></h6>
                 <p class="small text-muted">{{ item.price}} $</p>
               </div>
             </div>

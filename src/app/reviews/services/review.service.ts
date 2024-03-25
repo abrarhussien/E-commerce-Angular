@@ -8,9 +8,19 @@ import { catchError, throwError } from 'rxjs';
   providedIn: 'root',
 })
 export class ReviewService {
-  api = environment.apiUrl;
+  // api = environment.apiUrl;
+  api = 'https://node-ecommerce-sr19.onrender.com';
   constructor(private httpclient: HttpClient) {}
-
+  getCurrentUser() {
+    return this.httpclient
+      .get(`${this.api}/api/profile`)
+      .pipe(
+        catchError((error: any) => {
+          console.error('API Error:', error);
+          throw error;
+        })
+      );
+  }
   getProductReviews(id: string) {
     return this.httpclient
       .get<Review[]>(`${this.api}/api/product/${id}/reviews`)
@@ -43,28 +53,29 @@ export class ReviewService {
       );
   }
 
-  deleteProductReviews(id: string, userId: string) {
+  deleteProductReviews(id: any) {
 
     //const headers = new HttpHeaders();
-    let headers = new HttpHeaders();
-     headers = headers.set('user', userId);
-    const requestOptions: Object = {
-      /* other options here */
-      headers:headers,
-      responseType: 'text'
-    }
+    // let headers = new HttpHeaders();
+    //  headers = headers.set('user', userId);
+    // const requestOptions: Object = {
+    //   /* other options here */
+    //   headers:headers,
+    //   responseType: 'text'
+    // }
     return this.httpclient
-      .delete(`${this.api}/api/product/${id}/reviews`,requestOptions)
+      .delete(`${this.api}/api/product/${id}/reviews`)
       .pipe(
         // catchError((error: any) => {
         //   console.error('API Error:', error);
         //   throw error;
         //   // return throwError('An error occurred while deleting the reviews.');
         // })
+
         catchError((error: any) => {
+          console.log("id id id",id)
           console.error('API Error:', error);
-          const errorMessage = 'An error occurred while deleting the reviews.';
-          return throwError(errorMessage);
+          throw error;
         })
       );
   }

@@ -8,20 +8,21 @@ import { Product } from '../../models/product';
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.css',
 })
-
-
 export class ProductDetailsComponent implements OnInit {
   id: any;
   data: Product = {
     _id: '',
-    productName: '',
+    title: '',
     category: { name: '' },
     description: '',
     rating: 0,
     price: 0,
     quantity: 0,
     image: '',
+    imageCover: '',
   };
+  // data: Product | null = null;
+  // data: any;
   showDescription: boolean = true;
   showReview: boolean = false;
 
@@ -43,7 +44,8 @@ export class ProductDetailsComponent implements OnInit {
   getProduct(id: string) {
     this.productService.getProductsById(id).subscribe((data) => {
       this.data = data;
-      console.log(this.data);
+      console.log('Product ID:', this.data);
+      console.log(data);
     });
   }
 }
