@@ -11,7 +11,6 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth';
 import { UserInterFace } from '../../models/userInterface';
 import { catchError, throwError } from 'rxjs';
-import { CookieService } from 'ngx-cookie-service';
 const emailRegex = '[a-z0-9]+@[a-z]+.[a-z]{2,3}';
 
 @Component({
@@ -23,7 +22,6 @@ export class LoginComponent {
   constructor(
     private router: Router,
     private http: HttpClient,
-    private cookieService: CookieService
   ) {}
   validated = true;
 
