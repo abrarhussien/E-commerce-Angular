@@ -26,7 +26,7 @@ export class ProfileComponent implements OnInit {
   onLoginSuccess(): void {
     console.log("aaaaaaaaaaaaaaaaaaaaaahhhhhhhhhhhhhhhhhhhh");
 
-    const url = `http://localhost:5000/api/profile`;
+    const url = `https://node-e-commerce-rlkh.onrender.com/api/profile`;
     // const token: string = localStorage.getItem('token') as string
     // console.log(token)
     // let headers = new HttpHeaders({ 'jwt': `Bearer ${token}` });
@@ -51,7 +51,7 @@ export class ProfileComponent implements OnInit {
   editMode = false; // Flag to track edit mode
 
   getUserProfile(): void {
-    const url = `http://localhost:5000/api/profile`;
+    const url = `https://node-e-commerce-rlkh.onrender.com/api/profile`;
 
     this.http.get(url)
       .pipe(
@@ -73,7 +73,7 @@ export class ProfileComponent implements OnInit {
   }
 
 updateUserProfile(): void {
-  const url = `http://localhost:5000/api/profile`;
+  const url = `https://node-e-commerce-rlkh.onrender.com/api/profile`;
 
 
   this.http.patch(url, this.user)
