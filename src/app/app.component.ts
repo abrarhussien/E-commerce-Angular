@@ -1,8 +1,9 @@
+
 import { Component, OnInit, inject } from '@angular/core';
 import { AuthService } from './services/auth';
 import { HttpClient } from '@angular/common/http';
-import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,6 @@ import { Router } from '@angular/router';
 export class AppComponent implements OnInit {
   constructor(
     private http: HttpClient,
-    private cookieService: CookieService,
     private router: Router
   ) {}
   ngOnInit(): void {}
