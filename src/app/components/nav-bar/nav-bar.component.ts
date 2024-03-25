@@ -16,9 +16,4 @@ export class NavBarComponent {
     this.router.navigate(['/login']);
   }
 
-  test() {
-    this.http
-      .get('https://node-e-commerce-rlkh.onrender.com/api/v1/orders')
-      .subscribe((data: any) => console.log(data));
-  }
 }
