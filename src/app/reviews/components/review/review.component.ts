@@ -64,8 +64,6 @@ export class ReviewComponent implements OnInit {
   updateFormGroup: any;
 
   ngOnInit(): void {
-    ('lll');
-
     this.getCurrentUser();
     console.log(this.exampleModalInput);
     // console.log(this.exampleModalInput);
@@ -98,8 +96,8 @@ export class ReviewComponent implements OnInit {
     });
   }
   getProductReviews() {
-    this.reviewService.getProductReviews(this.id).subscribe((data) => {
-      this.dataReview = data;
+    this.reviewService.getProductReviews(this.id).subscribe((data:any) => {
+      this.dataReview = data.data;
       // data[0]['user']
       // this.dataReview
 
@@ -109,6 +107,7 @@ export class ReviewComponent implements OnInit {
   add(){
     this.addReview=true;
     this.updateRev=false;
+    this.myForm.reset()
     this.openModal();
   }
 
