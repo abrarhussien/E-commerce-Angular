@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ProductService } from '../../services/product.service';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 import { IProduct } from '../../models/product.model';
 import { Subscription } from 'rxjs';
 
