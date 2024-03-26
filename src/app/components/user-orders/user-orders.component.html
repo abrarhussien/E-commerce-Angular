@@ -1,0 +1,16 @@
+<div class="container py-4 bg-gray-900 text-light mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div *ngFor="let order of orders; let i = index" class="bg-gray-200 m-2 rounded-lg shadow-md p-4 text-dark slide-right" style="--delay: {{ i * 0.3 }}s;">
+          <h2 class="text-lg font-semibold mb-2 slide-left order_id"><strong>Order ID:</strong> {{ order._id }}</h2>
+          <p class="slide-left user_id"><strong>User ID:</strong> {{ order.user._id }}</p>
+          <p class="slide-left price"><strong>Total Order Price:</strong> ${{ order.totalOrderPrice }}</p>
+          <p class="slide-left status"><strong>Status:</strong> {{ order.status }}</p>
+          <button (click)="getOrderId(order._id)" class="btn btn-primary mt-3 mr-4 view">View Details</button>
+          <button *ngIf="order.status==='pending'||order.status==='Pending'" (click)="cancelOrder(order._id)" class="btn btn-danger mt-3 ml-4 cancel">Cancel Order</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

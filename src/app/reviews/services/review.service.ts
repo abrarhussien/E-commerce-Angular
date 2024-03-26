@@ -8,18 +8,16 @@ import { catchError, throwError } from 'rxjs';
   providedIn: 'root',
 })
 export class ReviewService {
-  // api = environment.apiUrl;
-  api = 'https://node-ecommerce-sr19.onrender.com';
+  api = environment.apiUrl;
+  // api = 'https://node-ecommerce-sr19.onrender.com';
   constructor(private httpclient: HttpClient) {}
   getCurrentUser() {
-    return this.httpclient
-      .get(`${this.api}/api/profile`)
-      .pipe(
-        catchError((error: any) => {
-          console.error('API Error:', error);
-          throw error;
-        })
-      );
+    return this.httpclient.get(`${this.api}/api/profile`).pipe(
+      catchError((error: any) => {
+        console.error('API Error:', error);
+        throw error;
+      })
+    );
   }
   getProductReviews(id: string) {
     return this.httpclient
@@ -42,7 +40,7 @@ export class ReviewService {
         })
       );
   }
-  updateoductReviews(data: any,id:string) {
+  updateoductReviews(data: any, id: string) {
     return this.httpclient
       .patch(`${this.api}/api/product/${id}/reviews`, data)
       .pipe(
@@ -54,7 +52,6 @@ export class ReviewService {
   }
 
   deleteProductReviews(id: any) {
-
     //const headers = new HttpHeaders();
     // let headers = new HttpHeaders();
     //  headers = headers.set('user', userId);
@@ -63,21 +60,19 @@ export class ReviewService {
     //   headers:headers,
     //   responseType: 'text'
     // }
-    return this.httpclient
-      .delete(`${this.api}/api/product/${id}/reviews`)
-      .pipe(
-        // catchError((error: any) => {
-        //   console.error('API Error:', error);
-        //   throw error;
-        //   // return throwError('An error occurred while deleting the reviews.');
-        // })
+    return this.httpclient.delete(`${this.api}/api/product/${id}/reviews`).pipe(
+      // catchError((error: any) => {
+      //   console.error('API Error:', error);
+      //   throw error;
+      //   // return throwError('An error occurred while deleting the reviews.');
+      // })
 
-        catchError((error: any) => {
-          console.log("id id id",id)
-          console.error('API Error:', error);
-          throw error;
-        })
-      );
+      catchError((error: any) => {
+        console.log('id id id', id);
+        console.error('API Error:', error);
+        throw error;
+      })
+    );
   }
 
   // delete(id:string){

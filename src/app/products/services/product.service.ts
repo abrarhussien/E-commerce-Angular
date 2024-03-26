@@ -8,8 +8,8 @@ import { catchError } from 'rxjs';
   providedIn: 'root',
 })
 export class ProductService {
-  // api = environment.apiUrl;https://node-ecommerce-sr19.onrender.com
-  api = 'https://node-ecommerce-sr19.onrender.com';
+  api = environment.apiUrl
+
   constructor(private httpclient: HttpClient) {}
 
   getAllProducts(page: number, sortField:string) {

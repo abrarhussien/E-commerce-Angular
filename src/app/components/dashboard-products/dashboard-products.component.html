@@ -1,0 +1,58 @@
+<div class="loader" *ngIf="loading"></div>
+<div class="table-responsive mb-4" *ngIf="!loading">
+  <button [routerLink]="'./add'" class="btn btn-dark mb-3">Add product</button>
+  <table class="table text-nowrap">
+    <thead class="bg-light">
+      <tr>
+        <th class="border-0 p-3" scope="col">
+          <strong class="text-sm text-uppercase">image</strong>
+        </th>
+        <th class="border-0 p-3" scope="col">
+          <strong class="text-sm text-uppercase">title</strong>
+        </th>
+        <th class="border-0 p-3" scope="col">
+          <strong class="text-sm text-uppercase">details</strong>
+        </th>
+        <th class="border-0 p-3" scope="col">
+          <strong class="text-sm text-uppercase">price</strong>
+        </th>
+        <th class="border-0 p-3" scope="col">
+          <strong class="text-sm text-uppercase"></strong>
+        </th>
+        <th class="border-0 p-3" scope="col">
+          <strong class="text-sm text-uppercase"></strong>
+        </th>
+      </tr>
+    </thead>
+    <tbody class="border-0">
+      <tr *ngFor="let item of products; index as i" >
+        <th class="ps-0 py-3 border-light " scope="row">
+          <div class="d-flex align-items-center">
+            <img [src]="item.imageCover" alt="..." width="70" />
+          </div>
+        </th>
+        <td class="p-3 align-middle border-light  text-wrap">
+          <p class="mb-0 small">{{ item.title }}</p>
+        </td>
+        <td class="p-3 align-middle text-wrap border-light ">
+          <ul class="mb-0 small">
+            <li>{{ item.description }}</li>
+          </ul>
+        </td>
+        <td class="p-3 align-middle border-light ">
+          <p class="mb-0 small">{{ item.price }}</p>
+        </td>
+        <td class="p-3 align-middle border-light ">
+          <a (click)="deleteProduct(item._id)" class="curser"
+            ><i class="fas fa-trash-alt small text-muted"></i
+          ></a>
+        </td>
+        <td class="p-3 align-middle border-light ">
+          <a [routerLink]="'./edit/' + item._id"
+            ><i class="fas fa-pen-to-square small text-muted"></i
+          ></a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
