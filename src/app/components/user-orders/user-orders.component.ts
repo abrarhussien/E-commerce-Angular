@@ -34,12 +34,10 @@ export class UserOrdersComponent {
         })
       )
       .subscribe((response: any) => {
-        if (response && response.data) {
-          console.log(response);
           this.orders = response.data;
           this.getOrders()
         }
-      });
+      );
   }
 
   getOrderId(orderId: string) {
