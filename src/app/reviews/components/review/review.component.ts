@@ -65,7 +65,7 @@ export class ReviewComponent implements OnInit {
 
   ngOnInit(): void {
     ('lll');
-  
+
     this.getCurrentUser();
     console.log(this.exampleModalInput);
     // console.log(this.exampleModalInput);
@@ -128,9 +128,11 @@ export class ReviewComponent implements OnInit {
         this.dataReview = this.dataReview.filter(
           (review) => review._id != id
         );
+        console.log(data);
+
       },
       error: (err) => {
-        console.error('Error deleting review:', err);
+        //console.error('Error deleting review:', err);
       alert('Error deleting review: ' + err.message);
       },
     });

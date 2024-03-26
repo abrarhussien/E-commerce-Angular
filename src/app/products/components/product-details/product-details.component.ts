@@ -34,7 +34,7 @@ export class ProductDetailsComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
-    console.log(this.id);
+    // console.log(this.id);
 
     this.getProduct(this.id);
   }
@@ -42,10 +42,10 @@ export class ProductDetailsComponent implements OnInit {
     this.showDescription = !this.showDescription;
   }
   getProduct(id: string) {
-    this.productService.getProductsById(id).subscribe((data) => {
-      this.data = data;
-      console.log('Product ID:', this.data);
-      console.log(data);
+    this.productService.getProductsById(id).subscribe((data:any) => {
+      this.data = data.data;
+      // console.log('Product ID:', this.data);
+      // console.log(data);
     });
   }
 }
