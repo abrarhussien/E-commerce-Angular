@@ -5,6 +5,11 @@ import {
 } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
+
+import { ProductModule } from './products/product.module';
+import { ReviewModule } from './reviews/review.module';
+
+import { EditReviewComponent } from './reviews/components/edit-review/edit-review.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductComponent } from './components/product/product.component';
 import { CartComponent } from './components/cart/cart.component';
@@ -16,7 +21,7 @@ import { DashboardOrdersComponent } from './components/dashboard-orders/dashboar
 import { DashboardProductsComponent } from './components/dashboard-products/dashboard-products.component';
 import { DashboardEditProductComponent } from './components/dashboard-edit-product/dashboard-edit-product.component';
 import { DashboardAddProductComponent } from './components/dashboard-add-product/dashboard-add-product.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 import { AuthInterceptor } from './models/authinterceptor';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/registerr/registerr.component';
@@ -27,8 +32,12 @@ import { UserOrdersComponent } from './components/user-orders/user-orders.compon
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
 import { HomeComponent } from './components/home/home.component';
 
+
+
+
 @NgModule({
   declarations: [
+    AppComponent, EditReviewComponent,
     AppComponent,
     LoginComponent,
     RegisterComponent,
@@ -56,7 +65,7 @@ import { HomeComponent } from './components/home/home.component';
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
-    FontAwesomeModule,
+  ProductModule,ReviewModule
   ],
   providers: [
     provideClientHydration(),
@@ -66,6 +75,7 @@ import { HomeComponent } from './components/home/home.component';
       multi: true,
     },
   ],
+
 
   bootstrap: [AppComponent],
 })
