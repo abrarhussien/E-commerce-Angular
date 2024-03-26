@@ -106,6 +106,11 @@ export class ReviewComponent implements OnInit {
       console.log(this.dataReview);
     });
   }
+  add(){
+    this.addReview=true;
+    this.updateRev=false;
+    this.openModal();
+  }
 
   // deleteReview(id: string) {
   //   const headers = new HttpHeaders();
