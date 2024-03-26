@@ -89,6 +89,10 @@ updateUserProfile(): void {
       // Optionally, you can show a success message to the user
       // Or navigate back to the profile page
     });
-}
+  }
+cancelUpdate(): void {
+      this.editMode = false;
+  }
+
 
 }

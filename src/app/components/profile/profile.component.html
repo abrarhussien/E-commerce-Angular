@@ -1,25 +1,31 @@
-<div>
-  <div *ngIf="editMode==false">
-      <h2>User Information</h2>
-  <p><strong>Name:</strong> {{ user.name }}</p>
-  <p><strong>Email:</strong> {{ user.email }}</p>
-
+<div class="container py-4 bg-dark text-light">
+  <div *ngIf="!editMode">
+    <h2>User Information</h2>
+    <p><strong>Name:</strong> {{ user.name }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <!-- Edit button -->
+    <button (click)="toggleEditMode()" class="btn btn-primary edit">Edit</button>
   </div>
 
-
-  <!-- Edit button -->
-  <button (click)="toggleEditMode()">Edit</button>
-
   <!-- Input fields for editing (shown only in edit mode) -->
-  <div *ngIf="editMode">
-    <label>Name:</label>
-    <input [(ngModel)]="user.name" type="text"><br>
-    <label>Email:</label>
-    <input [(ngModel)]="user.email" type="email"><br>
-    <button (click)="updateUserProfile()">Save</button>
+  <div *ngIf="editMode" class="mt-4">
+    <h2>Edit User Information</h2>
+    <label for="editName" class="form-label">Name:</label>
+    <input [(ngModel)]="user.name" type="text" id="editName" class="form-control mb-2">
+    <label for="editEmail" class="form-label">Email:</label>
+    <input [(ngModel)]="user.email" type="email" id="editEmail" class="form-control mb-2">
+    <div class="mt-3">
+      <button (click)="updateUserProfile()" class="btn btn-success me-2">Save</button>
+      <button (click)="cancelUpdate()" class="btn btn-secondary">Cancel</button>
+    </div>
   </div>
 </div>
 
+<div class="container py-4 bg-dark text-light mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-6 text-center"> <!-- Adjust the column size as needed -->
+      <button routerLink="./orders" class="btn btn-primary btn-slide">Orders</button>
+    </div>
+  </div>
+</div>
 
-
-<button routerLink="./orders">Orders</button>
