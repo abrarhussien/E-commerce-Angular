@@ -31,8 +31,9 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { UserOrdersComponent } from './components/user-orders/user-orders.component';
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
 import { HomeComponent } from './components/home/home.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-
+import { NgbRating} from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -57,6 +58,7 @@ import { HomeComponent } from './components/home/home.component';
     ProductComponent,
     CartComponent,
     LoginComponent,
+
   ],
 
   imports: [
@@ -65,7 +67,7 @@ import { HomeComponent } from './components/home/home.component';
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
-  ProductModule,ReviewModule
+  ProductModule,ReviewModule, NgbModule
   ],
   providers: [
     provideClientHydration(),

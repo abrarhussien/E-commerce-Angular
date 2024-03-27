@@ -7,6 +7,7 @@ import { ProductDetailsComponent } from './components/product-details/product-de
 import { HttpClientModule } from '@angular/common/http';
 import { ProductRoutingModule } from './product-routing.module';
 import { ReviewModule } from '../reviews/review.module';
+import { NgbRating} from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -17,9 +18,11 @@ import { ReviewModule } from '../reviews/review.module';
     ReactiveFormsModule,
     HttpClientModule,
     ProductRoutingModule,
-    ReviewModule
+    ReviewModule,
+    NgbRating
 
   ],
-  exports:[]
+  exports:[],
+ 
 })
 export class ProductModule {}
