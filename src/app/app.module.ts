@@ -31,9 +31,11 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { UserOrdersComponent } from './components/user-orders/user-orders.component';
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
 import { HomeComponent } from './components/home/home.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AboutUsComponent } from './about-us/about-us.component';
+import { FooterComponent } from './components/footer/footer.component';
 
-import { NgbRating} from '@ng-bootstrap/ng-bootstrap';
+
+
 
 
 @NgModule({
@@ -58,6 +60,9 @@ import { NgbRating} from '@ng-bootstrap/ng-bootstrap';
     ProductComponent,
     CartComponent,
     LoginComponent,
+    AboutUsComponent,
+    FooterComponent,
+
   ],
 
   imports: [
@@ -66,7 +71,7 @@ import { NgbRating} from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
-  ProductModule,ReviewModule, NgModule
+  ProductModule,ReviewModule
   ],
   providers: [
     provideClientHydration(),

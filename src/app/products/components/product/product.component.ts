@@ -97,7 +97,7 @@ export class ProductComponent implements OnInit {
       });
       // this.getAllProducts(this.currentPage , this.sortField);
 
-        this.getProductsByCategoryId(this.categoryId,this.currentPage, this.sortField)
+        this.getProductsByCategoryId(this.categoryId,this.currentPage+1, this.sortField)
       }else{
         this.currentPage = newPage;
         this.router.navigate(['/products'], {
