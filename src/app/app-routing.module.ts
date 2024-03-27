@@ -14,9 +14,12 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { UserOrdersComponent } from './components/user-orders/user-orders.component';
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
 import { HomeComponent } from './components/home/home.component';
+import { AboutUsComponent } from './about-us/about-us.component';
 
 export const routes: Routes = [
   { path: 'home', component:  HomeComponent},
+  { path: 'about-us', component:  AboutUsComponent},
+
   { path: 'cart', component: CartComponent },
   { path: 'login', component: LoginComponent },
   {
