@@ -19,8 +19,9 @@
     </header>
     <div class="row">
       <div class="col-md-4 mb-4 overflow-hidden " *ngFor="let item of allCategors let i = index">
-        <a class="category-item" [routerLink]="['/product',item.id]"><img class="img-fluid" src="assets/images/{{ item.image }}" alt=""  /><strong
-            class="category-item-title">{{ item.name }}</strong></a>
+        <a class="category-item" [routerLink]="'category/' + item._id + '/product'"><img class="img-fluid"
+            src="assets/images/{{ item.image }}" alt="" /><strong class="category-item-title">{{ item.name
+            }}</strong></a>
       </div>
 
     </div>

@@ -18,8 +18,7 @@ import { AboutUsComponent } from './about-us/about-us.component';
 
 export const routes: Routes = [
   { path: 'home', component:  HomeComponent},
-  { path: 'about-us', component:  AboutUsComponent},
-
+  { path: 'home', component: HomeComponent },
   { path: 'cart', component: CartComponent },
   { path: 'login', component: LoginComponent },
   {
@@ -54,6 +53,7 @@ export const routes: Routes = [
     path: 'home',
     component: HomeComponent,
   },
+
   {
     path: 'profile/orders',
     component: UserOrdersComponent,
@@ -69,5 +69,3 @@ export const routes: Routes = [
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
-
-

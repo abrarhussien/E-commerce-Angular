@@ -23,6 +23,7 @@ ngOnInit(): void {
       this.ordersService.getOrders().subscribe({
         next:(orders:any)=>{
           this.orders=orders.data
+          console.log(orders)
 
         },
         error:(err)=>{

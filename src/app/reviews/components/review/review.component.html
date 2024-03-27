@@ -53,7 +53,7 @@ aria-selected="true">Add Comment</li> -->
             <label for="review" class="form-label">Review</label>
 
             <!-- "myForm.controls['review'].errors?.['pattern'] -->
-            <input  type="text" class="form-control" id="review" aria-describedby="emailHelp" formControlName="review" >
+            <input  type="text" class="form-control" id="review" aria-describedby="emailHelp" formControlName="review"  >
             <div class="text-danger"
               *ngIf="myForm.get('review')?.invalid  && (myForm.get('review')?.dirty || myForm.get('review')?.touched)">
               Please provide a valid Review</div>

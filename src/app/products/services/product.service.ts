@@ -24,6 +24,18 @@ export class ProductService {
         })
       );
   }
+  getProductsByCategory(id:any,page: number, sortField:string) {
+    return this.httpclient
+      .get(
+        `${this.api}/api/v1/category/${id}/product?page=${page}&sort=${sortField}&limit=6`
+      )
+      .pipe(
+        catchError((error: any) => {
+          console.error('API Error:', error);
+          throw error;
+        })
+      );
+  }
 
   getProductsById(id: string) {
     return this.httpclient.get<Product>(`${this.api}/api/v1/products/${id}`).pipe(
