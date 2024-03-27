@@ -58,7 +58,6 @@ import { NgbRating} from '@ng-bootstrap/ng-bootstrap';
     ProductComponent,
     CartComponent,
     LoginComponent,
-
   ],
 
   imports: [
@@ -67,7 +66,7 @@ import { NgbRating} from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
-  ProductModule,ReviewModule, NgbModule
+  ProductModule,ReviewModule, NgModule
   ],
   providers: [
     provideClientHydration(),
