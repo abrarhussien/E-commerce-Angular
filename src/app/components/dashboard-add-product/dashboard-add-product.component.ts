@@ -55,7 +55,7 @@ export class DashboardAddProductComponent implements OnDestroy ,OnInit {
   addProduct() {
     //@ts-ignore
     this.subscriptions.add(
-      this.productService.addProduct(this.product.value as IProduct).subscribe({
+      this.productService.addProduct(this.product.value as unknown as IProduct).subscribe({
         next: () => {
           this.router.navigate(['/dashboard/products']);
         },

@@ -1,9 +1,13 @@
 export interface IProduct{
-    _id: string;
-    title: string;
-    imageCover: string;
-    price: number;
-    description: string;
-    category: string;
-    quantity: number;
+total: any;
+  _id: string;
+  title: string;
+  imageCover: string;
+  price: number;
+  description: string;
+  category: { name: string };
+  quantity: number;
+  rating: number;
+  image: string;
+  ratingsQuantity: number;
 }

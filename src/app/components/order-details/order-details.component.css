@@ -31,7 +31,12 @@
   color: #fff;
 }
 
-.profile-link::before {
+.profile-link:active {
+  background: #dfdddd;
+  color: #181818;
+}
+
+/* .profile-link::before {
   content: '';
   position: absolute;
   top: 0;
@@ -41,7 +46,7 @@
   background-color: #28a745;
   z-index: -1;
   transition: left 0.5s ease;
-}
+} */
 
 .profile-link:hover::before {
   left: 0;
