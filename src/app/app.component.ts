@@ -19,11 +19,6 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
 
 
-    this.activatedRoute.url.subscribe({
-      next:(data)=>console.log(data)
-
-    })
-
   }
   route:any;
 

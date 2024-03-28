@@ -8,8 +8,8 @@ import { BehaviorSubject, Subject, delay } from 'rxjs';
 })
 export class ProductService {
   constructor(private httpClient:HttpClient) {}
-  getProducts() {
-    return this.httpClient.get<any[]>('https://node-e-commerce-rlkh.onrender.com/api/v1/products');
+  getProducts(page: number, sortField:string) {
+    return this.httpClient.get<any[]>(`https://node-e-commerce-rlkh.onrender.com/api/v1/products?page=${page}&sort=${sortField}&limit=10`);
   }
   getProductById(id: string) {
     console.log(id)
@@ -28,6 +28,7 @@ export class ProductService {
     );
   }
   deleteProduct(id: string) {
+    console.log(id)
     return this.httpClient.delete('https://node-e-commerce-rlkh.onrender.com/api/v1/products/' + id);
   }
   getFilteredProducts(

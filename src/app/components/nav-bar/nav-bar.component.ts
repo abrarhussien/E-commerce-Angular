@@ -16,11 +16,9 @@ export class NavBarComponent implements OnInit{
 
   //user:any;
   ngOnInit(){
-    console.log(this.role)
     this.userService.roleObservable.subscribe({
       next:(role)=>{
         this.role=role;
-        console.log(this.role)
       }
     })
     this.userService.getCurrentUser();

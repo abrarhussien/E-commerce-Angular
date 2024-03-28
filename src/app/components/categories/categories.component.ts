@@ -20,7 +20,6 @@ export class CategoriesComponent implements OnInit{
     this.categoryService.getCategories().subscribe({
       next:(result:any)=>{
         this.allCategors=result.data;
-        console.log(result)
       }})
   }
 

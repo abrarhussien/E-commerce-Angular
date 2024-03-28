@@ -32,7 +32,7 @@ export class ProductComponent implements OnInit {
     //this.sortField = this.route.snapshot.queryParamMap.get('sortField');
 
     //this.sortOrder = this.route.snapshot.queryParamMap.get('sortOrder');
-    console.log(+this.page);
+    // console.log(+this.page);
     this.currentPage = this.page || 1;
 
     // this.route.queryParams.subscribe(params => {
@@ -45,7 +45,7 @@ export class ProductComponent implements OnInit {
     // this.getAllProducts(this.currentPage, this.sortField);
 
     this.categoryId = this.route.snapshot.paramMap.get('id');
-    console.log(this.categoryId)
+    // console.log(this.categoryId)
     if(this.categoryId){
       this.getProductsByCategoryId(this.categoryId,this.currentPage, this.sortField)
     }else{
@@ -56,7 +56,7 @@ export class ProductComponent implements OnInit {
   getAllProducts(page: number,sortField: string): void {
     this.productService.getAllProducts(page, sortField).subscribe({
       next: (data: any) => {
-        console.log(data)
+        // console.log(data)
         this.allProduct = data.data;
         this.currentPage = data.paginationResult.currentPage;
         this.limit=data.paginationResult.limit;

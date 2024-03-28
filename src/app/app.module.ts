@@ -31,17 +31,14 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { UserOrdersComponent } from './components/user-orders/user-orders.component';
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
 import { HomeComponent } from './components/home/home.component';
-import { AboutUsComponent } from './about-us/about-us.component';
+import { AboutUsComponent } from './components/about-us/about-us.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { FooterComponent } from './components/footer/footer.component';
 
-
-
-
-
 @NgModule({
   declarations: [
-    AppComponent, EditReviewComponent,
+    AppComponent,
+    EditReviewComponent,
     AppComponent,
     LoginComponent,
     RegisterComponent,
@@ -64,7 +61,6 @@ import { FooterComponent } from './components/footer/footer.component';
     AboutUsComponent,
     CategoriesComponent,
     FooterComponent,
-
   ],
 
   imports: [
@@ -73,7 +69,8 @@ import { FooterComponent } from './components/footer/footer.component';
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
-  ProductModule,ReviewModule
+    ProductModule,
+    ReviewModule,
   ],
   providers: [
     provideClientHydration(),
@@ -83,7 +80,6 @@ import { FooterComponent } from './components/footer/footer.component';
       multi: true,
     },
   ],
-
 
   bootstrap: [AppComponent],
 })
