@@ -9,7 +9,7 @@ import { AppComponent } from './app.component';
 import { ProductModule } from './products/product.module';
 import { ReviewModule } from './reviews/review.module';
 
-import { EditReviewComponent } from './reviews/components/edit-review/edit-review.component';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductComponent } from './components/product/product.component';
 import { CartComponent } from './components/cart/cart.component';
@@ -42,7 +42,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
-    AppComponent, EditReviewComponent,
+    AppComponent,
     AppComponent,
     LoginComponent,
     RegisterComponent,
@@ -74,7 +74,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
-  ProductModule,ReviewModule, 
+  ProductModule,ReviewModule,
 
   ],
   providers: [

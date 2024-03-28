@@ -6,16 +6,13 @@ import { ReviewRoutingModule } from './review-routing.module';
 import { ReviewComponent } from './components/review/review.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { AddReviewComponent } from './components/add-review/add-review.component';
-
-import { RatingComponent } from './components/rating/rating.component';
 import { NgbRating} from '@ng-bootstrap/ng-bootstrap';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
 @NgModule({
-  declarations: [ReviewComponent,AddReviewComponent, RatingComponent],
+  declarations: [ReviewComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -27,6 +24,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
   ],
-  exports: [ReviewComponent,AddReviewComponent,RatingComponent],
+  exports: [ReviewComponent],
 })
 export class ReviewModule {}
