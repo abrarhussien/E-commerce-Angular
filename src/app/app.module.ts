@@ -32,6 +32,7 @@ import { UserOrdersComponent } from './components/user-orders/user-orders.compon
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
 import { HomeComponent } from './components/home/home.component';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { CategoriesComponent } from './components/categories/categories.component';
 
 
 
@@ -59,6 +60,7 @@ import { AboutUsComponent } from './about-us/about-us.component';
     CartComponent,
     LoginComponent,
     AboutUsComponent,
+    CategoriesComponent,
   ],
 
   imports: [

@@ -1,19 +1,64 @@
-import { Component } from '@angular/core';
+import { UserService } from './../../services/user.service';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { catchError } from 'rxjs';
 
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
   styleUrl: './nav-bar.component.css'
 })
-export class NavBarComponent {
-  constructor(private router:Router,private http:HttpClient) {
+export class NavBarComponent implements OnInit{
+  constructor(private router:Router,private http:HttpClient,private userService:UserService) {
 
   }
+  //user:any;
+  ngOnInit(){
+    this.userService.roleObservable.subscribe({
+      next:(role)=>{
+        this.role=role;
+        console.log(this.role)
+      }
+    })
+    this.cartCount=5;
+    if(!localStorage.getItem('token')){
+      this.userService.onRoleChamge('vesitor')
+    }
+    // if(localStorage.getItem('token')){
+    //   this.userService.getCurrentUser().pipe(
+    //       catchError((error) => {
+    //         console.error(error);
+    //         throw error;
+    //       })
+    //     )
+    //     .subscribe({
+    //       next:(res:any)=>{
+    //         //this.user=res;
+    //         let role="";
+    //         res.isAdmin?role="admin":role="user";
+    //         this.role=role;
+    //         //this.router.navigate(['home']);
+
+    //         //this.userService.onRoleChamge(role)
+    //         //this.role="user"
+    //       }
+    //     });
+    //   }
+    //   else{this.role="vesitor"}
+
+
+  }
+
+  cartCount:number=0;
+  role :any;
+
   logout() {
     localStorage.removeItem('token');
-    this.router.navigate(['/login']);
+    localStorage.removeItem('role');
+    this.userService.onRoleChamge("vesitor");
+    //this.role="vesitor";
+    this.router.navigate(['/home']);
   }
 
 }

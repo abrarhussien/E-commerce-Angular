@@ -1,3 +1,4 @@
+import { UserService } from './../../services/user.service';
 
 import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
@@ -23,6 +24,7 @@ export class LoginComponent {
   constructor(
     private router: Router,
     private http: HttpClient,
+    private userService:UserService
   ) {}
   validated = true;
 
@@ -58,7 +60,11 @@ export class LoginComponent {
       .subscribe((response) => {
         console.log('Response:', response);
         localStorage.setItem('token', response['token']);
+        //localStorage.setItem('id', response['id']);
+        const role =response['role'];
         //this.cookieService.set('token', reponse['token']);
+        this.userService.onRoleChamge(role)
+
         this.router.navigate(['/home']);
       });
     this.contactForm.reset();

@@ -7,21 +7,7 @@ import { CategoriesService } from '../../services/categories.service';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent implements OnInit {
-  allCategors:Category[]=[];
-  constructor(private categoryService:CategoriesService){
+export class HomeComponent  {
 
-  }
-  ngOnInit(): void {
-    this.findAllCategories();
-
-  }
-  findAllCategories(){
-    this.categoryService.getCategories().subscribe({
-      next:(result:any)=>{
-        this.allCategors=result.data;
-        console.log(result)
-      }})
-  }
 
 }

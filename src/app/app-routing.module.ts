@@ -15,12 +15,14 @@ import { UserOrdersComponent } from './components/user-orders/user-orders.compon
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
 import { HomeComponent } from './components/home/home.component';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { CategoriesComponent } from './components/categories/categories.component';
 
 export const routes: Routes = [
   {path:'about-us', component:AboutUsComponent},
   { path: 'home', component: HomeComponent },
   { path: 'cart', component: CartComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'categories', component: CategoriesComponent },
   {
     path: 'dashboard',
     component: DashboardComponent,
