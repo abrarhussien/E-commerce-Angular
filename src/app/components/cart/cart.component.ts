@@ -26,12 +26,18 @@ export class CartComponent implements OnInit {
   }
 
   deleteItem(id: string) {
-    console.log(id);
     this.cartService.removeCartItem(id).subscribe({
       next: () => {
-        const newCartItems = this.cartItems.filter((item: any) => item.productId._id === id)
-        this.cartItems = newCartItems
-    }})
+        this.cartItems = this.cartItems.filter((item: any) => item.productId._id !== id);
+
+        this.total = this.cartItems.reduce((total: number, item: any) => {
+          return total + (item.quantity * item.productId.price);
+        }, 0);
+      },
+      error: (error: any) => {
+        console.error('Error removing item from cart:', error);
+      }
+    });
   }
 
     // calculateTotal(): void {

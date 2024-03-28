@@ -29,11 +29,11 @@
         <div class="row align-items-stretch mb-4">
           <div class="col-sm-5 pr-sm-0">
             <div class="border d-flex align-items-center justify-content-between py-1 px-3 bg-white border-white"><span
-                class="small text-uppercase text-gray mr-4 no-select">{{ data.quantity }}</span>
+                class="small text-uppercase text-gray mr-4 no-select">{{ cartQuantity*data.price }}</span>
               <div class="quantity">
-                <button class="dec-btn p-0"><i class="fas fa-caret-left"></i></button>
-                <input class="form-control border-0 shadow-0 p-0" type="text" value="1">
-                <button class="inc-btn p-0"><i class="fas fa-caret-right"></i></button>
+                <button class="dec-btn p-0" (click)="setQuantity(-1)"><i class="fas fa-caret-left"></i></button>
+                <input class="form-control border-0 shadow-0 p-0" type="text" [value]="cartQuantity">
+                <button class="inc-btn p-0" (click)="setQuantity(1)"><i class="fas fa-caret-right"></i></button>
               </div>
             </div>
           </div>

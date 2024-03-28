@@ -17,8 +17,8 @@ export class CartService {
 
   addToCart(id: string, quantity: number): Observable<any> {
     const body = {
-      productId: "65fe0c18af3193e81072b088",
-        quantity: 2
+      productId: id,
+        quantity: quantity
     }
     return this.http.post<any>(`${this.apiUrl}`, body);
   }

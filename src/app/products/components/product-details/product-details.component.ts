@@ -27,6 +27,7 @@ export class ProductDetailsComponent implements OnInit {
   };
   showDescription: boolean = true;
   showReview: boolean = false;
+  cartQuantity:number=1;
 
   constructor(
     private productService: ProductService,
@@ -41,14 +42,17 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   addToCart(product: IProduct) {
-    this.cartService.addToCart(product._id, 1).subscribe({
+    this.cartService.addToCart(product._id, this.cartQuantity).subscribe({
       next: () => {
         this.router.navigate(['/cart']);
         this.cartService.incrementCartCounter();
     }})
     // this.cartService.addToCart(product);
   }
-
+  setQuantity(quantity:number){
+    if(this.cartQuantity+quantity>=1){
+    this.cartQuantity=this.cartQuantity+quantity;}
+  }
   getProduct(id: string) {
     this.productService.getProductsById(id).subscribe((data: any) => {
       this.data = data.data;
