@@ -9,4 +9,5 @@ total: any;
   quantity: number;
   rating: number;
   image: string;
+  ratingsQuantity: number;
 }

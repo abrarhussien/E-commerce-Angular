@@ -18,6 +18,7 @@ import { AboutUsComponent } from './components/about-us/about-us.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { AuthGuard } from './guards/auth.guard';
 import { AdminGuard } from './guards/admin.guard';
+import { ProductDetailsComponent } from './products/components/product-details/product-details.component';
 
 export const routes: Routes = [
   { path: 'about-us', component: AboutUsComponent },

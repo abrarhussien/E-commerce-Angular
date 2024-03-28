@@ -22,7 +22,8 @@ export class ProductDetailsComponent implements OnInit {
     quantity: 0,
     image: '',
     imageCover: '',
-    total: 0
+    total: 0,
+    rating: 0
   };
   showDescription: boolean = true;
   showReview: boolean = false;
