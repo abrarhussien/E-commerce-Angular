@@ -18,7 +18,7 @@ export class ProductComponent implements OnInit {
   totalPagesArray: number[] = [];
   //sortField='category', sortOrder
   sortField: any ;
- 
+
   constructor(
     private productService: ProductService,
     private router: Router,
@@ -97,14 +97,14 @@ export class ProductComponent implements OnInit {
       });
       // this.getAllProducts(this.currentPage , this.sortField);
 
-        this.getProductsByCategoryId(this.categoryId,this.currentPage, this.sortField)
+        this.getProductsByCategoryId(this.categoryId,this.currentPage+1, this.sortField)
       }else{
         this.currentPage = newPage;
         this.router.navigate(['/products'], {
           queryParams: { page: this.currentPage + 1 },
         });
 
-        this.getAllProducts(this.currentPage, this.sortField);
+        this.getAllProducts(this.currentPage+1, this.sortField);
       }
     }
   }

@@ -8,17 +8,24 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AddReviewComponent } from './components/add-review/add-review.component';
 
+import { RatingComponent } from './components/rating/rating.component';
+import { NgbRating} from '@ng-bootstrap/ng-bootstrap';
+
 
 
 @NgModule({
-  declarations: [ReviewComponent,AddReviewComponent],
+  declarations: [ReviewComponent,AddReviewComponent, RatingComponent],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     ReviewRoutingModule,
+    NgbRating
+
+
+
   ],
-  exports: [ReviewComponent,AddReviewComponent],
+  exports: [ReviewComponent,AddReviewComponent,RatingComponent],
 })
 export class ReviewModule {}

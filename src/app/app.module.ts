@@ -33,6 +33,8 @@ import { OrderDetailsComponent } from './components/order-details/order-details.
 import { HomeComponent } from './components/home/home.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { CategoriesComponent } from './components/categories/categories.component';
+import { FooterComponent } from './components/footer/footer.component';
+
 
 
 
@@ -61,6 +63,8 @@ import { CategoriesComponent } from './components/categories/categories.componen
     LoginComponent,
     AboutUsComponent,
     CategoriesComponent,
+    FooterComponent,
+
   ],
 
   imports: [

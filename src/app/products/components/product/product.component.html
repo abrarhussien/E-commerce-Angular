@@ -41,7 +41,7 @@
         <div class="col-lg-6 text-lg-end">
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb justify-content-lg-end mb-0 px-0 bg-light">
-              <li class="breadcrumb-item"><a class="text-dark" href="index.html">Home</a></li>
+              <li class="breadcrumb-item"><a class="text-dark" [routerLink]="['/home']">Home</a></li>
               <li class="breadcrumb-item active" aria-current="page">Shop</li>
             </ol>
           </nav>
@@ -57,7 +57,7 @@
         <div class=" col-lg-9 order-1 order-lg-2 mb-5 mb-lg-0">
           <div class="row mb-3 align-items-center">
             <div class="col-lg-6 mb-2 mb-lg-0">
-              <p class="text-sm text-muted mb-0">Showing 1–12 of 53 results</p>
+              <p class="text-sm text-muted mb-0">Showing  of 53 results</p>
             </div>
             <div class="col-lg-6 ">
               <ul class="list-inline d-flex align-items-center justify-content-lg-end mb-0">
@@ -100,7 +100,7 @@
                     </ul>
                   </div>
                 </div>
-                <h6> <a class="reset-anchor" href="detail.html">{{ item.title }}</a></h6>
+                <h6> <a class="reset-anchor" [routerLink]="['/product-detail',item._id]">{{ item.title }}</a></h6>
                 <p class="small text-muted">{{ item.price}} $</p>
               </div>
             </div>
@@ -120,14 +120,14 @@
                 </a>
               </li> -->
 
-              <li class="page-item mx-1 " *ngFor="let page of totalPagesArray" (click)="changePage(page)">
+              <li class="page-item mx-1 " *ngFor="let page of totalPagesArray let i=index" (click)="changePage(page)" [class.active]="currentPage-1 === page">
 
-                
+
 
                   <a class="page-link"
                   [routerLink]="categoryId ? ['/home/category', categoryId, 'product'] : ['/products']"
                   [queryParams]="{ page: currentPage }">
-                  {{ page + 1 }}
+                  {{page+1}}
                 </a>
               </li>
 
