@@ -9,7 +9,7 @@ import { AppComponent } from './app.component';
 import { ProductModule } from './products/product.module';
 import { ReviewModule } from './reviews/review.module';
 
-import { EditReviewComponent } from './reviews/components/edit-review/edit-review.component';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductComponent } from './components/product/product.component';
 import { CartComponent } from './components/cart/cart.component';
@@ -31,13 +31,14 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { UserOrdersComponent } from './components/user-orders/user-orders.component';
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
 import { HomeComponent } from './components/home/home.component';
-
-
-
+import { AboutUsComponent } from './components/about-us/about-us.component';
+import { CategoriesComponent } from './components/categories/categories.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
-    AppComponent, EditReviewComponent,
+    AppComponent,
     AppComponent,
     LoginComponent,
     RegisterComponent,
@@ -57,6 +58,9 @@ import { HomeComponent } from './components/home/home.component';
     ProductComponent,
     CartComponent,
     LoginComponent,
+    AboutUsComponent,
+    CategoriesComponent,
+    FooterComponent,
   ],
 
   imports: [
@@ -65,7 +69,8 @@ import { HomeComponent } from './components/home/home.component';
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
-  ProductModule,ReviewModule
+  ProductModule,ReviewModule,
+
   ],
   providers: [
     provideClientHydration(),
@@ -75,7 +80,6 @@ import { HomeComponent } from './components/home/home.component';
       multi: true,
     },
   ],
-
 
   bootstrap: [AppComponent],
 })

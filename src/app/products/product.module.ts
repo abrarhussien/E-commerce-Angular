@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -7,6 +7,7 @@ import { ProductDetailsComponent } from './components/product-details/product-de
 import { HttpClientModule } from '@angular/common/http';
 import { ProductRoutingModule } from './product-routing.module';
 import { ReviewModule } from '../reviews/review.module';
+import { NgbRating} from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -17,9 +18,13 @@ import { ReviewModule } from '../reviews/review.module';
     ReactiveFormsModule,
     HttpClientModule,
     ProductRoutingModule,
-    ReviewModule
+    ReviewModule,
+    //CUSTOM_ELEMENTS_SCHEMA,
+    NgbRating
+    //NgbRating
 
   ],
-  exports:[]
+  exports:[],
+
 })
 export class ProductModule {}

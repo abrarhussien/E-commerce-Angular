@@ -19,9 +19,9 @@ export class ReviewService {
       })
     );
   }
-  getProductReviews(id: string) {
+  getProductReviews(page:number,id: string) {
     return this.httpclient
-      .get<Review[]>(`${this.api}/api/product/${id}/reviews`)
+      .get<Review[]>(`${this.api}/api/product/${id}/reviews?page=${page}&limit=3`)
       .pipe(
         catchError((error: any) => {
           console.error('API Error:', error);

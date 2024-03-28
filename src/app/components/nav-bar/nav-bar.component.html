@@ -1,55 +1,97 @@
-
 <div class="container px-lg-3">
-  <nav class="navbar navbar-expand-lg navbar-light py-3 px-lg-0"><a class="navbar-brand"routerLink="home"><span
-        class="fw-bold text-uppercase text-dark">Boutique</span></a>
-    <button class="navbar-toggler navbar-toggler-end" type="button" data-bs-toggle="collapse"
-      data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-      aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+  <nav class="navbar navbar-expand-lg navbar-light py-3 px-lg-0">
+    <a class="navbar-brand" routerLink="home"
+      ><span class="fw-bold text-uppercase text-dark">Boutique</span></a
+    >
+    <button
+      class="navbar-toggler navbar-toggler-end"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto" >
+      <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <!-- Link--><a class="nav-link " routerLink="home" routerLinkActive="active" ariaCurrentWhenActive="page">Home</a>
+          <!-- Link--><a
+            class="nav-link"
+            routerLink="home"
+            routerLinkActive="active"
+            ariaCurrentWhenActive="page"
+            >Home</a
+          >
         </li>
         <li class="nav-item">
-          <!-- Link--><a class="nav-link" routerLink="products" >Products</a>
+          <!-- Link--><a class="nav-link" routerLink="categories">Categories</a>
         </li>
         <li class="nav-item">
-          <!-- Link--><a class="nav-link " routerLink="/profile" >Profile</a>
+          <!-- Link--><a class="nav-link" routerLink="products">Products</a>
         </li>
-        <!-- <a href="https://www.amazon.eg/-/en/gp/cart/view.html?ref_=nav_cart" aria-label="2 items in cart" class="nav-a nav-a-2 nav-progressive-attribute" id="nav-cart">
-          <div id="nav-cart-count-container">
-            <span id="nav-cart-count" aria-hidden="true" class="nav-cart-count nav-cart-1 nav-progressive-attribute nav-progressive-content">2</span>
-            <span class="nav-cart-icon nav-sprite"></span>
-          </div>
-          <div id="nav-cart-text-container" class=" nav-progressive-attribute">
-            <span aria-hidden="true" class="nav-line-1">
 
-            </span>
-            <span aria-hidden="true" class="nav-line-2">
-              Cart
-              <span class="nav-icon nav-arrow"></span>
-            </span>
-          </div>
-        </a> -->
-
+        <li class="nav-item">
+          <!-- Link--><a class="nav-link" routerLink="/about-us">About Us</a>
+        </li>
       </ul>
       <ul class="navbar-nav ms-auto">
-<!-- Cart Link -->
-<li class="nav-item">
-  <a class="nav-link" routerLink="/cart">
-    <i class="fas fa-dolly-flatbed me-1 text-gray"></i>Cart
-    <small class="text-gray fw-normal">({{ cartCounter }})</small>
-  </a>
-</li>
-        <li class="nav-item"><a class="nav-link"> <i class="far fa-heart me-1"></i><small
-              class="text-gray fw-normal"> (0)</small></a></li>
-        <li class="nav-item"><a class="nav-link" routerLink="/login"> <i
-              class="fas fa-user me-1 text-gray fw-normal" routerLink="/login"></i>Login</a></li>
-              <li class="nav-item"><a class="nav-link" routerLink="/registerr"> <i
-                class="fas fa-user me-1 text-gray fw-normal" routerLink="/registerr"></i>Register</a></li>
-                <li class="nav-item"><a class="nav-link" (click)="logout()" > <i
-                  class="fas fa-user me-1 text-gray fw-normal" (click)="logout()"></i>Logout</a></li>
+        <li class="nav-item">
+          <a class="nav-link" *ngIf="role !== 'vesitor'" routerLink="/cart">
+            <i class="fas fa-dolly-flatbed me-1 text-gray"></i>Cart<small
+              class="text-gray fw-normal"
+              >({{cartCount}})</small
+            ></a
+          >
+        </li>
+        <li class="nav-item">
+          <!-- Link--><a
+            class="nav-link"
+            *ngIf="role === 'admin'"
+            routerLink="/dashboard"
+          >
+          <i class="fa-solid fa-gauge fas  me-1 text-gray "></i>
+            Dashboard</a
+          >
+        </li>
+        <li class="nav-item">
+          <!-- Link--><a
+            class="nav-link"
+            *ngIf="role !== 'vesitor'"
+            routerLink="/profile"
+          >
+            <i
+              class="fas fa-user me-1 text-gray fa-solid"
+              routerLink="/profile"
+            ></i>
+            Profile</a
+          >
+        </li>
 
+        <li class="nav-item">
+          <a class="nav-link" *ngIf="role === 'vesitor'" routerLink="/login">
+            <i
+              class="fas fa-user me-1 text-gray fa-solid"
+              routerLink="/login"
+            ></i
+            >Login</a
+          >
+        </li>
+
+        <li class="nav-item" *ngIf="role === 'vesitor'">
+          <a class="nav-link" routerLink="/registerr">
+            <i
+              class="fas fa-user me-1 text-gray fa-solid"
+              routerLink="/registerr"
+            ></i
+            >Register</a
+          >
+        </li>
+
+        <li class="nav-item " *ngIf="role !== 'vesitor'">
+          <a class="nav-link" (click)="logout()"> Logout</a>
+        </li>
       </ul>
     </div>
   </nav>

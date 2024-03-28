@@ -14,23 +14,57 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { UserOrdersComponent } from './components/user-orders/user-orders.component';
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
 import { HomeComponent } from './components/home/home.component';
-import { ProductDetailsComponent } from './products/components/product-details/product-details.component';
+import { AboutUsComponent } from './components/about-us/about-us.component';
+import { CategoriesComponent } from './components/categories/categories.component';
+import { AuthGuard } from './guards/auth.guard';
+import { AdminGuard } from './guards/admin.guard';
 
 export const routes: Routes = [
-  { path: 'home', component:  HomeComponent},
-  { path: 'cart', component: CartComponent },
+  { path: 'about-us', component: AboutUsComponent },
+  { path: 'home', component: HomeComponent },
+  { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
+  { path: 'categories', component: CategoriesComponent },
   {
     path: 'dashboard',
     component: DashboardComponent,
+
     children: [
-      { path: 'orders/pending', component: DashboardOrdersComponent },
-      { path: 'orders/accepted', component: DashboardOrdersComponent },
-      { path: 'orders/rejected', component: DashboardOrdersComponent },
-      { path: 'orders', component: DashboardOrdersComponent },
-      { path: 'products/add', component: DashboardAddProductComponent },
-      { path: 'products/edit/:id', component: DashboardEditProductComponent },
-      { path: 'products', component: DashboardProductsComponent },
+      {
+        path: 'orders/pending',
+        component: DashboardOrdersComponent,
+        canActivate: [AdminGuard],
+      },
+      {
+        path: 'orders/accepted',
+        component: DashboardOrdersComponent,
+        canActivate: [AdminGuard],
+      },
+      {
+        path: 'orders/rejected',
+        component: DashboardOrdersComponent,
+        canActivate: [AdminGuard],
+      },
+      {
+        path: 'orders',
+        component: DashboardOrdersComponent,
+        canActivate: [AdminGuard],
+      },
+      {
+        path: 'products/add',
+        component: DashboardAddProductComponent,
+        canActivate: [AdminGuard],
+      },
+      {
+        path: 'products/edit/:id',
+        component: DashboardEditProductComponent,
+        canActivate: [AdminGuard],
+      },
+      {
+        path: 'products',
+        component: DashboardProductsComponent,
+        canActivate: [AdminGuard],
+      },
       { path: '', redirectTo: '/dashboard/orders', pathMatch: 'full' },
     ],
   },
@@ -47,18 +81,22 @@ export const routes: Routes = [
   {
     path: 'profile',
     component: ProfileComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'home',
     component: HomeComponent,
   },
+
   {
     path: 'profile/orders',
     component: UserOrdersComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'profile/orders/:id',
     component: OrderDetailsComponent,
+    canActivate: [AuthGuard],
   },
   { path: 'products/:id', component: ProductDetailsComponent },
 ];
@@ -68,5 +106,3 @@ export const routes: Routes = [
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
-
-
