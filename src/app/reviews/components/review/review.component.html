@@ -9,11 +9,8 @@
             <h6 class="mb-0 text-uppercase">{{ item.user['name'] }}</h6>
             <p class="small text-muted mb-0 text-uppercase">20 May 2020</p>
             <ul class="list-inline mb-1 text-xs">
-              <li class="list-inline-item m-0"><i class="fas fa-star text-warning"></i></li>
-              <li class="list-inline-item m-0"><i class="fas fa-star text-warning"></i></li>
-              <li class="list-inline-item m-0"><i class="fas fa-star text-warning"></i></li>
-              <li class="list-inline-item m-0"><i class="fas fa-star text-warning"></i></li>
-              <li class="list-inline-item m-0"><i class="fas fa-star-half-alt text-warning"></i></li>
+              <li class="list-inline-item m-0"></li>
+              <ngb-rating [max]="5" [rate]="productRatingReview" [readonly]="true"></ngb-rating>
             </ul>
             <p class="text-sm mb-0 text-muted">{{ item.reviewDetails }}</p>
             <div class="d-grid gap-2 d-md-block " *ngIf="userId==item.user._id">
@@ -27,6 +24,25 @@
     </div>
   </div>
 </div>
+
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center justify-content-lg-end">
+
+    <li class="page-item mx-1 " *ngFor="let page of totalPagesArray let i=index" (click)="changePage(page)" [class.active]="currentPage-1 === page">
+
+
+
+        <a class="page-link"
+        [routerLink]=" ['/product-detail',this.id]"
+        [queryParams]="{ page: currentPage }">
+        {{page+1}}
+      </a>
+    </li>
+
+
+
+  </ul>
+</nav>
 <!-- <li class="nav-item nav-link text-uppercase cursor-pointer active"
  id="description-tab"
 data-bs-toggle="tab" role="tab" aria-controls="description"
@@ -58,6 +74,8 @@ aria-selected="true">Add Comment</li> -->
               *ngIf="myForm.get('review')?.invalid  && (myForm.get('review')?.dirty || myForm.get('review')?.touched)">
               Please provide a valid Review</div>
           </div>
+          <app-rating *ngIf="addReview"></app-rating>
+
 
           <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
 

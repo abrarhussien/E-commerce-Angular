@@ -32,6 +32,8 @@ import { UserOrdersComponent } from './components/user-orders/user-orders.compon
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
 import { HomeComponent } from './components/home/home.component';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { FooterComponent } from './components/footer/footer.component';
+
 
 
 
@@ -59,6 +61,8 @@ import { AboutUsComponent } from './about-us/about-us.component';
     CartComponent,
     LoginComponent,
     AboutUsComponent,
+    FooterComponent,
+
   ],
 
   imports: [
