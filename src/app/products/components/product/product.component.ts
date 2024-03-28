@@ -119,7 +119,7 @@ export class ProductComponent implements OnInit {
       const sortField= value
       this.sortField = value;
       // this.sortOrder = sortOrder;
-      this.router.navigate(['/home/category', this.categoryId, 'product'], {
+      this.router.navigate(['/category', this.categoryId, 'product'], {
         queryParams: { sortField, page: this.currentPage }, // Reset page to 1 when sorting changes
       });
       this.getProductsByCategoryId(this.categoryId,this.currentPage, this.sortField)
