@@ -31,13 +31,14 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { UserOrdersComponent } from './components/user-orders/user-orders.component';
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
 import { HomeComponent } from './components/home/home.component';
-
-
-
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
-    AppComponent, EditReviewComponent,
+    AppComponent,
+    EditReviewComponent,
     AppComponent,
     LoginComponent,
     RegisterComponent,
@@ -65,8 +66,12 @@ import { HomeComponent } from './components/home/home.component';
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
-  ProductModule,ReviewModule
+    ProductModule,
+    ReviewModule,
+    BrowserAnimationsModule,
+    NgxSpinnerModule,
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
     provideClientHydration(),
     {
@@ -75,7 +80,6 @@ import { HomeComponent } from './components/home/home.component';
       multi: true,
     },
   ],
-
 
   bootstrap: [AppComponent],
 })

@@ -1,6 +1,5 @@
-
 import { HttpClient } from '@angular/common/http';
-import { Component, inject } from '@angular/core';
+import { Component, EventEmitter, Output, inject } from '@angular/core';
 import {
   AbstractControl,
   FormControl,
@@ -20,10 +19,7 @@ const emailRegex = '[a-z0-9]+@[a-z]+.[a-z]{2,3}';
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
-  constructor(
-    private router: Router,
-    private http: HttpClient,
-  ) {}
+  constructor(private router: Router, private http: HttpClient) {}
   validated = true;
 
   contactForm = new FormGroup({
@@ -58,9 +54,19 @@ export class LoginComponent {
       .subscribe((response) => {
         console.log('Response:', response);
         localStorage.setItem('token', response['token']);
-        //this.cookieService.set('token', reponse['token']);
         this.router.navigate(['/home']);
       });
     this.contactForm.reset();
+  }
+  @Output('parentOpenRegComp') parentOpenRegComp: EventEmitter<any> =
+    new EventEmitter();
+  @Output('parentOpenResetComp') parentOpenResetComp: EventEmitter<any> =
+    new EventEmitter();
+  openRegPage() {
+    this.parentOpenRegComp.emit();
+    this.router.navigate(['/registerr']);
+  }
+  openResetComp() {
+    this.parentOpenResetComp.emit();
   }
 }

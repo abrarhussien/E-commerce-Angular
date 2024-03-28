@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ProductService } from '../../services/product.service';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+// import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { IProduct } from '../../models/product.model';
 import { Subscription } from 'rxjs';
 
@@ -12,27 +12,28 @@ import { Subscription } from 'rxjs';
 export class DashboardProductsComponent implements OnInit, OnDestroy {
   constructor(private productsService: ProductService) {}
   products: IProduct[] = [];
-  loading =false;
-  currentPage=1;
-  limit=10;
+  loading = false;
+  currentPage = 1;
+  limit = 10;
 
-  search=[{key:"name", value:"laptop"}]
-  sort={
-    by:"name",
-    direction:"desc"
-
+  search = [{ key: 'name', value: 'laptop' }];
+  sort = {
+    by: 'name',
+    direction: 'desc',
   };
 
   subscriptions = new Subscription();
   ngOnInit(): void {
-    this.loading=true;
+    this.loading = true;
     this.subscriptions.add(
       this.productsService.getProducts().subscribe({
-        next: (products:any) => {
+        next: (products: any) => {
           this.products = products.data;
-          this.loading=false;
+          this.loading = false;
         },
-        error:(err)=>{alert(err.message)}
+        error: (err) => {
+          alert(err.message);
+        },
       })
     );
   }
@@ -40,7 +41,9 @@ export class DashboardProductsComponent implements OnInit, OnDestroy {
     this.subscriptions.add(
       this.productsService.deleteProduct(id).subscribe({
         next: () => {
-          this.products=this.products.filter((product: IProduct) => product._id !== id);
+          this.products = this.products.filter(
+            (product: IProduct) => product._id !== id
+          );
         },
         error: (err) => {
           alert(err.message);
@@ -49,12 +52,14 @@ export class DashboardProductsComponent implements OnInit, OnDestroy {
     );
   };
 
-  getFilteredProducts(){
-    this.productsService.getFilteredProducts(this.currentPage,this.limit,this.search,this.sort).subscribe({
-      next:(filteredProducts:any)=>this.products=filteredProducts.data,
-      error:(err)=>alert(err.message)
-
-    })
+  getFilteredProducts() {
+    this.productsService
+      .getFilteredProducts(this.currentPage, this.limit, this.search, this.sort)
+      .subscribe({
+        next: (filteredProducts: any) =>
+          (this.products = filteredProducts.data),
+        error: (err) => alert(err.message),
+      });
   }
 
   ngOnDestroy(): void {
