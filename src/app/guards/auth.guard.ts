@@ -12,7 +12,8 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot):boolean {
       console.log('CanActivate called');
     let isLoggedIn = this.userService.isUser()
-    if (isLoggedIn){
+    let isAdmin= this.userService.isAdmin()
+    if (isLoggedIn || isAdmin){
       return true
     } else {
       this.router.navigate(['/login']);

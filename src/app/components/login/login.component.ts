@@ -1,3 +1,4 @@
+import { NavBarComponent } from './../nav-bar/nav-bar.component';
 import { UserService } from './../../services/user.service';
 
 import { HttpClient } from '@angular/common/http';
@@ -60,10 +61,12 @@ export class LoginComponent {
       .subscribe((response) => {
         console.log('Response:', response);
         localStorage.setItem('token', response['token']);
+        localStorage.setItem('role', response['role']);
+
         //localStorage.setItem('id', response['id']);
         const role =response['role'];
         //this.cookieService.set('token', reponse['token']);
-        this.userService.onRoleChamge(role)
+        this.userService.roleObservable.next(role)
 
         this.router.navigate(['/home']);
       });
