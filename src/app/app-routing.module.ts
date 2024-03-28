@@ -14,6 +14,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { UserOrdersComponent } from './components/user-orders/user-orders.component';
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
 import { HomeComponent } from './components/home/home.component';
+import { ProductDetailsComponent } from './products/components/product-details/product-details.component';
 
 export const routes: Routes = [
   { path: 'home', component:  HomeComponent},
@@ -59,6 +60,7 @@ export const routes: Routes = [
     path: 'profile/orders/:id',
     component: OrderDetailsComponent,
   },
+  { path: 'products/:id', component: ProductDetailsComponent },
 ];
 
 @NgModule({

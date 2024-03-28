@@ -14,7 +14,13 @@ export class AppComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private router: Router
-  ) {}
-  ngOnInit(): void {}
+  ) { }
+
+  cartItemCount: number = 0;
+  ngOnInit(): void { }
+
+  updateCartItemCount(): void {
+  this.cartItemCount++;
+  }
 
 }
