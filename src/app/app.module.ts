@@ -34,6 +34,7 @@ import { HomeComponent } from './components/home/home.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -73,7 +74,8 @@ import { FooterComponent } from './components/footer/footer.component';
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
-  ProductModule,ReviewModule
+  ProductModule,ReviewModule, 
+
   ],
   providers: [
     provideClientHydration(),

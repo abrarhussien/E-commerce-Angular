@@ -10,6 +10,7 @@ import { AddReviewComponent } from './components/add-review/add-review.component
 
 import { RatingComponent } from './components/rating/rating.component';
 import { NgbRating} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -21,7 +22,7 @@ import { NgbRating} from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule,
     HttpClientModule,
     ReviewRoutingModule,
-    NgbRating
+    NgbModule
 
 
 

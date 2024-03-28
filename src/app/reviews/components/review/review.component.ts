@@ -18,6 +18,7 @@ import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
   selector: 'app-review',
   templateUrl: './review.component.html',
   styleUrl: './review.component.css',
+
 })
 export class ReviewComponent implements OnInit {
 
@@ -57,13 +58,16 @@ export class ReviewComponent implements OnInit {
   formdata: Review = {
     _id: '',
     reviewDetails: '',
+    rating: 0,
     user: { name: '', image: '', _id: '' },
     product: '',
+
   };
   dataEnter: object = {
     reviewDetails: '',
     user: '',
     product: '',
+    rating: 0,
   };
   dataEdit: object = {
     reviewDetails: '',
@@ -87,6 +91,12 @@ export class ReviewComponent implements OnInit {
           Validators.required,
           Validators.pattern('[a-zA-Z ]*'),
           Validators.minLength(3),
+        ],
+      ],rating: [
+        0,
+        [
+          Validators.required,
+
         ],
       ],
     });
@@ -191,8 +201,10 @@ export class ReviewComponent implements OnInit {
   onSubmit(form: FormGroup) {
     console.log(this.id);
     if (form.valid) {
+      console.log("form.value.rating",form.value.rating)
       this.dataEnter = {
         reviewDetails: form.value.review,
+        rating: form.value.rating,
         user: this.userId,
         product: this.id,
       };

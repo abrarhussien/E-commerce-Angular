@@ -25,6 +25,7 @@ export class AddReviewComponent  implements OnInit {
     reviewDetails: '',
     user: { name: '', image: '', _id: '' },
     product: '',
+    rating:0
   };
   dataEnter: object = {
     reviewDetails: '',
