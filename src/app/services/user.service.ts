@@ -1,11 +1,18 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class UserService implements OnInit {
+  role:any;
+  ngOnInit(): void {
+    this.roleObservable.subscribe({
+      next:(role)=>this.role
+    })
+  }
+
   public roleObservable: BehaviorSubject<string>= new BehaviorSubject("");
 
   constructor(private httpClient:HttpClient) { }
@@ -25,6 +32,23 @@ export class UserService {
 onRoleChamge(role:string){
   console.log(role)
   this.roleObservable.next(role);
-
+}
+isUser(){
+  if (this.role==='user'){
+    return true
+  }
+  return false
+}
+isAdmin(){
+  if (this.role==='admin'){
+    return true
+  }
+  return false
+}
+isVesitor(){
+  if (this.role==='vesitor'){
+    return true
+  }
+  return false
 }
 }
