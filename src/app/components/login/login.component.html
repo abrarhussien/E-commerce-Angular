@@ -1,5 +1,4 @@
-
-<div class="flex justify-center items-center h-screen bg-black">
+<!-- <div class="flex justify-center items-center h-screen bg-black">
   <div
     class="max-w-md w-full p-8 bg-white shadow-md rounded-lg transform transition-all duration-300 hover:scale-105"
   >
@@ -51,13 +50,6 @@
             {{
               contactForm.get("password")?.errors?.["minlength"]["requiredLength"]
 
-
-
-
-
-
-
-
             }}But you enter
             {{
               contactForm.get("password")?.errors?.["minlength"]["actualLength"]
@@ -82,5 +74,112 @@
       </div>
     </form>
   </div>
+</div> -->
+<div>
+  <div class="row align-items-center justify-content-center g-0">
+    <div class="col-12">
+      <div>
+        <h2>Sign in</h2>
+        <p class="text-secondary fs-6">
+          Welcome back to Boutique! Enter your email to get started.
+        </p>
+        <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+          <div class="my-3">
+            <input
+              type="email"
+              placeholder="Email"
+              formControlName="email"
+              id="email"
+              class="form-control"
+            />
+            <div
+              *ngIf="
+                contactForm.get('email')?.touched &&
+                contactForm.get('email')?.errors
+              "
+              class="text-danger"
+            >
+              <p *ngIf="contactForm.get('email')?.getError('required')">
+                Email is required
+              </p>
+              <p *ngIf="contactForm.get('email')?.getError('email')">
+                Email must be like example&#64;info.com
+              </p>
+            </div>
+          </div>
+          <div class="my-3">
+            <input
+              type="password"
+              placeholder="Password"
+              formControlName="password"
+              id="password"
+              class="form-control"
+            />
+            <div
+              *ngIf="
+                contactForm.get('password')?.touched &&
+                contactForm.get('password')?.errors
+              "
+              class="text-danger"
+            >
+              <p *ngIf="contactForm.get('password')?.getError('required')">
+                Password is required
+              </p>
+              <p *ngIf="contactForm.get('password')?.getError('minlength')">
+                Password min length is 8 Characters
+              </p>
+              <p *ngIf="contactForm.get('password')?.getError('maxlength')">
+                Password max length is 20 Characters
+              </p>
+              <p *ngIf="contactForm.get('password')?.getError('pattern')">
+                Password must include at least one uppercase letter, one
+                lowercase letter, one number and one special character
+              </p>
+            </div>
+          </div>
+          <div
+            class="my-3 w-100 d-flex align-items-center justify-content-start flex-column flex-md-row text-secondary justify-content-md-between"
+          >
+            <div>
+              <input
+                type="checkbox"
+                name="Remember"
+                id="Remember"
+                class="me-2"
+              />
+              <label for="Remember">Remember me</label>
+            </div>
+            <div>
+              <p class="text-center m-0 fs-6">
+                Forgot password?
+                <span class="text-main" role="button" (click)="openResetComp()"
+                  >Reset It</span
+                >
+              </p>
+            </div>
+          </div>
+          <button
+            class="btn-main mt-3 w-100 py-2 rounded-2 d-flex justify-content-center align-items-center"
+            [disabled]="!contactForm.valid"
+          >
+            Sign In
+            <!-- <div *ngIf="isloading">
+              <app-btn-loader></app-btn-loader>
+            </div> -->
+          </button>
+          <!-- <p *ngIf="requisError" class="text-danger">
+            {{ requisError }}
+          </p> -->
+        </form>
+        <div>
+          <p class="text-center mt-4 fs-6 text-secondary">
+            Don’t have an account?
+            <span class="text-main" (click)="openRegPage()" role="button"
+              >Sign Up</span
+            >
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-

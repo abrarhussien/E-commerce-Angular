@@ -7,24 +7,19 @@ import { ProductDetailsComponent } from './components/product-details/product-de
 import { HttpClientModule } from '@angular/common/http';
 import { ProductRoutingModule } from './product-routing.module';
 import { ReviewModule } from '../reviews/review.module';
-import { NgbRating} from '@ng-bootstrap/ng-bootstrap';
-
+import { NgbRating } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [ProductComponent, ProductDetailsComponent],
   imports: [
     CommonModule,
-   FormsModule,
+    FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     ProductRoutingModule,
     ReviewModule,
-    //CUSTOM_ELEMENTS_SCHEMA,
-    NgbRating
-    //NgbRating
-
+    NgbRating,
   ],
-  exports:[],
-
+  exports: [],
 })
 export class ProductModule {}

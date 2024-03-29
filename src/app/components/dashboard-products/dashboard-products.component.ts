@@ -21,11 +21,10 @@ export class DashboardProductsComponent implements OnInit, OnDestroy {
   totalPagesArray: number[] = [];
   sortField: any ;
 
-  search=[{key:"name", value:"laptop"}]
-  sort={
-    by:"name",
-    direction:"desc"
-
+  search = [{ key: 'name', value: 'laptop' }];
+  sort = {
+    by: 'name',
+    direction: 'desc',
   };
 
   subscriptions = new Subscription();
@@ -41,7 +40,9 @@ export class DashboardProductsComponent implements OnInit, OnDestroy {
     this.subscriptions.add(
       this.productsService.deleteProduct(id).subscribe({
         next: () => {
-          this.products=this.products.filter((product: IProduct) => product._id !== id);
+          this.products = this.products.filter(
+            (product: IProduct) => product._id !== id
+          );
         },
         error: (err) => {
           alert(err.message);

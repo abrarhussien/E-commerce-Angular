@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserInterFace } from '../../models/userInterface';
 import { AuthService } from '../../services/auth';
@@ -35,11 +35,6 @@ export class RegisterComponent {
         Validators.required,
         Validators.pattern(emailRegex),
       ]),
-      // address: new FormControl('', [Validators.required]),
-      // phone: new FormControl<number>(20, [
-      //   Validators.required,
-      //   Validators.minLength(11),
-      // ]),
       password: new FormControl('', [
         Validators.required,
         Validators.minLength(6),
@@ -78,5 +73,11 @@ export class RegisterComponent {
   }
   getRepated(name: string) {
     return (this.contactForm.controls as { [key: string]: any })[name];
+  }
+  @Output('parentOpenLogComp') parentOpenLogComp: EventEmitter<any> =
+    new EventEmitter();
+  openLoginPage() {
+    this.parentOpenLogComp.emit();
+    this.router.navigate(['/login']);
   }
 }
