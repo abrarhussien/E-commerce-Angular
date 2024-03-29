@@ -9,7 +9,7 @@ import { AppComponent } from './app.component';
 import { ProductModule } from './products/product.module';
 import { ReviewModule } from './reviews/review.module';
 
-import { EditReviewComponent } from './reviews/components/edit-review/edit-review.component';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductComponent } from './components/product/product.component';
 import { CartComponent } from './components/cart/cart.component';
@@ -34,11 +34,14 @@ import { HomeComponent } from './components/home/home.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { AboutUsComponent } from './components/about-us/about-us.component';
+import { CategoriesComponent } from './components/categories/categories.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
     AppComponent,
-    EditReviewComponent,
     AppComponent,
     LoginComponent,
     RegisterComponent,
@@ -58,6 +61,9 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     ProductComponent,
     CartComponent,
     LoginComponent,
+    AboutUsComponent,
+    CategoriesComponent,
+    FooterComponent,
   ],
 
   imports: [
@@ -70,6 +76,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     ReviewModule,
     BrowserAnimationsModule,
     NgxSpinnerModule,
+  ProductModule,ReviewModule, NgbModule,
+
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [

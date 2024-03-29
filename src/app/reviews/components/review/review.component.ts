@@ -1,4 +1,4 @@
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Review } from '../../models/review';
 import { ReviewService } from './../../services/review.service';
 import {
@@ -18,11 +18,19 @@ import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
   selector: 'app-review',
   templateUrl: './review.component.html',
   styleUrl: './review.component.css',
+
 })
 export class ReviewComponent implements OnInit {
+
+  currentPage: number = 0;
+  totalPages: number = 0;
+  page: any;
+  limit:number=3;
+  totalPagesArray: number[] = [];
   constructor(
     private reviewService: ReviewService,
     private route: ActivatedRoute,
+    private router: Router,
     private formBuilder: FormBuilder
   ) {
     this.getCurrentUser();
@@ -50,13 +58,16 @@ export class ReviewComponent implements OnInit {
   formdata: Review = {
     _id: '',
     reviewDetails: '',
+    rating: 0,
     user: { name: '', image: '', _id: '' },
     product: '',
+
   };
   dataEnter: object = {
     reviewDetails: '',
     user: '',
     product: '',
+    rating: 0,
   };
   dataEdit: object = {
     reviewDetails: '',
@@ -64,9 +75,11 @@ export class ReviewComponent implements OnInit {
   updateFormGroup: any;
 
   ngOnInit(): void {
-    ('lll');
-
+    this.page = this.route.snapshot.queryParamMap.get('page');
+    console.log(+this.page);
+    this.currentPage = this.page || 1;
     this.getCurrentUser();
+
     console.log(this.exampleModalInput);
     // console.log(this.exampleModalInput);
     this.id = this.route.snapshot.paramMap.get('id');
@@ -79,6 +92,12 @@ export class ReviewComponent implements OnInit {
           Validators.pattern('[a-zA-Z ]*'),
           Validators.minLength(3),
         ],
+      ],rating: [
+        0,
+        [
+          Validators.required,
+
+        ],
       ],
     });
     // this.id = this.route.snapshot.paramMap.get('id');
@@ -89,7 +108,7 @@ export class ReviewComponent implements OnInit {
     // });
     console.log(this.id);
     console.log(this.productName);
-    this.getProductReviews();
+    this.getProductReviews(this.currentPage);
   }
   getCurrentUser() {
     this.reviewService.getCurrentUser().subscribe((response: any) => {
@@ -97,9 +116,18 @@ export class ReviewComponent implements OnInit {
       this.userId = response._id;
     });
   }
-  getProductReviews() {
-    this.reviewService.getProductReviews(this.id).subscribe((data) => {
-      this.dataReview = data;
+  getProductReviews(page:number) {
+    this.reviewService.getProductReviews(page,this.id).subscribe((data:any) => {
+      console.log("review",data)
+      this.dataReview = data.data;
+      this.currentPage = data.paginationResult.currentPage;
+        this.limit=data.paginationResult.limit;
+
+        this.totalPages = data.paginationResult.numberPages;
+        this.totalPagesArray = Array.from(
+          { length: this.totalPages },
+          (_, i) => i
+        );
       // data[0]['user']
       // this.dataReview
 
@@ -109,6 +137,7 @@ export class ReviewComponent implements OnInit {
   add(){
     this.addReview=true;
     this.updateRev=false;
+    this.myForm.reset()
     this.openModal();
   }
 
@@ -172,15 +201,17 @@ export class ReviewComponent implements OnInit {
   onSubmit(form: FormGroup) {
     console.log(this.id);
     if (form.valid) {
+      console.log("form.value.rating",form.value.rating)
       this.dataEnter = {
         reviewDetails: form.value.review,
+        rating: form.value.rating,
         user: this.userId,
         product: this.id,
       };
       //  this.addNewReview();
       this.reviewService.addroductReviews(this.id, this.dataEnter).subscribe({
         next: (data) => console.log(data),
-        complete: () => this.getProductReviews(),
+        complete: () => this.getProductReviews(this.currentPage),
       });
       console.log('id', 'this.dataReview)');
 
@@ -200,7 +231,7 @@ export class ReviewComponent implements OnInit {
         .subscribe({
           next: (data) => console.log(data),
           error: (err) => console.log(err),
-          complete: () => this.getProductReviews(),
+          complete: () => this.getProductReviews(this.currentPage),
         });
     }
   }
@@ -217,4 +248,21 @@ export class ReviewComponent implements OnInit {
     this.updateRev = true;
     this.openModal();
   }
+
+  changePage(newPage: number): void {
+    if (newPage >= 0 && newPage < this.totalPages) {
+
+      this.currentPage = newPage;
+      this.router.navigate(['/product-detail',this.id],{
+        queryParams: { page: this.currentPage + 1 },
+      });
+      // this.getAllProducts(this.currentPage , this.sortField);
+
+        this.getProductReviews(this.currentPage+1)
+
+console.log("pagesss",this.router)
+      }
+  }
+
 }
+

@@ -1,3 +1,6 @@
+import { NavBarComponent } from './../nav-bar/nav-bar.component';
+import { UserService } from './../../services/user.service';
+
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Output, inject } from '@angular/core';
 import {
@@ -19,7 +22,11 @@ const emailRegex = '[a-z0-9]+@[a-z]+.[a-z]{2,3}';
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
-  constructor(private router: Router, private http: HttpClient) {}
+  constructor(
+    private router: Router,
+    private http: HttpClient,
+    private userService:UserService
+  ) {}
   validated = true;
 
   contactForm = new FormGroup({
@@ -54,6 +61,13 @@ export class LoginComponent {
       .subscribe((response) => {
         console.log('Response:', response);
         localStorage.setItem('token', response['token']);
+        localStorage.setItem('role', response['role']);
+
+        //localStorage.setItem('id', response['id']);
+        const role =response['role'];
+        //this.cookieService.set('token', reponse['token']);
+        this.userService.roleObservable.next(role)
+
         this.router.navigate(['/home']);
       });
     this.contactForm.reset();

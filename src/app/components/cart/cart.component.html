@@ -1,1 +1,203 @@
-<p>cart works!</p>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Boutique | Ecommerce bootstrap template</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <!-- gLightbox gallery-->
+    <link rel="stylesheet" href="./vendor/glightbox/css/glightbox.min.css">
+    <!-- Range slider-->
+    <link rel="stylesheet" href="./vendor/nouislider/nouislider.min.css">
+    <!-- Choices CSS-->
+    <link rel="stylesheet" href="./vendor/choices.js/public/assets/styles/choices.min.css">
+    <!-- Swiper slider-->
+    <link rel="stylesheet" href="./vendor/swiper/swiper-bundle.min.css">
+    <!-- Google fonts-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300;400;700&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Martel+Sans:wght@300;400;800&amp;display=swap">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="./css/style.default.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="./css/custom.css">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="../../../assets/img/favicon.png">
+  </head>
+<body>
+
+    <!-- Cart Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row px-4 px-lg-5 py-lg-4 align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="h2 text-uppercase mb-0">Cart</h1>
+                </div>
+                <div class="col-lg-6 text-lg-end">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-lg-end mb-0 px-0 bg-light">
+                            <li class="breadcrumb-item"><a class="text-dark" href="#">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Cart</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mb-4 mb-lg-0">
+                    <!-- Cart Items -->
+                    <div class="table-responsive mb-4" *ngIf="cartItems.length > 0">
+                        <table class="table text-nowrap">
+                            <thead class="bg-light">
+                                <tr>
+                                    <th class="border-0 p-3" scope="col"><strong class="text-sm text-uppercase">Product</strong></th>
+                                    <th class="border-0 p-3" scope="col"><strong class="text-sm text-uppercase">Price</strong></th>
+                                    <th class="border-0 p-3" scope="col"><strong class="text-sm text-uppercase">Quantity</strong></th>
+                                    <th class="border-0 p-3" scope="col"><strong class="text-sm text-uppercase">Total</strong></th>
+                                    <th class="border-0 p-3" scope="col"><strong class="text-sm text-uppercase"></strong></th>
+                                </tr>
+                            </thead>
+                            <tbody class="border-0">
+                                <tr *ngFor="let item of cartItems">
+                                  <th class="ps-0 py-3 border-light" scope="row">
+                                      <div class="d-flex align-items-center">
+                                          <!-- Replace anchor tag with router link -->
+                                          <a class="reset-anchor d-block animsition-link" [routerLink]="['/products', item._id]">
+                                              <img src="{{ item.productId.imageCover }}" alt="{{ item.productId.title }}" width="70" />
+                                          </a>
+                                          <div class="ms-3">
+                                              <strong class="h6">
+                                                  <!-- Remove href attribute -->
+                                                  <a class="reset-anchor animsition-link" [routerLink]="['/products', item._id]">{{ item.productId.title }}</a>
+                                              </strong>
+                                          </div>
+                                      </div>
+                                  </th>
+                                    <td class="p-3 align-middle border-light">
+                                        <p class="mb-0 small">{{ item.productId.price }}</p>
+                                    </td>
+                                    <td class="p-3 align-middle border-light">
+                                        <div class="border d-flex align-items-center justify-content-between px-3">
+                                            <span class="small text-uppercase text-gray headings-font-family">Quantity</span>
+                                            <div class="quantity">
+                                                <button class="dec-btn p-0"><i class="fas fa-caret-left"></i></button>
+                                                <input class="form-control form-control-sm border-0 shadow-0 p-0" type="text" value="{{ item.quantity }}" />
+                                                <button class="inc-btn p-0"><i class="fas fa-caret-right"></i></button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="p-3 align-middle border-light">
+                                        <p class="mb-0 small">{{ item.quantity * item.productId.price }}</p>
+                                    </td>
+                                    <td class="p-3 align-middle border-light" ><button class="reset-anchor" (click)="deleteItem(item.productId._id)"><i class="fas fa-trash-alt small text-muted"></i></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Empty Cart Message -->
+                    <div *ngIf="cartItems.length === 0">
+                        <p>Your cart is empty.</p>
+                    </div>
+
+                    <!-- CART NAV-->
+                    <div class="bg-light px-4 py-3">
+                        <div class="row align-items-center text-center">
+                            <div class="col-md-6 mb-3 mb-md-0 text-md-start"><a class="btn btn-link p-0 text-dark btn-sm" href="shop.html"><i class="fas fa-long-arrow-alt-left me-2"></i>Continue shopping</a></div>
+                            <div class="col-md-6 text-md-end"><a class="btn btn-outline-dark btn-sm" href="checkout.html">Proceed to checkout<i class="fas fa-long-arrow-alt-right ms-2"></i></a></div>
+                        </div>
+                    </div>
+                </div>
+
+                  <!-- ORDER TOTAL-->
+                  <div class="col-lg-4">
+                      <div class="card border-0 rounded-0 p-lg-4 bg-light">
+                          <div class="card-body">
+                              <h5 class="text-uppercase mb-4">Cart total</h5>
+                              <ul class="list-unstyled mb-0">
+                                  <li class="d-flex align-items-center justify-content-between">
+                                      <!-- <strong class="text-uppercase small font-weight-bold">Subtotal</strong> -->
+                                      <!-- <span class="text-muted small">${{ subtotal }}</span> -->
+                                  </li>
+                                  <li class="border-bottom my-2"></li>
+                                  <li class="d-flex align-items-center justify-content-between mb-4">
+                                      <strong class="text-uppercase small font-weight-bold">Total</strong>
+                                      <span>${{ total }}</span>
+                                  </li>
+                                  <li>
+                                      <form action="#">
+                                          <div class="input-group mb-0">
+                                              <input class="form-control" type="text" placeholder="Enter your coupon">
+                                              <button class="btn btn-dark btn-sm w-100" type="submit">
+                                                  <i class="fas fa-gift me-2"></i>Apply coupon
+                                              </button>
+                                          </div>
+                                      </form>
+                                  </li>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white">
+        <div class="container py-4">
+            <div class="row py-5">
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <h6 class="text-uppercase mb-3">Customer services</h6>
+                    <ul class="list-unstyled mb-0">
+                        <li><a class="footer-link" href="#!">Help &amp; Contact Us</a></li>
+                        <li><a class="footer-link" href="#!">Returns &amp; Refunds</a></li>
+                        <li><a class="footer-link" href="#!">Online Stores</a></li>
+                        <li><a class="footer-link" href="#!">Terms &amp; Conditions</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <h6 class="text-uppercase mb-3">Company</h6>
+                    <ul class="list-unstyled mb-0">
+                        <li><a class="footer-link" href="#!">What We Do</a></li>
+                        <li><a class="footer-link" href="#!">Available Services</a></li>
+                        <li><a class="footer-link" href="#!">Latest Posts</a></li>
+                        <li><a class="footer-link" href="#!">FAQs</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h6 class="text-uppercase mb-3">Social media</h6>
+                    <ul class="list-unstyled mb-0">
+                        <li><a class="footer-link" href="#!">Twitter</a></li>
+                        <li><a class="footer-link" href="#!">Instagram</a></li>
+                        <li><a class="footer-link" href="#!">Tumblr</a></li>
+                        <li><a class="footer-link" href="#!">Pinterest</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-top pt-4" style="border-color: #1d1d1d !important">
+                <div class="row">
+                    <div class="col-md-6 text-center text-md-start">
+                        <p class="small text-muted mb-0">&copy; 2021 All rights reserved.</p>
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        <p class="small text-muted mb-0">Template designed by <a class="text-white reset-anchor" href="https://bootstrapious.com/p/boutique-bootstrap-e-commerce-template">Bootstrapious</a></p>
+                        <!-- If you want to remove the backlink, please purchase the Attribution-Free License. See details in readme.txt or license.txt. Thanks!-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <!-- Font Awesome JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js" integrity="sha512-0Fpkf/+lL7OR2v8ekX8pYBe6gm9WT+rFhHrB0w3V3rVdI7aZimz7k5TUIgZlP/nmhGFlf44WtGy9nV3Ufkxd0Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</body>
+</html>
+
