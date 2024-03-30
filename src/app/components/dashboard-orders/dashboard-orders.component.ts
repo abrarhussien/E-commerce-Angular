@@ -23,7 +23,7 @@ ngOnInit(): void {
       this.ordersService.getOrders().subscribe({
         next:(orders:any)=>{
           this.orders=orders.data
-          console.log(orders)
+          //console.log(orders)
 
         },
         error:(err)=>{
@@ -38,7 +38,7 @@ ngOnInit(): void {
     this.ordersService.getorderByStatus(route).subscribe({
       next:(orders:any)=>{
         this.orders=orders.data
-        console.log(orders)
+        //console.log(orders)
       },
       error:(err)=>{
         alert(err.message)
@@ -57,7 +57,7 @@ ngOnInit(): void {
     this.subscription.add(
       this.ordersService.setOrderStatus(id,{status:(newStatus.target as HTMLInputElement).value}).subscribe({
         next:(data)=>{
-          console.log(data);
+          //console.log(data);
         },
         error:(err)=>{
           alert(err.message)

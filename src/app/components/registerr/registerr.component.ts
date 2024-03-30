@@ -65,11 +65,11 @@ export class RegisterComponent {
         })
       )
       .subscribe((reponse) => {
-        console.log('Response:', reponse);
+        //console.log('Response:', reponse);
         this.router.navigate(['/login']);
       });
     this.contactForm.reset();
-    console.log(this.contactForm.value);
+    //console.log(this.contactForm.value);
   }
   getRepated(name: string) {
     return (this.contactForm.controls as { [key: string]: any })[name];

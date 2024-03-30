@@ -59,7 +59,7 @@ export class LoginComponent {
         })
       )
       .subscribe((response) => {
-        console.log('Response:', response);
+        //console.log('Response:', response);
         localStorage.setItem('token', response['token']);
         localStorage.setItem('role', response['role']);
 

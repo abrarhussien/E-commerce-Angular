@@ -42,7 +42,7 @@ export class OrderDetailsComponent {
       )
       .subscribe((response: any) => {
         if (response) {
-          console.log(response);
+          //console.log(response);
           this.order = response.data
         }
       });

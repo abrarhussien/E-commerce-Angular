@@ -76,11 +76,11 @@ export class ReviewComponent implements OnInit {
 
   ngOnInit(): void {
     this.page = this.route.snapshot.queryParamMap.get('page');
-    console.log(+this.page);
+    //console.log(+this.page);
     this.currentPage = this.page || 1;
     this.getCurrentUser();
 
-    console.log(this.exampleModalInput);
+    //console.log(this.exampleModalInput);
     // console.log(this.exampleModalInput);
     this.id = this.route.snapshot.paramMap.get('id');
 
@@ -106,19 +106,19 @@ export class ReviewComponent implements OnInit {
     //   const id = param.get(`id`);
     //   this.deleteReview(id);
     // });
-    console.log(this.id);
-    console.log(this.productName);
+    //console.log(this.id);
+    //console.log(this.productName);
     this.getProductReviews(this.currentPage);
   }
   getCurrentUser() {
     this.reviewService.getCurrentUser().subscribe((response: any) => {
-      console.log('id111', response);
+      //console.log('id111', response);
       this.userId = response._id;
     });
   }
   getProductReviews(page:number) {
     this.reviewService.getProductReviews(page,this.id).subscribe((data:any) => {
-      console.log("review",data)
+      //console.log("review",data)
       this.dataReview = data.data;
       this.currentPage = data.paginationResult.currentPage;
         this.limit=data.paginationResult.limit;
@@ -131,7 +131,7 @@ export class ReviewComponent implements OnInit {
       // data[0]['user']
       // this.dataReview
 
-      console.log(this.dataReview);
+      //console.log(this.dataReview);
     });
   }
   add(){
@@ -162,7 +162,7 @@ export class ReviewComponent implements OnInit {
         this.dataReview = this.dataReview.filter(
           (review) => review._id != id
         );
-        console.log(data);
+        //console.log(data);
 
       },
       error: (err) => {
