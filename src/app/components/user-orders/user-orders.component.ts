@@ -60,7 +60,7 @@ export class UserOrdersComponent {
       )
       .subscribe((response: any) => {
         if (response) {
-          console.log(response);
+          //console.log(response);
           this.orders = response.data;
         }
       });

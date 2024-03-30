@@ -12,7 +12,7 @@ export class ProductService {
     return this.httpClient.get<any[]>(`https://node-e-commerce-rlkh.onrender.com/api/v1/products?page=${page}&sort=${sortField}&limit=10`);
   }
   getProductById(id: string) {
-    console.log(id)
+    //console.log(id)
     return this.httpClient.get<IProduct>(
       'https://node-e-commerce-rlkh.onrender.com/api/v1/products/' + id
     );
@@ -21,14 +21,14 @@ export class ProductService {
     return this.httpClient.post('https://node-e-commerce-rlkh.onrender.com/api/v1/products', product);
   }
   editProduct(newProduct: IProduct) {
-    console.log(newProduct)
+    //console.log(newProduct)
     return this.httpClient.put(
       'https://node-e-commerce-rlkh.onrender.com/api/v1/products/' + newProduct._id,
       newProduct
     );
   }
   deleteProduct(id: string) {
-    console.log(id)
+    //console.log(id)
     return this.httpClient.delete('https://node-e-commerce-rlkh.onrender.com/api/v1/products/' + id);
   }
   getFilteredProducts(
