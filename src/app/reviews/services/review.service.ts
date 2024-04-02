@@ -68,7 +68,7 @@ export class ReviewService {
       // })
 
       catchError((error: any) => {
-        console.log('id id id', id);
+        //console.log('id id id', id);
         console.error('API Error:', error);
         throw error;
       })

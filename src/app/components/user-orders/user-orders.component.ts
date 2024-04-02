@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError } from 'rxjs';
 
@@ -8,26 +8,25 @@ import { catchError } from 'rxjs';
   templateUrl: './user-orders.component.html',
   styleUrl: './user-orders.component.css'
 })
-export class UserOrdersComponent {
+export class UserOrdersComponent implements OnInit {
    orders: any;
 
   constructor(
     private router: Router,
     private http: HttpClient
   ) {
-    this.getOrders();
+  }
+  ngOnInit(): void {
+     this.getOrders();
+
   }
 
   cancelOrder(orderId:string):void {
     const url = `https://node-e-commerce-rlkh.onrender.com/api/v1/orders/${orderId}/status`;
     const body = {status:"Canceled"}
-        let headers = new HttpHeaders({
-      'Content-type': 'application/json; charset=UTF-8',
-      jwt: localStorage.getItem('token') || '',
-      email: localStorage.getItem('email') || '',
-        });
+
         this.http
-      .put(url, body ,  { headers })
+      .put(url, body )
       .pipe(
         catchError((error) => {
           return error;
@@ -45,20 +44,17 @@ export class UserOrdersComponent {
   }
 
   getOrders(): void {
-    const url = 'https://node-e-commerce-rlkh.onrender.com/api/v1/orders';
-    let headers = new HttpHeaders({
-      'Content-type': 'application/json; charset=UTF-8',
-      jwt: localStorage.getItem('token') || '',
-      email: localStorage.getItem('email') || '',
-    });
+    const url = 'https://node-e-commerce-rlkh.onrender.com/api/v1/orders/user';
+
     this.http
-      .get(url, { headers })
+      .get("https://node-e-commerce-rlkh.onrender.com/api/v1/orders/user")
       .pipe(
         catchError((error) => {
+          console.log(error);
+
           return error;
         })
-      )
-      .subscribe((response: any) => {
+      ).subscribe((response: any) => {
         if (response) {
           console.log(response);
           this.orders = response.data;

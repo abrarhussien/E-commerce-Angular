@@ -37,8 +37,12 @@ import { AboutUsComponent } from './components/about-us/about-us.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 import { ResetComponent } from './components/reset/reset.component';
 import { ToastrModule } from 'ngx-toastr';
+
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { ThankYouComponent } from './components/thank-you/thank-you.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +69,11 @@ import { ToastrModule } from 'ngx-toastr';
     AboutUsComponent,
     CategoriesComponent,
     FooterComponent,
+
     ResetComponent,
+
+    CheckoutComponent,
+    ThankYouComponent,
   ],
 
   imports: [
@@ -82,6 +90,8 @@ import { ToastrModule } from 'ngx-toastr';
     ReviewModule,
     NgbModule,
     ToastrModule.forRoot(),
+
+    NgbModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [

@@ -24,7 +24,7 @@ export class ProfileComponent implements OnInit {
   user= {name:"",email:""};
 
   onLoginSuccess(): void {
-    console.log("aaaaaaaaaaaaaaaaaaaaaahhhhhhhhhhhhhhhhhhhh");
+    //console.log("aaaaaaaaaaaaaaaaaaaaaahhhhhhhhhhhhhhhhhhhh");
 
     const url = `https://node-e-commerce-rlkh.onrender.com/api/profile`;
     // const token: string = localStorage.getItem('token') as string
@@ -40,7 +40,7 @@ export class ProfileComponent implements OnInit {
         })
       )
       .subscribe((response: any) => {
-          console.log(response);
+          //console.log(response);
         this.user.name = response.name;
         this.user.email = response.email;
 
@@ -61,7 +61,7 @@ export class ProfileComponent implements OnInit {
         })
       )
       .subscribe((response: any) => {
-        console.log(response);
+        //console.log(response);
         this.user.name = response.name;
         this.user.email = response.email;
 
@@ -84,7 +84,7 @@ updateUserProfile(): void {
       })
     )
     .subscribe((response: any) => {
-      console.log(response);
+      //console.log(response);
       this.editMode = false;
       // Optionally, you can show a success message to the user
       // Or navigate back to the profile page
