@@ -9,7 +9,6 @@ import { AppComponent } from './app.component';
 import { ProductModule } from './products/product.module';
 import { ReviewModule } from './reviews/review.module';
 
-
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductComponent } from './components/product/product.component';
 import { CartComponent } from './components/cart/cart.component';
@@ -38,6 +37,10 @@ import { AboutUsComponent } from './components/about-us/about-us.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+import { ResetComponent } from './components/reset/reset.component';
+import { ToastrModule } from 'ngx-toastr';
+
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { ThankYouComponent } from './components/thank-you/thank-you.component';
 
@@ -66,6 +69,9 @@ import { ThankYouComponent } from './components/thank-you/thank-you.component';
     AboutUsComponent,
     CategoriesComponent,
     FooterComponent,
+
+    ResetComponent,
+
     CheckoutComponent,
     ThankYouComponent,
   ],
@@ -82,8 +88,10 @@ import { ThankYouComponent } from './components/thank-you/thank-you.component';
     NgxSpinnerModule,
     ProductModule,
     ReviewModule,
-   NgbModule
+    NgbModule,
+    ToastrModule.forRoot(),
 
+    NgbModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
