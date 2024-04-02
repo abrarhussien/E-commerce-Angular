@@ -32,7 +32,7 @@ export class CartComponent implements OnInit {
     showData(): void {
     this.cartService.getCartItems().subscribe({
       next: (data:any) => {
-        console.log(data);
+        //console.log(data);
         this.cartItems = data.items
         this.total = data.price
       }
@@ -40,6 +40,7 @@ export class CartComponent implements OnInit {
   }
 
   deleteItem(id: string) {
+
     console.log(id);
 
     this.cartService.removeCartItem(id).subscribe({
@@ -59,6 +60,7 @@ export class CartComponent implements OnInit {
         console.error('Error removing item from cart:', error);
       }
     });
+
     }
 
   increaseQuantity(cartId: any, quantity: any) {
@@ -71,6 +73,7 @@ export class CartComponent implements OnInit {
           this.calculateTotal();
       }
     })
+
   }
 
 decreaseQuantity(cartId: any, quantity: any) {

@@ -36,7 +36,12 @@
           <!-- Link--><a class="nav-link" routerLink="/about-us">About Us</a>
         </li>
       </ul>
+
+
+
       <ul class="navbar-nav ms-auto">
+      <input type="text" (input)="search($event)" placeholder="search for product" #filter>
+
         <li class="nav-item">
           <a class="nav-link" *ngIf="role !== 'vesitor'" routerLink="/cart">
             <i class="fas fa-dolly-flatbed me-1 text-gray"></i>Cart<small

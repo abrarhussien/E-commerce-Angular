@@ -1,140 +1,142 @@
-<div class="flex justify-center items-center h-screen bg-black">
-  <div
-    class="max-w-md w-full p-8 bg-white shadow-md rounded-lg transform transition-all duration-300 hover:scale-105"
-  >
-    <h1 class="text-3xl font-bold mb-6 text-center">Register</h1>
-    <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
-      <div class="mb-4 relative">
-        <input
-          type="text"
-          placeholder="name"
-          formControlName="name"
-          class="w-full px-3 py-2 border rounded-md bg-gray-100 focus:outline-none focus:border-blue-500 transition duration-500 ease-in-out transform hover:scale-105"
-        />
-        <div
-          *ngIf="getRepated('name').errors && getRepated('name').touched"
-          class="error"
-        >
-          <div *ngIf="getRepated('name').errors.required">
-            First Name is requird
-          </div>
-          <div *ngIf="getRepated('name').errors.minlength">
-            Min length is
-            {{ getRepated("name").errors["minlength"]["requiredLength"] }}But
-            you enter
-            {{ getRepated("name").errors["minlength"]["actualLength"] }}
-          </div>
-        </div>
-      </div>
-      <div class="mb-4 relative">
-        <input
-          type="text"
-          placeholder="Email"
-          formControlName="email"
-          class="w-full px-3 py-2 border rounded-md bg-gray-100 focus:outline-none focus:border-blue-500 transition duration-500 ease-in-out transform hover:scale-105"
-        />
-        <div
-          *ngIf="getRepated('email').touched && getRepated('email').errors"
-          class="error"
-        >
-          <div *ngIf="getRepated('email').errors.required">
-            E-mail is Required
-          </div>
-          <div *ngIf="getRepated('email').errors['pattern']">
-            Email should be example&#64;ex.ex
-          </div>
-        </div>
-      </div>
-      <!-- <div class="mb-4 relative">
-        <input
-          type="text"
-          placeholder="Address"
-          formControlName="address"
-          class="w-full px-3 py-2 border rounded-md bg-gray-100 focus:outline-none focus:border-blue-500 transition duration-500 ease-in-out transform hover:scale-105"
-        />
-        <div
-          *ngIf="getRepated('address').errors && getRepated('address').touched"
-          class="error"
-        >
-          <div *ngIf="getRepated('address').errors.required">
-            address is requird
-          </div>
-        </div>
-      </div>
-      <div class="mb-4 relative">
-        <input
-          type="text"
-          placeholder="Phone"
-          formControlName="phone"
-          class="w-full px-3 py-2 border rounded-md bg-gray-100 focus:outline-none focus:border-blue-500 transition duration-500 ease-in-out transform hover:scale-105"
-        />
-        <div
-          class="error"
-          *ngIf="getRepated('phone').touched && getRepated('phone').errors"
-        >
-          <div *ngIf="getRepated('phone').errors.required">
-            Phone is Required
-          </div>
-        </div>
-      </div> -->
-      <div class="mb-4 relative">
-        <input
-          type="password"
-          placeholder="Password"
-          formControlName="password"
-          class="w-full px-3 py-2 border rounded-md bg-gray-100 focus:outline-none focus:border-blue-500 transition duration-500 ease-in-out transform hover:scale-105"
-        />
-        <div
-          *ngIf="
-            getRepated('password').errors && getRepated('password').touched
-          "
-          class="error"
-        >
-          <div *ngIf="getRepated('password').errors.required">
-            password is requird
-          </div>
-          <div *ngIf="getRepated('password').errors.minlength">
-            Min length is
-            {{
-              getRepated("password").errors["minlength"]["requiredLength"]
-            }}But you enter
-            {{ getRepated("password").errors["minlength"]["actualLength"] }}
-          </div>
-        </div>
-      </div>
-      <div class="mb-4 relative">
-        <input
-          type="password"
-          placeholder="Re-password"
-          formControlName="repassword"
-          class="w-full px-3 py-2 border rounded-md bg-gray-100 focus:outline-none focus:border-blue-500 transition duration-500 ease-in-out transform hover:scale-105"
-        />
-        <div *ngIf="getRepated('repassword').touched" class="error">
-          <div *ngIf="getRepated('repassword').errors?.required">
-            repassword is requird
-          </div>
-          <div *ngIf="contactForm.errors?.['passwordmatcherror']">
-            Passwords do not match
-          </div>
-
-          <!-- <div
+<div class="row align-items-center justify-content-center g-0">
+  <div class="col-12">
+    <div class="rounded-3">
+      <h2 class="">Get Start Shopping</h2>
+      <p class="fs-6 text-secondary">
+        Welcome to Boutique! Enter your email to get started.
+      </p>
+      <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+        <div class="my-3">
+          <input
+            type="text"
+            placeholder="Name"
+            formControlName="name"
+            id="name"
+            class="form-control"
+          />
+          <div
             *ngIf="
-              getRepated('repassword').value !== getRepated('password').value
+              contactForm.get('name')?.touched &&
+              contactForm.get('name')?.errors
             "
+            class="text-danger"
           >
-            Passwords do not match
-          </div> -->
+            <p *ngIf="contactForm.get('name')?.getError('required')">
+              Name is required
+            </p>
+            <p *ngIf="contactForm.get('name')?.getError('minlength')">
+              Name min length is 4 Characters
+            </p>
+            <p *ngIf="contactForm.get('name')?.getError('maxlength')">
+              Name max length is 20 Characters
+            </p>
+            <p *ngIf="contactForm.get('name')?.getError('pattern')">
+              Name must contain only charcters and numbers
+            </p>
+          </div>
         </div>
-      </div>
-      <div class="mb-4">
+        <div class="my-3">
+          <input
+            type="email"
+            placeholder="Email"
+            formControlName="email"
+            id="email"
+            class="form-control"
+          />
+          <div
+            *ngIf="
+              contactForm.get('email')?.touched &&
+              contactForm.get('email')?.errors
+            "
+            class="text-danger"
+          >
+            <p *ngIf="contactForm.get('email')?.getError('required')">
+              Email is required
+            </p>
+            <p *ngIf="contactForm.get('email')?.getError('email')">
+              Email must be like example&#64;info.com
+            </p>
+          </div>
+        </div>
+        <div class="my-3">
+          <input
+            type="password"
+            placeholder="Password"
+            formControlName="password"
+            id="password"
+            class="form-control"
+          />
+          <div
+            *ngIf="
+              contactForm.get('password')?.touched &&
+              contactForm.get('password')?.errors
+            "
+            class="text-danger"
+          >
+            <p *ngIf="contactForm.get('password')?.getError('required')">
+              Password is required
+            </p>
+            <p *ngIf="contactForm.get('password')?.getError('minlength')">
+              Password min length is 8 Characters
+            </p>
+            <p *ngIf="contactForm.get('password')?.getError('maxlength')">
+              Password max length is 20 Characters
+            </p>
+            <p *ngIf="contactForm.get('password')?.getError('pattern')">
+              Password must include at least one uppercase letter, one lowercase
+              letter, one number and one special character
+            </p>
+          </div>
+        </div>
+        <div class="my-3">
+          <input
+            type="password"
+            placeholder="Repassword"
+            formControlName="rePassword"
+            id="rePassword"
+            class="form-control"
+          />
+          <div
+            *ngIf="contactForm.get('rePassword')?.touched"
+            class="text-danger"
+          >
+            <p *ngIf="contactForm.get('rePassword')?.getError('required')">
+              Repassword is required
+            </p>
+            <p
+              class="error-message"
+              *ngIf="contactForm.errors?.['PasswordNoMatch']"
+            >
+              Password does'nt match.
+            </p>
+          </div>
+        </div>
+        <p class="text-secondary">
+          By Sign up, you agree to our
+          <span class="text-main fw-bold">Terms of Service</span> &
+          <span class="text-main fw-bold"> Privacy Policy</span>
+        </p>
         <button
-          type="submit"
-          [disabled]="contactForm.invalid"
-          class="w-full bg-black text-white py-2 rounded-md hover:bg-gray-800 transition duration-300"
+          class="btn-main mt-3 w-100 d-flex justify-content-center align-items-center rounded-2 px-3 py-2"
+          [disabled]="!contactForm.valid"
         >
           Sign Up
+          <!-- <div *ngIf="isloading">
+            <app-btn-loader></app-btn-loader>
+          </div> -->
         </button>
+        <!-- <p *ngIf="requisError" class=" text-danger">
+          {{requisError}}
+        </p> -->
+      </form>
+      <div>
+        <p class="text-center mt-4 fs-6 text-secondary mb-0">
+          Already have an account?
+          <span class="text-main" (click)="openLoginPage()" role="button"
+            >Sign in</span
+          >
+        </p>
       </div>
-    </form>
+    </div>
   </div>
 </div>

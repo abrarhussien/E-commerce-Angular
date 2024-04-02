@@ -126,13 +126,12 @@
                             </a>
                         </div>
 
-              <li class="page-item mx-1 " *ngFor="let page of totalPagesArray let i=index" (click)="changePage(page)" [class.active]="currentPage-1 === page">
+              <li class="page-item mx-1 " *ngFor="let page of totalPagesArray let i=index" (click)="changePage(page)" [class.active]="currentPage === page+1">
 
 
 
                   <a class="page-link"
-                  [routerLink]="categoryId ? ['/category', categoryId, 'product'] : ['/products']"
-                  [queryParams]="{ page: currentPage }">
+                  >
                   {{page+1}}
                 </a>
               </li>

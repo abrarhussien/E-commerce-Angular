@@ -1,4 +1,4 @@
-<div class="container py-4 text-light mt-4">
+<div class="container py-4 text-light mt-5">
     <div class="row justify-content-center">
         <div class="col-md-12"> <!-- Adjusted to take full width -->
             <div class="table-responsive">
@@ -15,7 +15,7 @@
                     <tbody>
                         <tr *ngFor="let order of orders; let i = index" class="slide-right" style="--delay: {{ i * 0.3 }}s;">
                             <td>{{ order._id }}</td>
-                            <td>{{ order.user._id }}</td>
+                            <td>{{ order.user }}</td>
                             <td>${{ order.totalOrderPrice }}</td>
                             <td>{{ order.status }}</td>
                             <td>

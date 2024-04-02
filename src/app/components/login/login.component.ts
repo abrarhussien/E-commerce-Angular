@@ -2,7 +2,7 @@ import { NavBarComponent } from './../nav-bar/nav-bar.component';
 import { UserService } from './../../services/user.service';
 
 import { HttpClient } from '@angular/common/http';
-import { Component, inject } from '@angular/core';
+import { Component, EventEmitter, Output, inject } from '@angular/core';
 import {
   AbstractControl,
   FormControl,
@@ -59,7 +59,7 @@ export class LoginComponent {
         })
       )
       .subscribe((response) => {
-        console.log('Response:', response);
+        //console.log('Response:', response);
         localStorage.setItem('token', response['token']);
         localStorage.setItem('role', response['role']);
 
@@ -71,5 +71,16 @@ export class LoginComponent {
         this.router.navigate(['/home']);
       });
     this.contactForm.reset();
+  }
+  @Output('parentOpenRegComp') parentOpenRegComp: EventEmitter<any> =
+    new EventEmitter();
+  @Output('parentOpenResetComp') parentOpenResetComp: EventEmitter<any> =
+    new EventEmitter();
+  openRegPage() {
+    this.parentOpenRegComp.emit();
+    this.router.navigate(['/registerr']);
+  }
+  openResetComp() {
+    this.parentOpenResetComp.emit();
   }
 }
