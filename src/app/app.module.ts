@@ -38,6 +38,8 @@ import { AboutUsComponent } from './components/about-us/about-us.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { ThankYouComponent } from './components/thank-you/thank-you.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +66,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AboutUsComponent,
     CategoriesComponent,
     FooterComponent,
+    CheckoutComponent,
+    ThankYouComponent,
   ],
 
   imports: [
@@ -76,7 +80,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ReviewModule,
     BrowserAnimationsModule,
     NgxSpinnerModule,
-  ProductModule,ReviewModule, NgbModule,
+    ProductModule,
+    ReviewModule,
+   NgbModule
 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
