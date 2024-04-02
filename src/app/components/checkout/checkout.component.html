@@ -1,0 +1,105 @@
+<!-- Checkout Section -->
+<section class="checkout-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <!-- Shipping Address -->
+        <div class="card mb-4">
+          <div class="card-body">
+            <h4 class="card-title">Shipping Address</h4>
+            <form (ngSubmit)="placeOrder()">
+              <!-- Full Name -->
+              <div class="mb-3">
+                <label for="fullName" class="form-label">Full Name</label>
+                <input type="text" class="form-control" id="fullName" placeholder="Enter your full name" [(ngModel)]="shippingInfo.fullName" name="fullName" required #fullNameInput="ngModel">
+                <div *ngIf="fullNameInput.invalid && (fullNameInput.dirty || fullNameInput.touched)" class="invalid-feedback">Full Name is required</div>
+              </div>
+              <!-- Phone -->
+              <div class="mb-3">
+                <label for="phone" class="form-label">Phone Number</label>
+                <input type="text" class="form-control" id="phone" placeholder="Enter your phone number" [(ngModel)]="shippingInfo.phone" name="phone" required #phone="ngModel">
+                <div *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="invalid-feedback">Phone number is required</div>
+              </div>
+              <!-- Street Address -->
+              <div class="mb-3">
+                <label for="streetAddress" class="form-label">Street Address</label>
+                <input type="text" class="form-control" id="streetAddress" placeholder="Enter your street address" [(ngModel)]="shippingInfo.streetAddress" name="streetAddress" required #streetAddressInput="ngModel">
+                <div *ngIf="streetAddressInput.invalid && (streetAddressInput.dirty || streetAddressInput.touched)" class="invalid-feedback">Street Address is required</div>
+              </div>
+              <!-- City and Postal Code -->
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="city" class="form-label">City</label>
+                  <input type="text" class="form-control" id="city" placeholder="Enter your city" [(ngModel)]="shippingInfo.city" name="city" required #cityInput="ngModel">
+                  <div *ngIf="cityInput.invalid && (cityInput.dirty || cityInput.touched)" class="invalid-feedback">City is required</div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="postalCode" class="form-label">Postal Code</label>
+                  <input type="text" class="form-control" id="postalCode" placeholder="Enter your postal code" [(ngModel)]="shippingInfo.postalCode" name="postalCode" required #postalCodeInput="ngModel">
+                  <div *ngIf="postalCodeInput.invalid && (postalCodeInput.dirty || postalCodeInput.touched)" class="invalid-feedback">Postal Code is required</div>
+                </div>
+              </div>
+              <!-- Country -->
+              <div class="mb-3">
+                <label for="country" class="form-label">Country</label>
+                <select class="form-select" id="country" [(ngModel)]="shippingInfo.country" name="country" required #countryInput="ngModel">
+                  <option value="">Select your country</option>
+                  <option *ngFor="let country of countries" [value]="country">{{ country }}</option>
+                </select>
+                <div *ngIf="countryInput.invalid && (countryInput.dirty || countryInput.touched)" class="invalid-feedback">Country is required</div>
+              </div>
+
+              <!-- Proceed to payment buttons -->
+              <div class="row mb-3">
+                <div class="col">
+                    <p>Please select payment Method</p>
+                    <input type="radio" id="delivery" name="paymentMethod" [(ngModel)]="paymentMethod" value="cash"><label for="delivery">cach on delvery</label><br>
+                    <input type="radio" id="credit" name="paymentMethod" [(ngModel)]="paymentMethod" value="card"><label for="credit">payment</label><br>
+                  <button type="submit" class="btn btn-primary">place order</button>
+            <!-- <button (click)="credit()" class="btn btn-primary">Credit Payment</button> -->
+
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+            <!-- Order Summary -->
+      <div class="col-lg-4">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Order Summary</h4>
+            <!-- Display cart items -->
+            <div *ngFor="let item of cartItems" class="cart-item">
+              <div class="row">
+                <div class="col-4">
+                  <img [src]="item.productId.imageCover" alt="{{ item.productId.title }}" class="img-fluid">
+                </div>
+                <div class="col-8">
+                  <p><strong>{{ item.productId.title }}</strong></p>
+                  <p>Quantity: {{ item.quantity }}</p>
+                  <p>Price: ${{ item.productId.price }}</p>
+                </div>
+              </div>
+              <hr>
+            </div>
+            <!-- Total amount -->
+            <p>Total: ${{ total }}</p>
+            <!-- Additional summary details -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Credit Payment Button -->
+      <!-- <div class="col-lg-4">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h4 class="card-title">Credit Payment</h4>
+            <button (click)="credit()" class="btn btn-primary">Credit Payment</button>
+          </div>
+        </div>
+      </div> -->
+    </div>
+  </div>
+</section>

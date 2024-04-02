@@ -9,22 +9,42 @@ import { HttpClient } from '@angular/common/http';
 export class CartService {
   cartItems: IProduct[] = [];
   cartItemCount: number = 0;
-  private cartCounterSubject: BehaviorSubject<number> = new BehaviorSubject<number>(0);
-  public cartCounter$: Observable<number> = this.cartCounterSubject.asObservable();
+  cartCounterSubject: BehaviorSubject<any> = new BehaviorSubject<number>(0);
+  // public cartCounter$: Observable<number> = this.cartCounterSubject.asObservable();
+  private cartItemsSubject: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+  public cartItems$: Observable<any[]> = this.cartItemsSubject.asObservable();
   private apiUrl = 'https://node-e-commerce-rlkh.onrender.com/api/carts';
+  private baseUrl = 'http://localhost:3040/api/carts/payement';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {  }
 
   addToCart(id: string, quantity: number): Observable<any> {
     const body = {
-      productId: "65fe0c18af3193e81072b088",
-        quantity: 2
+      productId: id,
+        quantity: quantity
     }
+    this.getCount()
+    this.incrementCartCounter()
     return this.http.post<any>(`${this.apiUrl}`, body);
   }
 
-  getCartItems(): Observable<IProduct[]> {
-    return this.http.get<IProduct[]>(`${this.apiUrl}`);
+  updateCart(cartId: string, quantity: number): Observable<any> {
+    console.log(quantity);
+
+    const url = `https://node-e-commerce-rlkh.onrender.com/api/carts/update/${cartId}`
+    const body = {
+      quantity: quantity
+    }
+    return this.http.patch<any>(`${url}`, body);
+  }
+
+  getCartItems(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}`);
+  }
+
+  getCount() {
+    this.getCartItems().subscribe((res)=>{this.cartCounterSubject.next(res.items.length);
+    })
   }
 
   // updateCartItem(productId: string, quantity: number): Observable<any> {
@@ -35,20 +55,26 @@ export class CartService {
     return this.http.delete<any>(`${this.apiUrl}/remove/${productId}`);
   }
 
-  // addToCart(product: IProduct) {
-  //   this.cartItems.push(product);
-  //   console.log(this.cartItems);
-  //   this.cartItemCount = this.cartItems.length;
-  // }
-
-  //   getCartItems(): IProduct[] {
-  //   return this.cartItems;
-  // }
-
   incrementCartCounter(): void {
     let currentCount = this.cartCounterSubject.value;
     this.cartCounterSubject.next(currentCount + 1);
   }
 
+  // getCashPaymentInfo(): Observable<any> {
+  //   return this.http.get<any>(`${this.baseUrl}`);
+  // }
+
+  makePayment(cartId:string,order:any): Observable<any> {
+    return this.http.post<any>("https://node-e-commerce-rlkh.onrender.com/api/v1/orders/checkout-session/"+cartId,order);
+  }
+  placeOrder(cartId: any,order:any) {
+    return this.http.post<any>("https://node-e-commerce-rlkh.onrender.com/api/v1/orders/"+cartId,order);
+  }
+
+  getOrder(id: string) {
+    return this.http.get<any>("https://node-e-commerce-rlkh.onrender.com/api/v1/orders/"+id);
+
+
 }
 
+}

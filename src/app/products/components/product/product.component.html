@@ -93,7 +93,7 @@
                     <ul class="mb-0 list-inline">
                       <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-outline-dark" href="#!"><i
                             class="far fa-heart"></i></a></li>
-                      <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark" href="cart.html">Add to
+                      <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark" (click)="addToCart(item)">Add to
                           cart</a></li>
                       <li class="list-inline-item mr-0"><a class="btn btn-sm btn-outline-dark" href="#productView"
                           data-bs-toggle="modal"><i class="fas fa-expand"></i></a></li>
@@ -119,6 +119,12 @@
                   <span aria-hidden="true">«</span>
                 </a>
               </li> -->
+                                      <div class="col-md-6 mb-3 mb-md-0 text-md-start">
+                            <!-- Replace the anchor tag with routerLink -->
+                            <a class="btn btn-link p-0 text-dark btn-sm" [routerLink]="['/cart']">
+                                <i class="fas fa-long-arrow-alt-left me-2"></i>Back to cart
+                            </a>
+                        </div>
 
               <li class="page-item mx-1 " *ngFor="let page of totalPagesArray let i=index" (click)="changePage(page)" [class.active]="currentPage-1 === page">
 
