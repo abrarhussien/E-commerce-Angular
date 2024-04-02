@@ -1,7 +1,11 @@
 import { ProductService } from '../../services/product.service';
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../../models/product';
+
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+import { CartService } from '../../../services/cart.service';
+import { IProduct } from '../../../models/product.model';
+
 import { filter } from 'rxjs';
 
 @Component({
@@ -18,13 +22,30 @@ export class ProductComponent implements OnInit {
   limit:number=6;
   totalPagesArray: number[] = [];
   //sortField='category', sortOrder
-  sortField: any ;
+  sortField: any;
+    id: any;
+  data: IProduct = {
+    _id: '',
+    title: '',
+    category: { name: '' },
+    description: '',
+    ratingsQuantity: 0,
+    price: 0,
+    quantity: 0,
+    image: '',
+    imageCover: '',
+    total: 0,
+    rating: 0,
+    productId: 0
+  };
+
   searchfilter:any;
 
   constructor(
     private productService: ProductService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private cartService: CartService
   ) {}
   // this.userService.getAll().subscribe((data)=>{
   //   this.allUsers=data;
@@ -76,6 +97,17 @@ export class ProductComponent implements OnInit {
     // })
 
 
+  }
+
+    addToCart(product: any) {
+
+   console.log(product);
+
+      this.cartService.addToCart(product._id, 1).subscribe({
+      next: () => {
+        this.router.navigate(['/cart']);
+        this.cartService.incrementCartCounter();
+    }})
   }
 
   getAllProducts(page: number,sortField: string , search:string): void {
