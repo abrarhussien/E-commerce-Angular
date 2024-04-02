@@ -9,7 +9,6 @@ import { AppComponent } from './app.component';
 import { ProductModule } from './products/product.module';
 import { ReviewModule } from './reviews/review.module';
 
-
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductComponent } from './components/product/product.component';
 import { CartComponent } from './components/cart/cart.component';
@@ -38,6 +37,8 @@ import { AboutUsComponent } from './components/about-us/about-us.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ResetComponent } from './components/reset/reset.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AboutUsComponent,
     CategoriesComponent,
     FooterComponent,
+    ResetComponent,
   ],
 
   imports: [
@@ -76,8 +78,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ReviewModule,
     BrowserAnimationsModule,
     NgxSpinnerModule,
-  ProductModule,ReviewModule, NgbModule,
-
+    ProductModule,
+    ReviewModule,
+    NgbModule,
+    ToastrModule.forRoot(),
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [

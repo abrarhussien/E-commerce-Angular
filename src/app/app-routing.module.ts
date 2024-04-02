@@ -19,8 +19,10 @@ import { CategoriesComponent } from './components/categories/categories.componen
 import { AuthGuard } from './guards/auth.guard';
 import { AdminGuard } from './guards/admin.guard';
 import { ProductDetailsComponent } from './products/components/product-details/product-details.component';
+import { ResetComponent } from './components/reset/reset.component';
 
 export const routes: Routes = [
+  { path: 'reset', component: ResetComponent },
   { path: 'about-us', component: AboutUsComponent },
   { path: 'home', component: HomeComponent },
   { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
