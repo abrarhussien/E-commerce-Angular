@@ -31,6 +31,7 @@ export class DashboardAddProductComponent implements OnDestroy ,OnInit {
   }
 
   subscriptions = new Subscription();
+  selectedFile:any;
 
   product = new FormGroup({
     title: new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -44,18 +45,31 @@ export class DashboardAddProductComponent implements OnDestroy ,OnInit {
       Validators.max(60),
     ]),
     category: new FormControl('', [Validators.required]),
-    imageCover: new FormControl('', [Validators.required]),
-    quantity:new FormControl(0,[Validators.required])
+    //imageCover: new FormControl('', [Validators.required]),
+    quantity:new FormControl(0,[Validators.required]),
+
   });
 
   categories:any;
 
+  onFileSelected(event: Event) {
+    //@ts-ignore
+    this.selectedFile = (event.target as HTMLInputElement)['files'][0]
+
+
+
+
+  }
+
 
 
   addProduct() {
+    const formData = new FormData();
+    formData.append('file', this.selectedFile, this.selectedFile.name);
+
     //@ts-ignore
     this.subscriptions.add(
-      this.productService.addProduct(this.product.value as unknown as IProduct).subscribe({
+      this.productService.addProduct(this.product.value as unknown as IProduct,formData).subscribe({
         next: () => {
           this.router.navigate(['/dashboard/products']);
         },

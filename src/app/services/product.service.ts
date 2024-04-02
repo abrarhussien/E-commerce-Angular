@@ -17,8 +17,10 @@ export class ProductService {
       'https://node-e-commerce-rlkh.onrender.com/api/v1/products/' + id
     );
   }
-  addProduct(product: IProduct) {
-    return this.httpClient.post('https://node-e-commerce-rlkh.onrender.com/api/v1/products', product);
+  addProduct(product: IProduct,imageCover:any) {
+    product={...product,imageCover}
+
+    return this.httpClient.post('https://node-e-commerce-rlkh.onrender.com/api/v1/products', product,{ headers: { 'Content-Type': 'multipart/form-data' } });
   }
   editProduct(newProduct: IProduct) {
     //console.log(newProduct)
