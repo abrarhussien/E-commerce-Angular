@@ -29,7 +29,7 @@ urlSearch:any;
           //console.log((event as NavigationEnd));
 
       });
-
+      //this.ProductService.searchKeyword.next("")
     this.userService.getCurrentUser();
     this.cartCount=5;
     if(!localStorage.getItem('role')){
