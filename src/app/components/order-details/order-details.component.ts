@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { catchError } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-order-details',
@@ -12,6 +13,7 @@ export class OrderDetailsComponent {
 
   orderId: number | null = null; // Initialize orderId as null
   order: any;
+  private apiUrl = environment.apiUrl
 
   constructor(
     private route: ActivatedRoute,
@@ -27,7 +29,7 @@ export class OrderDetailsComponent {
   }
 
   getOrderById(): void {
-    const url = `https://node-e-commerce-rlkh.onrender.com/api/v1/orders/${this.id}`;
+    const url = `${this.apiUrl}/api/v1/orders/${this.id}`;
     let headers = new HttpHeaders({
       'Content-type': 'application/json; charset=UTF-8',
       jwt: sessionStorage.getItem('token') || '',

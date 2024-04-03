@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth';
 import { UserInterFace } from '../../models/userInterface';
 import { catchError, throwError } from 'rxjs';
+import { environment } from '../../environments/environment';
 const emailRegex = '[a-z0-9]+@[a-z]+.[a-z]{2,3}';
 
 @Component({
@@ -22,6 +23,7 @@ const emailRegex = '[a-z0-9]+@[a-z]+.[a-z]{2,3}';
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
+  private apiUrl = environment.apiUrl
   constructor(
     private router: Router,
     private http: HttpClient,
@@ -48,7 +50,7 @@ export class LoginComponent {
     const { email, password } = this.contactForm.value;
     //console.log(email, password);
     this.http
-      .post<any>('https://node-e-commerce-rlkh.onrender.com/api/users/login', {
+      .post<any>(this.apiUrl+'/api/users/login', {
         email,
         password,
       })

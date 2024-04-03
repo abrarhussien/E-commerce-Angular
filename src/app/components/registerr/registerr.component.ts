@@ -7,6 +7,7 @@ import { Contact } from '../../models/contact';
 import { AbstractControl, ValidationErrors } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { catchError, throwError } from 'rxjs';
+import { environment } from '../../environments/environment';
 const emailRegex = '[a-z0-9]+@[a-z]+.[a-z]{2,3}';
 
 function passwordMatchValidator(
@@ -28,6 +29,7 @@ function passwordMatchValidator(
 })
 export class RegisterComponent {
   emailExistErr = false;
+  private apiUrl = environment.apiUrl
   constructor(private router: Router, private http: HttpClient) {}
   contactForm = new FormGroup(
     {
@@ -58,7 +60,7 @@ export class RegisterComponent {
     console.log(name, email, password);
     this.http
       .post<any>(
-        'https://node-e-commerce-rlkh.onrender.com/api/users/register',
+        this.apiUrl+'/api/users/register',
         {
           name,
           email,

@@ -16,6 +16,21 @@
             placeholder="Enter product title"
             formControlName="title"
           />
+          <div
+          *ngIf="
+            product.get('title')?.touched &&
+            product.get('title')?.errors
+          "
+          class="text-danger"
+        >
+          <p *ngIf="product.get('title')?.getError('required')">
+           title is required
+          </p>
+          <p *ngIf="product.get('title')?.getError('minlength')">
+            title min length is 3 Characters
+          </p>
+
+        </div>
         </div>
         <div class="col-lg-12">
           <label class="form-label text-sm text-uppercase" for="details"
@@ -28,6 +43,21 @@
             placeholder="Enter product details"
             formControlName="description"
           />
+          <div
+          *ngIf="
+            product.get('description')?.touched &&
+            product.get('description')?.errors
+          "
+          class="text-danger"
+        >
+          <p *ngIf="product.get('description')?.getError('required')">
+            description is required
+          </p>
+          <p *ngIf="product.get('description')?.getError('minlength')">
+            description min length is 10 Characters
+          </p>
+
+        </div>
         </div>
         <div class="col-lg-12">
           <label class="form-label text-sm text-uppercase" for="price"
@@ -40,6 +70,24 @@
             placeholder="Enter price"
             formControlName="price"
           />
+          <div
+          *ngIf="
+            product.get('price')?.touched &&
+            product.get('price')?.errors
+          "
+          class="text-danger"
+        >
+          <p *ngIf="product.get('price')?.getError('required')">
+            price is required
+          </p>
+          <p *ngIf="product.get('price')?.getError('min')">
+            price min is 1
+          </p>
+          <p *ngIf="product.get('price')?.getError('max')">
+            price max is 200000
+          </p>
+
+        </div>
         </div>
         <div class="col-lg-12">
           <label class="form-label text-sm text-uppercase" for="quantity"
@@ -52,6 +100,22 @@
             placeholder="Enter quantity"
             formControlName="quantity"
           />
+          <div
+          *ngIf="
+            product.get('quantity')?.touched &&
+            product.get('quantity')?.errors
+          "
+          class="text-danger"
+        >
+          <p *ngIf="product.get('quantity')?.getError('required')">
+            quantity is required
+          </p>
+          <p *ngIf="product.get('quantity')?.getError('min')">
+            quantity min is 1
+          </p>
+
+
+        </div>
         </div>
         <div class="col-lg-6 form-group">
           <label class="form-label text-sm text-uppercase" for="category"
@@ -66,6 +130,19 @@
           <option *ngFor="let item of categories" [value]="item._id">{{item.name}}</option>
 
           </select>
+          <div
+          *ngIf="
+            product.get('category')?.touched &&
+            product.get('category')?.errors
+          "
+          class="text-danger"
+        >
+          <p *ngIf="product.get('category')?.getError('required')">
+            category is required
+          </p>
+
+
+        </div>
         </div>
 
         <div class="col-lg-12">
@@ -78,12 +155,26 @@
             id="image"
             formControlName="imageCover"
           /> -->
-          <input type="file" (change)="onFileSelected($event)">
+          <input type="file" class="form-control form-control-lg" (change)="onFileSelected($event)" formControlName="imageCover">
+          <div
+          *ngIf="
+            product.get('imageCover')?.touched &&
+            product.get('imageCover')?.errors
+          "
+          class="text-danger"
+        >
+          <p *ngIf="product.get('imageCover')?.getError('required')">
+            image is required
+          </p>
+
+
+
+        </div>
 
         </div>
 
         <div class="col-lg-12 form-group">
-          <button class="btn btn-dark" type="submit">Add</button>
+          <button class="btn btn-dark" type="submit"  [disabled]="!product.valid">Add</button>
         </div>
       </div>
     </form>

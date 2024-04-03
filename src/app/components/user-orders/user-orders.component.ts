@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-user-orders',
@@ -10,6 +11,7 @@ import { catchError } from 'rxjs';
 })
 export class UserOrdersComponent implements OnInit {
    orders: any;
+   private apiUrl = environment.apiUrl
 
   constructor(
     private router: Router,
@@ -22,7 +24,7 @@ export class UserOrdersComponent implements OnInit {
   }
 
   cancelOrder(orderId:string):void {
-    const url = `https://node-e-commerce-rlkh.onrender.com/api/v1/orders/${orderId}/status`;
+    const url = `${this.apiUrl}/api/v1/orders/${orderId}/status`;
     const body = {status:"Canceled"}
 
         this.http
@@ -44,10 +46,10 @@ export class UserOrdersComponent implements OnInit {
   }
 
   getOrders(): void {
-    const url = 'https://node-e-commerce-rlkh.onrender.com/api/v1/orders/user';
+
 
     this.http
-      .get("https://node-e-commerce-rlkh.onrender.com/api/v1/orders/user")
+      .get(`${this.apiUrl}/api/v1/orders/user`)
       .pipe(
         catchError((error) => {
           console.log(error);

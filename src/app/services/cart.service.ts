@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { IProduct } from '../models/product.model';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +14,7 @@ export class CartService {
   // public cartCounter$: Observable<number> = this.cartCounterSubject.asObservable();
   private cartItemsSubject: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
   public cartItems$: Observable<any[]> = this.cartItemsSubject.asObservable();
-  private apiUrl = 'https://node-e-commerce-rlkh.onrender.com/api/carts';
-  private baseUrl = 'http://localhost:3040/api/carts/payement';
+  private apiUrl = environment.apiUrl
 
   constructor(private http: HttpClient) {  }
 
@@ -25,13 +25,13 @@ export class CartService {
     }
     this.getCount()
     this.incrementCartCounter()
-    return this.http.post<any>(`${this.apiUrl}`, body);
+    return this.http.post<any>(`${this.apiUrl}/api/carts`, body);
   }
 
   updateCart(cartId: string, quantity: number): Observable<any> {
     console.log(quantity);
 
-    const url = `https://node-e-commerce-rlkh.onrender.com/api/carts/update/${cartId}`
+    const url = `${this.apiUrl}/api/carts/update/${cartId}`
     const body = {
       quantity: quantity
     }
@@ -39,7 +39,7 @@ export class CartService {
   }
 
   getCartItems(): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}`);
+    return this.http.get<any>(`${this.apiUrl}/api/carts`);
   }
 
   getCount() {
@@ -47,12 +47,8 @@ export class CartService {
     })
   }
 
-  // updateCartItem(productId: string, quantity: number): Observable<any> {
-  //   return this.http.put<any>(`${this.apiUrl}/update/${productId}`, { quantity });
-  // }
-
   removeCartItem(productId: string): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}/remove/${productId}`);
+    return this.http.delete<any>(`${this.apiUrl}/api/carts/remove/${productId}`);
   }
 
   incrementCartCounter(): void {
@@ -60,19 +56,16 @@ export class CartService {
     this.cartCounterSubject.next(currentCount + 1);
   }
 
-  // getCashPaymentInfo(): Observable<any> {
-  //   return this.http.get<any>(`${this.baseUrl}`);
-  // }
 
   makePayment(cartId:string,order:any): Observable<any> {
-    return this.http.post<any>("https://node-e-commerce-rlkh.onrender.com/api/v1/orders/checkout-session/"+cartId,order);
+    return this.http.post<any>(this.apiUrl+"/api/v1/orders/checkout-session/"+cartId,order);
   }
   placeOrder(cartId: any,order:any) {
-    return this.http.post<any>("https://node-e-commerce-rlkh.onrender.com/api/v1/orders/"+cartId,order);
+    return this.http.post<any>(this.apiUrl+"/api/v1/orders/"+cartId,order);
   }
 
   getOrder(id: string) {
-    return this.http.get<any>("https://node-e-commerce-rlkh.onrender.com/api/v1/orders/"+id);
+    return this.http.get<any>(this.apiUrl+"/api/v1/orders/"+id);
 
 
 }

@@ -42,7 +42,7 @@
               <ul class="list-inline d-flex align-items-center justify-content-lg-end mb-0">
                 <li class="list-inline-item">
 
-                  <select class="selectpicker" data-customclass="form-control form-control-sm"
+                  <select class="form-select" aria-label="Default select example"
                     (change)="sorting($event)">
                     <option value=""></option>
                     <option value="price">Price: Low to High(Ascending)</option>
@@ -63,7 +63,7 @@
               <div class="product text-center">
                 <div class="mb-3 position-relative">
                   <div class="badge text-white bg-"></div><a class="d-block"
-                    [routerLink]="['/product-detail',item._id]"><img class="img-fluid w-100" [src]=" item.imageCover"
+                    [routerLink]="['/product-detail',item._id]"><img class="img-fluid w-100" src="assets/images/products/{{ item.imageCover }}"
                       alt="..."></a>
                   <div class="product-overlay">
 
@@ -75,7 +75,7 @@
                           cart</a></li>
                       <li class="list-inline-item mr-0"><a class="btn btn-sm btn-outline-dark" href="#productView"
                           data-bs-toggle="modal"><i class="fas fa-expand"></i></a></li>
-                    </ul> 
+                    </ul>
                   </div>
                 </div>
                 <h6> <a class="reset-anchor" [routerLink]="['/product-detail',item._id]">{{ item.title }}</a></h6>
