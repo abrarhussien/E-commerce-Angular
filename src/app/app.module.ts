@@ -42,6 +42,10 @@ import { ToastrModule } from 'ngx-toastr';
 
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { ThankYouComponent } from './components/thank-you/thank-you.component';
+import { TestComponent } from './test/test.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { ErrorComponent } from './error/error.component';
+import { SomeThingComponent } from './some-thing/some-thing.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { DeleteConfirmationComponent } from './components/delete-confirmation/delete-confirmation.component';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -70,11 +74,12 @@ import { MatDialogModule } from '@angular/material/dialog';
     AboutUsComponent,
     CategoriesComponent,
     FooterComponent,
-
     ResetComponent,
-
     CheckoutComponent,
     ThankYouComponent,
+    TestComponent,
+    ErrorComponent,
+    SomeThingComponent,
     DeleteConfirmationComponent,
   ],
 
@@ -93,8 +98,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     NgbModule,
     ToastrModule.forRoot(),
     MatDialogModule,
-
     NgbModule,
+    MatSlideToggleModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
