@@ -14,10 +14,9 @@ export class CartComponent implements OnInit {
   subtotal: number = 0;
   total: number = 0;
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 7e56ff027da88fed80e01014e30640d6d7305a6c
+
+
   constructor(private cartService:CartService) {}
 
 

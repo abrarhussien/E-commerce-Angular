@@ -1,6 +1,6 @@
 import { ProductService } from './../../products/services/product.service';
 import { UserService } from './../../services/user.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
@@ -51,6 +51,8 @@ urlSearch:any;
     })
 
   }
+  @ViewChild('toggleButton') toggleButton!: ElementRef;
+  showList: boolean = false;
 
 
   cartCount:number=0;

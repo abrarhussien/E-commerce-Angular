@@ -53,10 +53,10 @@
           </div>
           <div class="row">
             <div class="col-lg-4 col-sm-6" *ngFor="let item of allProduct let i = index">
-              <div class="product text-center">
-                <div class="mb-3 position-relative">
-                  <div class="badge text-white bg- overflow-hidden"></div><a class="d-block"
-                    [routerLink]="['/product-detail',item._id]"><img class="img-fluid w-100" [src]=" item.imageCover"
+              <div class="product text-center ">
+                <div class="mb-3 position-relative overflow-hidden" style="height:250px ;">
+                  <a class="d-block"
+                    [routerLink]="['/product-detail',item._id]"><img class="img-fluid " [src]=" item.imageCover"
                       alt="..."></a>
 
                       <div class="product-overlay">
