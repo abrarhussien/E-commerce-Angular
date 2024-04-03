@@ -49,8 +49,11 @@ export class ProductComponent implements OnInit {
     private productService: ProductService,
     private router: Router,
     private route: ActivatedRoute,
-    private categoryService:CategoriesService,
-    private cartService: CartService
+
+    private cartService: CartService,
+    private categoryService:CategoriesService
+
+
 
   ) {}
   // this.userService.getAll().subscribe((data)=>{
@@ -170,6 +173,9 @@ export class ProductComponent implements OnInit {
         queryParamsHandling: 'merge',
       });
       // this.getAllProducts(this.currentPage , this.sortField);
+
+
+       // this.getProductsByCategoryId(this.categoryId,this.currentPage+1, this.sortField,this.searchfilter)
 
       }else{
         this.currentPage = newPage;

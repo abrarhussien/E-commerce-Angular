@@ -19,6 +19,7 @@ export class CartComponent implements OnInit {
 
 
 
+
   ngOnInit(): void {
     this.showData()
     this.cartService.getCount()
