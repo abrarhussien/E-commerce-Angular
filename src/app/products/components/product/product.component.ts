@@ -49,8 +49,11 @@ export class ProductComponent implements OnInit {
     private productService: ProductService,
     private router: Router,
     private route: ActivatedRoute,
+
     private cartService: CartService,
     private categoryService:CategoriesService
+
+
 
   ) {}
   // this.userService.getAll().subscribe((data)=>{
@@ -133,7 +136,7 @@ export class ProductComponent implements OnInit {
           (_, i) => i
         );
       },
-      error: (err) => alert('Error'),
+      error: (err) => {alert('Error'); console.log(err)},
     });
   }
 
@@ -171,7 +174,9 @@ export class ProductComponent implements OnInit {
       });
       // this.getAllProducts(this.currentPage , this.sortField);
 
-        this.getProductsByCategoryId(this.categoryId,this.currentPage+1, this.sortField,this.searchfilter)
+
+       // this.getProductsByCategoryId(this.categoryId,this.currentPage+1, this.sortField,this.searchfilter)
+
       }else{
         this.currentPage = newPage;
         // this.router.navigate(['/products'], {

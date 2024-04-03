@@ -18,7 +18,7 @@ export class AuthInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     req = req.clone({
       setHeaders: {
-        jwt: localStorage.getItem('token') || "",
+        jwt: sessionStorage.getItem('token') || "",
       },
     });
 
