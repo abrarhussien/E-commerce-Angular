@@ -46,20 +46,20 @@ export class UserService  {
 //   this.roleObservable.next(role);
 // }
 isUser(){
-  if (localStorage.getItem('role')==='user'){
+  if (sessionStorage.getItem('role')==='user'){
     return true
   }
   return false
 }
 isAdmin(){
 
-  if (localStorage.getItem('role')==='admin'){
+  if (sessionStorage.getItem('role')==='admin'){
     return true
   }
   return false
 }
 isVesitor(){
-  if (!localStorage.getItem('role')){
+  if (!sessionStorage.getItem('role')){
     return true
   }
   return false

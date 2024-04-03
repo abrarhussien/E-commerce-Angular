@@ -54,8 +54,9 @@ export class DashboardProductsComponent implements OnInit, OnDestroy {
 
   getProducts(page: number, sort: string) {
     this.subscriptions.add(
-      this.productsService.getProducts(page, sort).subscribe({
-        next: (products: any) => {
+
+      this.productsService.getProducts(page).subscribe({
+        next: (products:any) => {
           this.products = products.data;
           this.loading = false;
           this.currentPage = products.paginationResult.currentPage;

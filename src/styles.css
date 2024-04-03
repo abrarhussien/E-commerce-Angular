@@ -38,9 +38,6 @@ body{
 @keyframes l4 {to{transform: rotate(1turn)}}
 
 
-/* @tailwind base;
-@tailwind components;
-@tailwind utilities; */
 
 
 html, body { height: 100%; }

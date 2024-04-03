@@ -7,11 +7,15 @@
       <h2 class="h5 text-uppercase mb-4">Browse our categories</h2>
     </header>
     <div class="row">
+
       <div class="col-md-4 mb-4 overflow-hidden " style="height:280px ;" *ngFor="let item of allCategors let i = index">
+
         <a class="category-item" [routerLink]="'../category/' + item._id + '/product'"><img class="img-fluid"
             src="assets/images/{{ item.image }}" alt="" /><strong class="category-item-title">{{ item.name
             }}</strong></a>
       </div>
+
+
 
     </div>
 
