@@ -10,7 +10,6 @@ import { ProductModule } from './products/product.module';
 import { ReviewModule } from './reviews/review.module';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ProductComponent } from './components/product/product.component';
 import { CartComponent } from './components/cart/cart.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -63,7 +62,6 @@ import { ThankYouComponent } from './components/thank-you/thank-you.component';
     DashboardEditProductComponent,
     DashboardAddProductComponent,
     AppComponent,
-    ProductComponent,
     CartComponent,
     LoginComponent,
     AboutUsComponent,
