@@ -37,7 +37,6 @@ export class ProductComponent implements OnInit {
   )
       .subscribe(event => {
         console.log(event);
-
         this.page = this.route.snapshot.queryParamMap.get('page');
         this.searchfilter = this.route.snapshot.queryParamMap.get('title');
         this.sortField = this.route.snapshot.queryParamMap.get('sortField');
