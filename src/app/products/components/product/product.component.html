@@ -26,7 +26,6 @@
               Acc</strong></div>
           <ul class="list-unstyled small text-muted ps-lg-4 font-weight-normal"
             *ngFor="let item of allCategors let i=index">
-
             <li class="mb-2"><a class="reset-anchor"
                 [routerLink]="  categoryId ? '../../../category/' + item._id + '/product' : '../category/' + item._id + '/product'">{{
                 item.name
@@ -35,46 +34,38 @@
         </div>
         <!-- SHOP LISTING-->
         <div class=" col-lg-9 order-1 order-lg-2 mb-5 mb-lg-0">
-
           <div class="row mb-3 align-items-center">
             <div class="col-lg-6 "></div>
             <div class="col-lg-6 ">
               <ul class="list-inline d-flex align-items-center justify-content-lg-end mb-0">
                 <li class="list-inline-item">
-
-                  <select class="selectpicker" data-customclass="form-control form-control-sm"
+                  <select  class="form-select" aria-label="Default select example"
                     (change)="sorting($event)">
-                    <option value=""></option>
-                    <option value="price">Price: Low to High(Ascending)</option>
-                    <option value="-price">Price: High to Low (Descending)</option>
-                    <!-- <option value="popularity">Popularity </option> -->
-                    <option value="title">Sort By Name (Ascending) </option>
-                    <option value="-title">Sort By Name (Descending)</option>
+                    <option value="" ></option>
+                    <option value="price">  Price: Low to High(Ascending)  </option>
+                    <option value="-price"> Price: High to Low (Descending)  </option>
+                    <option value="title">  Sort By Name (Ascending)       </option>
+                    <option value="-title">  Sort By Name (Descending)      </option>
                   </select>
-
                 </li>
               </ul>
             </div>
           </div>
-
           <div class="row">
-            <!-- PRODUCT  src="assets/images/products/{{ item.image }}"-->
             <div class="col-lg-4 col-sm-6" *ngFor="let item of allProduct let i = index">
               <div class="product text-center">
                 <div class="mb-3 position-relative">
-                  <div class="badge text-white bg-"></div><a class="d-block"
+                  <div class="badge text-white bg- overflow-hidden"></div><a class="d-block"
                     [routerLink]="['/product-detail',item._id]"><img class="img-fluid w-100" [src]=" item.imageCover"
                       alt="..."></a>
-                  <div class="product-overlay">
-                    <!-- <ul class="mb-0 list-inline">
-                      <li class="list-inline-item m-0 p-0"><0a class="btn btn-sm btn-outline-dark" href="#!"><i
-                            class="far fa-heart"></i></0a></li>
-                      <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark" href="cart.html">Add to
-                          cart</a></li>
-                      <li class="list-inline-item mr-0"><a class="btn btn-sm btn-outline-dark" href="#productView"
-                          data-bs-toggle="modal"><i class="fas fa-expand"></i></a></li>
-                    </ul> -->
-                  </div>
+                      <div class="product-overlay">
+                        <ul class="mb-0 list-inline">
+                          <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark" (click)="addToCart(item)">Add to
+                              cart</a></li>
+                          <li class="list-inline-item mr-0"><a class="btn btn-sm btn-outline-dark"  [routerLink]="['/product-detail',item._id]"
+                              data-bs-toggle="modal"><i class="fas fa-expand"></i></a></li>
+                        </ul>
+                      </div>
                 </div>
                 <h6> <a class="reset-anchor" [routerLink]="['/product-detail',item._id]">{{ item.title }}</a></h6>
                 <p class="small text-muted">{{ item.price}} $</p>
@@ -95,6 +86,12 @@
                   <span aria-hidden="true">«</span>
                 </a>
               </li> -->
+                                      <div class="col-md-6 mb-3 mb-md-0 text-md-start">
+                            <!-- Replace the anchor tag with routerLink -->
+                            <a class="btn btn-link p-0 text-dark btn-sm" [routerLink]="['/cart']">
+                                <i class="fas fa-long-arrow-alt-left me-2"></i>Back to cart
+                            </a>
+                        </div>
 
               <li class="page-item mx-1 " *ngFor="let page of totalPagesArray let i=index" (click)="changePage(page)"
                 [class.active]="currentPage === page+1">

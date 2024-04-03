@@ -23,7 +23,8 @@ export class ProductDetailsComponent implements OnInit {
     image: '',
     imageCover: '',
     total: 0,
-    rating: 0
+    rating: 0,
+    productId: 0
   };
   showDescription: boolean = true;
   showReview: boolean = false;
@@ -47,7 +48,6 @@ export class ProductDetailsComponent implements OnInit {
         this.router.navigate(['/cart']);
         this.cartService.incrementCartCounter();
     }})
-    // this.cartService.addToCart(product);
   }
   setQuantity(quantity:number){
     if(this.cartQuantity+quantity>=1){

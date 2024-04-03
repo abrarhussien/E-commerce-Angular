@@ -75,16 +75,16 @@
     </form>
   </div>
 </div> -->
-<div>
-  <div class="row align-items-center justify-content-center g-0">
-    <div class="col-12">
-      <div>
-        <h2>Sign in</h2>
+<div class="container">
+  <div class="row justify-content-center align-items-center">
+    <div class="col-md-6">
+      <div class="card p-4 shadow">
+        <h2 class="mb-4">Sign in</h2>
         <p class="text-secondary fs-6">
           Welcome back to Boutique! Enter your email to get started.
         </p>
         <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
-          <div class="my-3">
+          <div class="mb-3">
             <input
               type="email"
               placeholder="Email"
@@ -102,12 +102,12 @@
               <p *ngIf="contactForm.get('email')?.getError('required')">
                 Email is required
               </p>
-              <p *ngIf="contactForm.get('email')?.getError('email')">
+              <p *ngIf="contactForm.get('email')?.getError('pattern')">
                 Email must be like example&#64;info.com
               </p>
             </div>
           </div>
-          <div class="my-3">
+          <div class="mb-3">
             <input
               type="password"
               placeholder="Password"
@@ -137,17 +137,17 @@
               </p>
             </div>
           </div>
-          <div
-            class="my-3 w-100 d-flex align-items-center justify-content-start flex-column flex-md-row text-secondary justify-content-md-between"
-          >
-            <div>
+          <p *ngIf="invalid" class="text-danger">invalid email or password</p>
+
+          <div class="mb-3 d-flex align-items-center justify-content-between">
+            <div class="form-check">
               <input
                 type="checkbox"
                 name="Remember"
                 id="Remember"
-                class="me-2"
+                class="form-check-input"
               />
-              <label for="Remember">Remember me</label>
+              <label for="Remember" class="form-check-label">Remember me</label>
             </div>
             <div>
               <p class="text-center m-0 fs-6">
@@ -158,18 +158,9 @@
               </p>
             </div>
           </div>
-          <button
-            class="btn-main mt-3 w-100 py-2 rounded-2 d-flex justify-content-center align-items-center"
-            [disabled]="!contactForm.valid"
-          >
+          <button class="btn btn-primary w-100" [disabled]="!contactForm.valid">
             Sign In
-            <!-- <div *ngIf="isloading">
-              <app-btn-loader></app-btn-loader>
-            </div> -->
           </button>
-          <!-- <p *ngIf="requisError" class="text-danger">
-            {{ requisError }}
-          </p> -->
         </form>
         <div>
           <p class="text-center mt-4 fs-6 text-secondary">

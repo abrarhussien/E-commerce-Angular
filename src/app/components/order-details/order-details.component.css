@@ -48,16 +48,16 @@
   transition: left 0.5s ease;
 } */
 
-.profile-link:hover::before {
+/* .profile-link:hover::before {
   left: 0;
 }
 
 .slide-left {
   animation: slideLeft 1.5s ease forwards;
   opacity: 0;
-}
+} */
 
-@keyframes slideLeft {
+/* @keyframes slideLeft {
   0% {
     transform: translateX(-50%);
     opacity: 0;
@@ -66,4 +66,4 @@
     transform: translateX(0);
     opacity: 1;
   }
-}
+} */
