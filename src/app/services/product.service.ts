@@ -1,15 +1,27 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IProduct } from '../models/product.model';
-import { BehaviorSubject, Subject, delay } from 'rxjs';
+import { BehaviorSubject, Subject, catchError, delay } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductService {
   constructor(private httpClient:HttpClient) {}
-  getProducts(page: number, sortField:string) {
-    return this.httpClient.get<any[]>(`https://node-e-commerce-rlkh.onrender.com/api/v1/products?page=${page}&sort=${sortField}&limit=10`);
+  getProducts(page: number) {
+    //return this.httpClient.get<any[]>(`https://node-e-commerce-rlkh.onrender.com/api/v1/products?page=${page||1}&limit=10` );
+
+
+    return this.httpClient
+      .get(
+        `https://node-e-commerce-rlkh.onrender.com/api/v1/products?page=${page||1}&limit=10`
+      )
+      .pipe(
+        catchError((error: any) => {
+          console.error('API Error:', error);
+          throw error;
+        })
+      );
   }
   getProductById(id: string) {
     //console.log(id)
@@ -17,10 +29,11 @@ export class ProductService {
       'https://node-e-commerce-rlkh.onrender.com/api/v1/products/' + id
     );
   }
-  addProduct(product: IProduct,imageCover:any) {
-    product={...product,imageCover}
+  addProduct(product:any) {
+    //product={...product,imageCover}
+    //console.log(imageCover)
 
-    return this.httpClient.post('https://node-e-commerce-rlkh.onrender.com/api/v1/products', product,{ headers: { 'Content-Type': 'multipart/form-data' } });
+    return this.httpClient.post('https://node-e-commerce-rlkh.onrender.com/api/v1/products', product);
   }
   editProduct(newProduct: IProduct) {
     //console.log(newProduct)

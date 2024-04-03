@@ -124,7 +124,7 @@ export class ProductComponent implements OnInit {
           (_, i) => i
         );
       },
-      error: (err) => alert('Error'),
+      error: (err) => {alert('Error'); console.log(err)},
     });
   }
 

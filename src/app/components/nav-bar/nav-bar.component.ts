@@ -36,12 +36,12 @@ urlSearch:any;
       //this.ProductService.searchKeyword.next("")
     this.userService.getCurrentUser();
     this.cartCount= 0;
-    if(!localStorage.getItem('role')){
+    if(!sessionStorage.getItem('role')){
       this.role="vesitor"
       // this.userService.onRoleChamge('vesitor')
     }
     else{
-      this.role=localStorage.getItem('role')
+      this.role=sessionStorage.getItem('role')
     }
     this.cartService.getCount()
     this.cartService.cartCounterSubject.subscribe({
@@ -57,8 +57,8 @@ urlSearch:any;
   role :any;
 
   logout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('role');
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('role');
     this.role="vesitor";
     //this.role="vesitor";
     this.router.navigate(['/home']);

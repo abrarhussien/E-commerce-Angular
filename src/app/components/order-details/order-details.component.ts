@@ -30,8 +30,8 @@ export class OrderDetailsComponent {
     const url = `https://node-e-commerce-rlkh.onrender.com/api/v1/orders/${this.id}`;
     let headers = new HttpHeaders({
       'Content-type': 'application/json; charset=UTF-8',
-      jwt: localStorage.getItem('token') || '',
-      email: localStorage.getItem('email') || '',
+      jwt: sessionStorage.getItem('token') || '',
+      email: sessionStorage.getItem('email') || '',
     });
     this.http
       .get(url, { headers })

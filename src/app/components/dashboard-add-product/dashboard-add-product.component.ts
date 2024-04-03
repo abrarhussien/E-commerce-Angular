@@ -55,6 +55,8 @@ export class DashboardAddProductComponent implements OnDestroy ,OnInit {
   onFileSelected(event: Event) {
     //@ts-ignore
     this.selectedFile = (event.target as HTMLInputElement)['files'][0]
+    //console.log(this.selectedFile)
+    console.log(this.product.value.title)
 
 
 
@@ -64,17 +66,35 @@ export class DashboardAddProductComponent implements OnDestroy ,OnInit {
 
 
   addProduct() {
-    const formData = new FormData();
-    formData.append('file', this.selectedFile, this.selectedFile.name);
+    let formData = new FormData();
+    console.log(this.selectedFile, this.selectedFile.name)
+    console.log(formData);
+
+    formData.append('imageCover', this.selectedFile, this.selectedFile.name);
+    const title=this.product.value.title
+    formData.append('title', title as string);
+    const description=this.product.value.description
+    formData.append('description', description as string);
+    const price=""+this.product.value.price
+    formData.append('price', price as string);
+    const quantity=""+this.product.value.quantity
+    formData.append('quantity', quantity as string);
+    const category=""+this.product.value.category
+    formData.append('category', category as string);
+    //console.log(formData);
+
+    //formData.append('text', this.product.value.quantity, this.selectedFile.name);
+
 
     //@ts-ignore
     this.subscriptions.add(
-      this.productService.addProduct(this.product.value as unknown as IProduct,formData).subscribe({
+      this.productService.addProduct(formData).subscribe({
         next: () => {
           this.router.navigate(['/dashboard/products']);
         },
         error: (err) => {
           alert(err.message);
+          console.log(err)
         },
       })
     );

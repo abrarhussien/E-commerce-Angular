@@ -53,7 +53,7 @@ export class DashboardProductsComponent implements OnInit, OnDestroy {
 
   getProducts(page:number,sort:string){
     this.subscriptions.add(
-      this.productsService.getProducts(page, sort).subscribe({
+      this.productsService.getProducts(page).subscribe({
         next: (products:any) => {
           this.products = products.data;
           this.loading=false;
