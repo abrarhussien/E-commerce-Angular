@@ -19,8 +19,20 @@
   </section>
   <section class="py-5">
     <div class="container p-0">
-      <div class="row justify-content-center">
+      <div class="row ">
+        <div class="col-lg-3 order-2 order-lg-1">
+          <h5 class="text-uppercase mb-4">Categories</h5>
+          <div class="py-2 px-4 bg-dark text-white mb-3"><strong class="small text-uppercase fw-bold">Fashion &amp;
+              Acc</strong></div>
+          <ul class="list-unstyled small text-muted ps-lg-4 font-weight-normal"
+            *ngFor="let item of allCategors let i=index">
 
+            <li class="mb-2"><a class="reset-anchor"
+                [routerLink]="  categoryId ? '../../../category/' + item._id + '/product' : '../category/' + item._id + '/product'">{{
+                item.name
+                }}</a></li>
+          </ul>
+        </div>
         <!-- SHOP LISTING-->
         <div class=" col-lg-9 order-1 order-lg-2 mb-5 mb-lg-0">
 
@@ -73,7 +85,7 @@
 
           </div>
           <!-- PAGINATION-->
-          <nav aria-label="Page navigation example">
+          <nav aria-label="Page navigation example" *ngIf="totalPages!=1">
             <ul class="pagination justify-content-center justify-content-lg-end">
 
               <!--
@@ -90,7 +102,7 @@
 
 
                 <a class="page-link">
-                  {{page+1}}
+                  {{page+1 }}
                 </a>
               </li>
 

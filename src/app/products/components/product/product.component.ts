@@ -3,6 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from '../../models/product';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs';
+import { CategoriesComponent } from '../../../components/categories/categories.component';
+import { Category } from '../../../models/category';
+import { CategoriesService } from '../../../services/categories.service';
 
 @Component({
   selector: 'app-product',
@@ -21,10 +24,12 @@ export class ProductComponent implements OnInit {
   sortField: any ;
   searchfilter:any;
 
+  allCategors:Category[]=[];
   constructor(
     private productService: ProductService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private categoryService:CategoriesService
   ) {}
   // this.userService.getAll().subscribe((data)=>{
   //   this.allUsers=data;
@@ -67,6 +72,8 @@ export class ProductComponent implements OnInit {
         this.getAllProducts(this.currentPage, this.sortField,this.searchfilter);
       }
 
+      this.findAllCategories();
+
     //this.searchfilter = this.route.snapshot.queryParamMap.get('title')||"";
     // this.productService.searchKeyword.subscribe({
     //   next:(data)=>{
@@ -81,11 +88,13 @@ export class ProductComponent implements OnInit {
     //console.log(search)
     this.productService.getAllProducts(page, sortField,search).subscribe({
       next: (data: any) => {
-        // console.log(data)
+
         this.allProduct = data.data;
         this.currentPage = data.paginationResult.currentPage;
         this.limit=data.paginationResult.limit;
         this.totalPages = data.paginationResult.numberPages;
+
+        console.log(data ,"total",this.totalPages )
         this.totalPagesArray = Array.from(
           { length: this.totalPages },
           (_, i) => i
@@ -191,5 +200,13 @@ export class ProductComponent implements OnInit {
       });
       //this.getAllProducts(this.currentPage, this.sortField,this.searchfilter);
     }
+  }
+
+
+  findAllCategories(){
+    this.categoryService.getCategories().subscribe({
+      next:(result:any)=>{
+        this.allCategors=result.data;
+      }})
   }
 }
