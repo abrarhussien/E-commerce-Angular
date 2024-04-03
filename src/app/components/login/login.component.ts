@@ -25,9 +25,9 @@ export class LoginComponent {
   constructor(
     private router: Router,
     private http: HttpClient,
-    private userService:UserService
+    private userService: UserService
   ) {}
-  validated = true;
+  invalid = false;
 
   contactForm = new FormGroup({
     email: new FormControl('', [
@@ -46,6 +46,7 @@ export class LoginComponent {
     }
 
     const { email, password } = this.contactForm.value;
+    //console.log(email, password);
     this.http
       .post<any>('https://node-e-commerce-rlkh.onrender.com/api/users/login', {
         email,
@@ -53,7 +54,7 @@ export class LoginComponent {
       })
       .pipe(
         catchError((error) => {
-          this.validated = false;
+          this.invalid = true;
           console.error('Error:', error);
           return throwError(() => error);
         })
@@ -64,13 +65,13 @@ export class LoginComponent {
         localStorage.setItem('role', response['role']);
 
         //localStorage.setItem('id', response['id']);
-        const role =response['role'];
+        const role = response['role'];
         //this.cookieService.set('token', reponse['token']);
-        this.userService.roleObservable.next(role)
+        this.userService.roleObservable.next(role);
+        this.contactForm.reset();
 
         this.router.navigate(['/home']);
       });
-    this.contactForm.reset();
   }
   @Output('parentOpenRegComp') parentOpenRegComp: EventEmitter<any> =
     new EventEmitter();
@@ -82,5 +83,6 @@ export class LoginComponent {
   }
   openResetComp() {
     this.parentOpenResetComp.emit();
+    this.router.navigate(['/reset']);
   }
 }

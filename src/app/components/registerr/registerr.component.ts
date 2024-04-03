@@ -27,10 +27,15 @@ function passwordMatchValidator(
   styleUrl: './registerr.component.css',
 })
 export class RegisterComponent {
+  emailExistErr = false;
   constructor(private router: Router, private http: HttpClient) {}
   contactForm = new FormGroup(
     {
-      name: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      name: new FormControl('', [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(50),
+      ]),
       email: new FormControl('', [
         Validators.required,
         Validators.pattern(emailRegex),
@@ -46,9 +51,11 @@ export class RegisterComponent {
     },
     { validators: passwordMatchValidator }
   );
+
   onSubmit() {
     if (!this.contactForm.valid) return;
     const { name, email, password } = this.contactForm.value;
+    console.log(name, email, password);
     this.http
       .post<any>(
         'https://node-e-commerce-rlkh.onrender.com/api/users/register',
@@ -65,11 +72,18 @@ export class RegisterComponent {
         })
       )
       .subscribe((reponse) => {
-        //console.log('Response:', reponse);
-        this.router.navigate(['/login']);
+        if (
+          reponse.message ===
+          'This Email Already Exist, Please Enter Another Email'
+        ) {
+          this.emailExistErr = true;
+        } else {
+          //console.log('Response:', reponse);
+          this.router.navigate(['/login']);
+        }
       });
     this.contactForm.reset();
-    //console.log(this.contactForm.value);
+    // console.log(this.contactForm.value);
   }
   getRepated(name: string) {
     return (this.contactForm.controls as { [key: string]: any })[name];

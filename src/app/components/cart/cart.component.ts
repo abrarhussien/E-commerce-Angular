@@ -14,37 +14,90 @@ export class CartComponent implements OnInit {
   subtotal: number = 0;
   total: number = 0;
 
+
   constructor(private cartService:CartService) {}
 
+
   ngOnInit(): void {
+    this.showData()
+    this.cartService.getCount()
+  }
+
+  addToCart(product: IProduct) {
+    this.cartService.addToCart(product._id, 1).subscribe({
+      next: () => {
+        // this.router.navigate(['/cart']);
+        this.cartService.incrementCartCounter();
+      }
+    })
+  }
+
+    showData(): void {
     this.cartService.getCartItems().subscribe({
       next: (data:any) => {
         //console.log(data);
         this.cartItems = data.items
         this.total = data.price
-    }})
-    // this.calculateTotal();
+      }
+    })
   }
 
   deleteItem(id: string) {
+
+    console.log(id);
+
     this.cartService.removeCartItem(id).subscribe({
       next: () => {
+        // Remove the item from the cartItems array
         this.cartItems = this.cartItems.filter((item: any) => item.productId._id !== id);
+        console.log(this.cartItems);
 
-        this.total = this.cartItems.reduce((total: number, item: any) => {
-          return total + (item.quantity * item.productId.price);
-        }, 0);
+        // Recalculate the total price
+        // this.total = this.cartItems.reduce((total: number, item: any) => {
+        //   return total + (item.quantity * item.productId.price);
+        // }, 0);
+        this.cartService.getCount()
       },
+
       error: (error: any) => {
         console.error('Error removing item from cart:', error);
       }
     });
+
+    }
+
+  increaseQuantity(cartId: any, quantity: any) {
+    console.log(quantity);
+
+    this.cartService.updateCart(cartId, ++quantity).subscribe({
+      next: (res) => {
+        console.log(res);
+          this.showData()
+          this.calculateTotal();
+      }
+    })
+
   }
 
-    // calculateTotal(): void {
-    // this.subtotal = this.cartItems.reduce((acc, item) => acc + (item.quantity * item.price), 0);
-    // this.total = this.subtotal;
-  // }
+decreaseQuantity(cartId: any, quantity: any) {
+  this.cartService.updateCart(cartId, --quantity).subscribe({
+    next: (res) => {
+      console.log(res);
+      if (quantity === 0) {
+        this.deleteItem(cartId); // Delete the item if quantity becomes zero
+      } else {
+        this.showData();
+        this.calculateTotal();
+      }
+    }
+  });
+}
 
+
+    calculateTotal(): void {
+    this.total = this.cartItems.reduce((total: number, item: any) => {
+      return total + (item.quantity * item.productId.price);
+    }, 0);
+  }
 
 }
