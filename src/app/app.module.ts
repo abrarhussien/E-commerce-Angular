@@ -43,6 +43,9 @@ import { ToastrModule } from 'ngx-toastr';
 
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { ThankYouComponent } from './components/thank-you/thank-you.component';
+import { TestComponent } from './test/test.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
@@ -74,6 +77,7 @@ import { ThankYouComponent } from './components/thank-you/thank-you.component';
 
     CheckoutComponent,
     ThankYouComponent,
+    TestComponent,
   ],
 
   imports: [
@@ -92,6 +96,7 @@ import { ThankYouComponent } from './components/thank-you/thank-you.component';
     ToastrModule.forRoot(),
 
     NgbModule,
+    MatSlideToggleModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
@@ -101,6 +106,7 @@ import { ThankYouComponent } from './components/thank-you/thank-you.component';
       useClass: AuthInterceptor,
       multi: true,
     },
+    provideAnimationsAsync(),
   ],
 
   bootstrap: [AppComponent],

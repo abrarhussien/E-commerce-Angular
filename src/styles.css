@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
-
+/* @import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300;400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Martel+Sans:wght@300;400;800&display=swap"); */
 @import "../node_modules/bootstrap/dist/css/bootstrap.css";
 @import "../node_modules/glightbox/dist/css/glightbox.css";
 @import "../node_modules/nouislider/dist/nouislider.min.css";
@@ -9,15 +10,37 @@
 @import url("https://fonts.googleapis.com/css2?family=Martel+Sans:wght@300;400;800&amp;display=swap");
 @import "./assets/css/style.default.css";
 @import url("https://use.fontawesome.com/releases/v6.5.1/css/all.css");
-body{
+/* $my-primary: mat.define-palette(mat.$indigo-palette, 500);
+$my-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// The "warn" palette is optional and defaults to red if not specified.
+$my-warn: mat.define-palette(mat.$red-palette);
+
+$my-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $my-primary,
+      accent: $my-accent,
+      warn: $my-warn,
+    ),
+    typography: mat.define-typography-config(),
+    density: 0,
+  )
+);
+.theme-dark {
+  @include mat.all-component-colors($my-theme-dark);
+}
+.theme-light {
+  @include mat.all-component-colors($my-theme);
+} */
+body {
   min-height: 100vh;
 }
 
-
-.active-link{
+.active-link {
   color: #b68b23;
 }
-.curser:hover{
+.curser:hover {
   cursor: pointer;
 }
 /* HTML: <div class="loader"></div> */
@@ -27,18 +50,36 @@ body{
   aspect-ratio: 1;
   border-radius: 50%;
   padding: 1px;
-  background: conic-gradient(#0000 10%,#f03355) content-box;
-  -webkit-mask:
-    repeating-conic-gradient(#0000 0deg,#000 1deg 20deg,#0000 21deg 36deg),
-    radial-gradient(farthest-side,#0000 calc(100% - var(--b) - 1px),#000 calc(100% - var(--b)));
+  background: conic-gradient(#0000 10%, #f03355) content-box;
+  -webkit-mask: repeating-conic-gradient(
+      #0000 0deg,
+      #000 1deg 20deg,
+      #0000 21deg 36deg
+    ),
+    radial-gradient(
+      farthest-side,
+      #0000 calc(100% - var(--b) - 1px),
+      #000 calc(100% - var(--b))
+    );
   -webkit-mask-composite: destination-in;
-          mask-composite: intersect;
-  animation:l4 1s infinite steps(10);
+  mask-composite: intersect;
+  animation: l4 1s infinite steps(10);
 }
-@keyframes l4 {to{transform: rotate(1turn)}}
-
+@keyframes l4 {
+  to {
+    transform: rotate(1turn);
+  }
+}
 
 /* @tailwind base;
 @tailwind components;
 @tailwind utilities; */
 
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
