@@ -1,6 +1,7 @@
-import { CartService } from './../../services/cart.service';
+
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { IProduct } from '../../models/product.model';
+import { CartService } from '../../services/cart.service';
 // import { filter } from 'dom7';
 
 @Component({
@@ -13,7 +14,9 @@ export class CartComponent implements OnInit {
   subtotal: number = 0;
   total: number = 0;
 
-  constructor(private cartService: CartService) { }
+
+  constructor(private cartService:CartService) {}
+
 
   ngOnInit(): void {
     this.showData()
