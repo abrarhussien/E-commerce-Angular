@@ -46,6 +46,8 @@ import { ThankYouComponent } from './components/thank-you/thank-you.component';
 import { TestComponent } from './test/test.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { ErrorComponent } from './error/error.component';
+import { SomeThingComponent } from './some-thing/some-thing.component';
 
 @NgModule({
   declarations: [
@@ -78,6 +80,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     CheckoutComponent,
     ThankYouComponent,
     TestComponent,
+    ErrorComponent,
+    SomeThingComponent,
   ],
 
   imports: [
@@ -94,7 +98,6 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     ReviewModule,
     NgbModule,
     ToastrModule.forRoot(),
-
     NgbModule,
     MatSlideToggleModule,
   ],
