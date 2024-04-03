@@ -1,7 +1,6 @@
 import { LoginComponent } from './components/login/login.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ProductComponent } from './components/product/product.component';
 import { CartComponent } from './components/cart/cart.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DashboardOrdersComponent } from './components/dashboard-orders/dashboard-orders.component';
@@ -84,7 +83,6 @@ export const routes: Routes = [
     component: RegisterComponent,
   },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'product', component: ProductComponent },
   {
     path: 'login',
     component: LoginComponent,
