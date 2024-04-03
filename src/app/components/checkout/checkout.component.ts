@@ -4,6 +4,7 @@ import { CartService } from '../../services/cart.service';
 import { ShippingInfo } from '../../models/shipping-info.model';
 import { PaymentInfo } from '../../models/payment-info.model';
 import { IProduct } from '../../models/product.model';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-checkout',
@@ -45,29 +46,19 @@ export class CheckoutComponent implements OnInit {
   errorMessage: string = '';
   paymentMethod: string = '';
   cartId: any;
+  checkoutForm: FormGroup;
 
-  constructor(private cartService: CartService, private router: Router) { }
-
-  // cash(): void {
-  //   this.cartService.getCashPaymentInfo().subscribe((data: any) => {
-  //     console.log('Cash Payment Info:', data);
-  //     this.router.navigateByUrl('/thank-you');
-  //   });
-  // }
-
-  // credit(): void {
-  //   if (this.validateForm()) {
-  //     this.cartService.makePayment().subscribe({
-  //       next: (paymentResponse: any) => {
-  //         window.location.href = paymentResponse.url; // Redirect user to payment URL
-  //       },
-  //       error: (error: any) => {
-  //         console.error('Error making payment:', error);
-  //         // Handle error as needed
-  //       }
-  //     });
-  //   }
-  // }
+  constructor(private cartService: CartService, private router: Router, private formBuilder: FormBuilder) {
+    this.checkoutForm = this.formBuilder.group({
+      fullName: ['', [Validators.required, Validators.pattern('[A-Za-z0-9]{6,}')]],
+      phone: ['', [Validators.required, Validators.pattern('[0-9]{11}')]],
+      streetAddress: ['', [Validators.required, Validators.pattern('[A-Za-z0-9\s]{10,}')]],
+      city: ['', [Validators.required, Validators.pattern('[A-Za-z]{3,}')]],
+      postalCode: ['', [Validators.required, Validators.pattern('[0-9]{5}')]],
+      country: ['', Validators.required],
+      paymentMethod: ['', Validators.required]
+    });
+  }
 
   ngOnInit(): void {
     this.cartService.getCartItems().subscribe({
@@ -80,54 +71,41 @@ export class CheckoutComponent implements OnInit {
         console.error('Error fetching cart items:', error);
       }
     });
+
+    this.checkoutForm.get('paymentMethod')?.valueChanges.subscribe((value) => {
+    console.log('Payment method changed:', value);
+    // You can perform any actions here based on the selected payment method
+  });
   }
 
   placeOrder(): void {
-    //console.log(this.paymentMethod)
-    const order = {
-      shipingAdress: this.shippingInfo,
-      paymentMethod:this.paymentMethod
+    console.log(this.checkoutForm.value);
+
+    if (!this.checkoutForm.valid) return;
+    if (this.checkoutForm.invalid) {
+      return;
     }
-    if (this.validateForm()) {
-      if (this.paymentMethod === "cash") {
-        this.cartService.placeOrder(this.cartId, order).subscribe({
-          next: (data) => {
-            //console.log(data)
-            this.cartService.cartCounterSubject.next(0)
-        this.router.navigateByUrl('/thank-you/'+data.data._id);
-          }
-        })
-      } else {
-        this.cartService.makePayment(this.cartId,order).subscribe({
-          next: (data) => {
-            this.router.navigate(["/"]).then(result=>{window.location.href = data.session.url;});
-       //this.router.navigateByUrl(data.session.url);
 
-            //console.log(data.session.url)
 
+    if (this.checkoutForm.value["paymentMethod"] === "cash") {
+        console.log("cash");
+
+        this.cartService.placeOrder(this.cartId, this.checkoutForm.value).subscribe({
+          next: (data) => {
+            this.cartService.cartCounterSubject.next(0);
+            this.router.navigateByUrl('/thank-you/' + data.data._id);
           }
-        })
+        });
+    } else {
+      console.log("card");
+
+        this.cartService.makePayment(this.cartId, this.checkoutForm.value).subscribe({
+          next: (data) => {
+            this.router.navigate(["/"]).then(result => { window.location.href = data.session.url; });
+          }
+        });
       }
-      // Add logic to place order
-      //console.log('Shipping Info:', this.shippingInfo);
-      // console.log('Payment Info:', this.paymentInfo);
-      // For simplicity, let's just navigate to a thank you page
-    }
   }
 
-  validateForm(): boolean {
-    if (!this.shippingInfo.fullName || !this.shippingInfo.streetAddress || !this.shippingInfo.city || !this.shippingInfo.postalCode || !this.shippingInfo.country) {
-      this.errorMessage = 'Please fill in all shipping information fields.';
-      console.log(this.errorMessage);
 
-      return false;
-    }
-    // if (!this.paymentInfo.cardholderName || !this.paymentInfo.cardNumber ||
-    //     !this.paymentInfo.expirationDate || !this.paymentInfo.cvv) {
-    //   this.errorMessage = 'Please fill in all payment information fields.';
-    //   return false;
-    // }
-    // Add additional validation checks for fields if needed
-    return true;
-  }
 }

@@ -43,10 +43,12 @@ import { ToastrModule } from 'ngx-toastr';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { ThankYouComponent } from './components/thank-you/thank-you.component';
 import { TestComponent } from './test/test.component';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ErrorComponent } from './error/error.component';
 import { SomeThingComponent } from './some-thing/some-thing.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { DeleteConfirmationComponent } from './components/delete-confirmation/delete-confirmation.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -72,14 +74,13 @@ import { SomeThingComponent } from './some-thing/some-thing.component';
     AboutUsComponent,
     CategoriesComponent,
     FooterComponent,
-
     ResetComponent,
-
     CheckoutComponent,
     ThankYouComponent,
     TestComponent,
     ErrorComponent,
     SomeThingComponent,
+    DeleteConfirmationComponent,
   ],
 
   imports: [
@@ -96,6 +97,7 @@ import { SomeThingComponent } from './some-thing/some-thing.component';
     ReviewModule,
     NgbModule,
     ToastrModule.forRoot(),
+    MatDialogModule,
     NgbModule,
     MatSlideToggleModule,
   ],
