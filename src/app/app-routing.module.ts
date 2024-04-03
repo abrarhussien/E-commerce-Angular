@@ -23,6 +23,8 @@ import { ResetComponent } from './components/reset/reset.component';
 
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { ThankYouComponent } from './components/thank-you/thank-you.component';
+import { ErrorComponent } from './error/error.component';
+import { SomeThingComponent } from './some-thing/some-thing.component';
 
 export const routes: Routes = [
   { path: 'reset', component: ResetComponent },
@@ -106,6 +108,8 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
   },
   { path: 'products/:id', component: ProductDetailsComponent },
+  { path: '**', component: ErrorComponent },
+  { path: '**', component: SomeThingComponent },
 ];
 
 @NgModule({
