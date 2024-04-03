@@ -42,6 +42,9 @@ import { ToastrModule } from 'ngx-toastr';
 
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { ThankYouComponent } from './components/thank-you/thank-you.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { DeleteConfirmationComponent } from './components/delete-confirmation/delete-confirmation.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -72,6 +75,7 @@ import { ThankYouComponent } from './components/thank-you/thank-you.component';
 
     CheckoutComponent,
     ThankYouComponent,
+    DeleteConfirmationComponent,
   ],
 
   imports: [
@@ -88,6 +92,7 @@ import { ThankYouComponent } from './components/thank-you/thank-you.component';
     ReviewModule,
     NgbModule,
     ToastrModule.forRoot(),
+    MatDialogModule,
 
     NgbModule,
   ],
@@ -99,6 +104,7 @@ import { ThankYouComponent } from './components/thank-you/thank-you.component';
       useClass: AuthInterceptor,
       multi: true,
     },
+    provideAnimationsAsync(),
   ],
 
   bootstrap: [AppComponent],

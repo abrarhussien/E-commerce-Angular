@@ -42,10 +42,10 @@
         <td class="p-3 align-middle border-light ">
           <p class="mb-0 small">{{ item.price }}</p>
         </td>
-        <td class="p-3 align-middle border-light ">
-          <a (click)="deleteProduct(item._id)" class="curser"
-            ><i class="fas fa-trash-alt small text-muted"></i
-          ></a>
+        <td class="p-0 align-middle border-light">
+            <button class="reset-anchor bg-transparent border-0" (click)="openConfirmationDialog(item._id)">
+                <i class="fas fa-trash-alt text-muted"></i>
+            </button>
         </td>
         <td class="p-3 align-middle border-light ">
           <a [routerLink]="'./edit/' + item._id"
