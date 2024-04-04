@@ -29,7 +29,11 @@ function passwordMatchValidator(
 })
 export class RegisterComponent {
   emailExistErr = false;
+
   private apiUrl = environment.apiUrl
+
+  themeService: any;
+
   constructor(private router: Router, private http: HttpClient) {}
   contactForm = new FormGroup(
     {

@@ -42,6 +42,13 @@ import { ToastrModule } from 'ngx-toastr';
 
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { ThankYouComponent } from './components/thank-you/thank-you.component';
+import { TestComponent } from './test/test.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { ErrorComponent } from './error/error.component';
+import { SomeThingComponent } from './some-thing/some-thing.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { DeleteConfirmationComponent } from './components/delete-confirmation/delete-confirmation.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -67,11 +74,14 @@ import { ThankYouComponent } from './components/thank-you/thank-you.component';
     AboutUsComponent,
     CategoriesComponent,
     FooterComponent,
-
     ResetComponent,
-
     CheckoutComponent,
     ThankYouComponent,
+    TestComponent,
+    ErrorComponent,
+    SomeThingComponent,
+    DeleteConfirmationComponent,
+    DashboardSidebarComponent
   ],
 
   imports: [
@@ -88,8 +98,9 @@ import { ThankYouComponent } from './components/thank-you/thank-you.component';
     ReviewModule,
     NgbModule,
     ToastrModule.forRoot(),
-
+    MatDialogModule,
     NgbModule,
+    MatSlideToggleModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
@@ -99,6 +110,7 @@ import { ThankYouComponent } from './components/thank-you/thank-you.component';
       useClass: AuthInterceptor,
       multi: true,
     },
+    provideAnimationsAsync(),
   ],
 
   bootstrap: [AppComponent],

@@ -59,7 +59,7 @@
   --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
   --bs-body-font-family: var(--bs-font-sans-serif);
-  --bs-body-font-size: 1rem;
+  --bs-body-font-size: 1rem ;
   --bs-body-font-weight: 400;
   --bs-body-line-height: 1.5;
   --bs-body-color: #212529;
@@ -81,7 +81,7 @@
 body {
   margin: 0;
   font-family: var(--bs-body-font-family);
-  font-size: var(--bs-body-font-size);
+  font-size: var(--bs-body-font-size) !important;
   font-weight: var(--bs-body-font-weight);
   line-height: var(--bs-body-line-height);
   color: var(--bs-body-color);
@@ -667,18 +667,25 @@ progress {
   .container, .container-sm {
     max-width: 540px;
   }
+
+
+
 }
 
 @media (min-width: 768px) {
   .container, .container-sm, .container-md {
     max-width: 720px;
   }
+
+
+
 }
 
 @media (min-width: 992px) {
   .container, .container-sm, .container-md, .container-lg {
     max-width: 960px;
   }
+
 }
 
 @media (min-width: 1200px) {
@@ -1963,6 +1970,9 @@ progress {
   .table-responsive-lg {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
+  }
+  .login-btn{
+    margin-top: 10px;
   }
 }
 
@@ -10880,10 +10890,11 @@ button:focus, button:active {
 
 @media (min-width: 992px) {
   .navbar-brand {
-    position: absolute;
+    /* position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); */
+
   }
 }
 
@@ -12048,9 +12059,9 @@ a.text-hover-dark:focus, a.text-hover-dark:hover {
   position: relative;
 }
 
-.headings-font-family {
+/* .headings-font-family {
   font-family: !important;
-}
+} */
 
 .no-select {
   cursor: default;
