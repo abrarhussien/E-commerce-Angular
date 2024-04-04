@@ -32,7 +32,7 @@ export class RegisterComponent {
 
   private apiUrl = environment.apiUrl
 
-  themeService: any;
+
 
   constructor(private router: Router, private http: HttpClient) {}
   contactForm = new FormGroup(

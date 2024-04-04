@@ -63,8 +63,17 @@ export class LoginComponent {
       )
       .subscribe((response) => {
         //console.log('Response:', response);
+        let expirationDate = new Date(new Date().getTime() + (60000 * 60))
+        let tokenExpir = {
+          value: response['token'],
+          expirationDate: expirationDate.toISOString()
+        }
+        let roleExpir = {
+          value: response['role'],
+          expirationDate: expirationDate.toISOString()
+        }
         sessionStorage.setItem('token', response['token']);
-        sessionStorage.setItem('role', response['role']);
+        sessionStorage.setItem('role',  response['role']);
 
         //localStorage.setItem('id', response['id']);
         const role = response['role'];

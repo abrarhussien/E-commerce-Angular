@@ -38,9 +38,13 @@
                                     <th class="ps-0 py-3 border-light" scope="row">
                                         <div class="d-flex align-items-center">
                                             <!-- Replace anchor tag with router link -->
-                                            <a class="reset-anchor d-block animsition-link" [routerLink]="['/products', item._id]">
-                                                <img  src="assets/images/products/{{ item.productId.imageCover }}" alt="{{ item.productId.title }}" width="70" />
-                                            </a>
+                                            <div style="height: 90px; width:90px; overflow: hidden; text-align: center;">
+                                              <a class="reset-anchor d-block animsition-link" [routerLink]="['/products', item._id]" style="height: 100%;">
+                                                <img  src="assets/images/products/{{ item.productId.imageCover }}" alt="{{ item.productId.title }}" height="100%" />
+                                              </a>
+
+                                            </div>
+
                                             <div class="ms-3">
                                                 <strong class="h6">
                                                     <!-- Limit product title to 20 characters -->

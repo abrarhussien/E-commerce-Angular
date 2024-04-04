@@ -94,13 +94,14 @@ import { MatDialogModule } from '@angular/material/dialog';
     ReviewModule,
     BrowserAnimationsModule,
     NgxSpinnerModule,
-    ProductModule,
+
     ReviewModule,
     NgbModule,
     ToastrModule.forRoot(),
     MatDialogModule,
     NgbModule,
     MatSlideToggleModule,
+    ProductModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
