@@ -1,6 +1,7 @@
 
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { IProduct } from '../../models/product.model';
+import { DeleteConfirmationService } from '../../services/delete-confirmation.service';
 import { CartService } from '../../services/cart.service';
 // import { filter } from 'dom7';
 
@@ -14,10 +15,9 @@ export class CartComponent implements OnInit {
   subtotal: number = 0;
   total: number = 0;
 
+  constructor(private cartService: CartService, private DeleteConfirmationService: DeleteConfirmationService) { }
 
 
-
-  constructor(private cartService:CartService) {}
 
 
   ngOnInit(): void {
@@ -100,6 +100,15 @@ decreaseQuantity(cartId: any, quantity: any) {
     this.total = this.cartItems.reduce((total: number, item: any) => {
       return total + (item.quantity * item.productId.price);
     }, 0);
+  }
+
+  openConfirmationDialog(productId: string): void {
+  this.DeleteConfirmationService.openConfirmationDialog('Are you sure you want to delete this item from your cart?')
+    .subscribe(result => {
+      if (result) {
+        this.deleteItem(productId);
+      }
+    });
   }
 
 }
