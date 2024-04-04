@@ -37,10 +37,12 @@ export class CartComponent implements OnInit {
     showData(): void {
     this.cartService.getCartItems().subscribe({
       next: (data:any) => {
-        //console.log(data);
+        console.log(data);
         this.cartItems = data.items
         this.total = data.price
-      }
+      },
+      error:(err)=>{        this.cartItems = []
+        this.total = 0}
     })
   }
 

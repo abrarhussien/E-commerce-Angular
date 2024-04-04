@@ -39,7 +39,8 @@
             <div class="col-lg-6 ">
               <ul class="list-inline d-flex align-items-center justify-content-lg-end mb-0">
                 <li class="list-inline-item">
-                  <select  class="form-select" aria-label="Default select example"
+
+                  <select class="selectpicker" data-customclass="form-control form-control-sm"
                     (change)="sorting($event)">
                     <option value="" ></option>
                     <option value="price">  Price: Low to High(Ascending)  </option>
@@ -53,21 +54,11 @@
           </div>
           <div class="row">
             <div class="col-lg-4 col-sm-6" *ngFor="let item of allProduct let i = index">
-              <div class="product text-center ">
-                <div class="mb-3 position-relative overflow-hidden" style="height:250px ;">
+              <div class="product text-center">
+                <div class="mb-3 position-relative overflow-hidden" style="height: 250px;">
                   <a class="d-block"
-                    [routerLink]="['/product-detail',item._id]"><img class="img-fluid " [src]=" item.imageCover"
+                    [routerLink]="['/product-detail',item._id]"><img class="img-fluid w-100" src="assets/images/products/{{ item.imageCover }}"
                       alt="..."></a>
-
-                      <div class="product-overlay">
-                        <ul class="mb-0 list-inline">
-                          <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark" (click)="addToCart(item)">Add to
-                              cart</a></li>
-                          <li class="list-inline-item mr-0"><a class="btn btn-sm btn-outline-dark"  [routerLink]="['/product-detail',item._id]"
-                              data-bs-toggle="modal"><i class="fas fa-expand"></i></a></li>
-                        </ul>
-                      </div>
-
                   <div class="product-overlay">
 
                     <ul class="mb-0 list-inline">

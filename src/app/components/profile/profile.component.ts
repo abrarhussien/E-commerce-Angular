@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { catchError } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-profile',
@@ -21,16 +22,14 @@ export class ProfileComponent implements OnInit {
 
   }
 
-  user= {name:"",email:""};
+  user= {name:"",email:"",image:""};
+  private apiUrl = environment.apiUrl
 
   onLoginSuccess(): void {
     //console.log("aaaaaaaaaaaaaaaaaaaaaahhhhhhhhhhhhhhhhhhhh");
 
-    const url = `https://node-e-commerce-rlkh.onrender.com/api/profile`;
-    // const token: string = localStorage.getItem('token') as string
-    // console.log(token)
-    // let headers = new HttpHeaders({ 'jwt': `Bearer ${token}` });
-    // console.log(headers)
+    const url = `${this.apiUrl}/api/profile`;
+
     this.http
       .get(url)
       .pipe(
@@ -40,9 +39,9 @@ export class ProfileComponent implements OnInit {
         })
       )
       .subscribe((response: any) => {
-          //console.log(response);
         this.user.name = response.name;
         this.user.email = response.email;
+        response.image?this.user.image=response.image:this.user.image="istockphoto-1682296067-612x612.jpg"
 
       });
   }
@@ -51,7 +50,7 @@ export class ProfileComponent implements OnInit {
   editMode = false; // Flag to track edit mode
 
   getUserProfile(): void {
-    const url = `https://node-e-commerce-rlkh.onrender.com/api/profile`;
+    const url = `${this.apiUrl}/api/profile`;
 
     this.http.get(url)
       .pipe(
@@ -73,7 +72,7 @@ export class ProfileComponent implements OnInit {
   }
 
 updateUserProfile(): void {
-  const url = `https://node-e-commerce-rlkh.onrender.com/api/profile`;
+  const url = `${this.apiUrl}/api/profile`;
 
 
   this.http.patch(url, this.user)

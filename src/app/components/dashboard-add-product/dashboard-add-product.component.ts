@@ -37,16 +37,16 @@ export class DashboardAddProductComponent implements OnDestroy ,OnInit {
     title: new FormControl('', [Validators.required, Validators.minLength(3)]),
     description: new FormControl('', [
       Validators.required,
-      Validators.minLength(3),
+      Validators.minLength(10),
     ]),
     price: new FormControl(0, [
       Validators.required,
-      Validators.min(0),
-      Validators.max(60),
+      Validators.min(1),
+      Validators.max(200000),
     ]),
     category: new FormControl('', [Validators.required]),
-    //imageCover: new FormControl('', [Validators.required]),
-    quantity:new FormControl(0,[Validators.required]),
+    imageCover: new FormControl('', [Validators.required]),
+    quantity:new FormControl(0,[Validators.required,Validators.min(1)]),
 
   });
 
@@ -58,14 +58,16 @@ export class DashboardAddProductComponent implements OnDestroy ,OnInit {
     //console.log(this.selectedFile)
     console.log(this.product.value.title)
 
-
-
-
   }
 
 
 
   addProduct() {
+    if (!this.product.valid) return;
+    if (this.product.invalid) {
+      return;
+    }
+
     let formData = new FormData();
     console.log(this.selectedFile, this.selectedFile.name)
     console.log(formData);

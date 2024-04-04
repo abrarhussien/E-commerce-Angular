@@ -17,49 +17,49 @@
     </div>
 </section>
 
-<section class="py-5">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 mb-4 mb-lg-0">
-                <!-- Cart Items -->
-                <div class="table-responsive mb-4" *ngIf="cartItems.length > 0">
-                    <table class="table text-nowrap">
-                        <thead class="bg-light">
-                            <tr>
-                                <th class="border-0 p-3" scope="col"><strong class="text-sm text-uppercase">Product</strong></th>
-                                <th class="border-0 p-3" scope="col"><strong class="text-sm text-uppercase">Price</strong></th>
-                                <th class="border-0 p-3" scope="col"><strong class="text-sm text-uppercase">Quantity</strong></th>
-                                <th class="border-0 p-3" scope="col"><strong class="text-sm text-uppercase">Total</strong></th>
-                                <th class="border-0 p-3" scope="col"><strong class="text-sm text-uppercase"></strong></th>
-                            </tr>
-                        </thead>
-                        <tbody class="border-0">
-                            <tr *ngFor="let item of cartItems">
-                                <th class="ps-0 py-3 border-light" scope="row">
-                                    <div class="d-flex align-items-center">
-                                        <!-- Replace anchor tag with router link -->
-                                        <a class="reset-anchor d-block animsition-link" [routerLink]="['/products', item._id]">
-                                            <img src="{{ item.productId.imageCover }}" alt="{{ item.productId.title }}" width="70" />
-                                        </a>
-                                        <div class="ms-3">
-                                            <strong class="h6">
-                                                <!-- Limit product title to 20 characters -->
-                                                <ng-container *ngIf="item.productId.title.length <= 20; else shortenName">
-                                                    <!-- If product title is within limit, display as normal -->
-                                                    <a class="reset-anchor animsition-link" [routerLink]="['/products', item._id]">{{ item.productId.title }}</a>
-                                                </ng-container>
-                                                <ng-template #shortenName>
-                                                    <!-- If product title is longer, display first 20 characters with ellipsis and show full name on hover -->
-                                                    <a class="reset-anchor animsition-link" [routerLink]="['/products', item._id]" [title]="item.productId.title">{{ item.productId.title | slice:0:20 }}{{ item.productId.title.length > 20 ? '...' : '' }}</a>
-                                                </ng-template>
-                                            </strong>
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mb-4 mb-lg-0">
+                    <!-- Cart Items -->
+                    <div class="table-responsive mb-4" *ngIf="cartItems.length > 0">
+                        <table class="table text-nowrap">
+                            <thead class="bg-light">
+                                <tr>
+                                    <th class="border-0 p-3" scope="col"><strong class="text-sm text-uppercase">Product</strong></th>
+                                    <th class="border-0 p-3" scope="col"><strong class="text-sm text-uppercase">Price</strong></th>
+                                    <th class="border-0 p-3" scope="col"><strong class="text-sm text-uppercase">Quantity</strong></th>
+                                    <th class="border-0 p-3" scope="col"><strong class="text-sm text-uppercase">Total</strong></th>
+                                    <th class="border-0 p-3" scope="col"><strong class="text-sm text-uppercase"></strong></th>
+                                </tr>
+                            </thead>
+                            <tbody class="border-0">
+                                <tr *ngFor="let item of cartItems">
+                                    <th class="ps-0 py-3 border-light" scope="row">
+                                        <div class="d-flex align-items-center">
+                                            <!-- Replace anchor tag with router link -->
+                                            <a class="reset-anchor d-block animsition-link" [routerLink]="['/products', item._id]">
+                                                <img  src="assets/images/products/{{ item.productId.imageCover }}" alt="{{ item.productId.title }}" width="70" />
+                                            </a>
+                                            <div class="ms-3">
+                                                <strong class="h6">
+                                                    <!-- Limit product title to 20 characters -->
+                                                    <ng-container *ngIf="item.productId.title.length <= 20; else shortenName">
+                                                        <!-- If product title is within limit, display as normal -->
+                                                        <a class="reset-anchor animsition-link" [routerLink]="['/products', item._id]">{{ item.productId.title }}</a>
+                                                    </ng-container>
+                                                    <ng-template #shortenName>
+                                                        <!-- If product title is longer, display first 20 characters with ellipsis and show full name on hover -->
+                                                        <a class="reset-anchor animsition-link" [routerLink]="['/products', item._id]" [title]="item.productId.title">{{ item.productId.title | slice:0:20 }}{{ item.productId.title.length > 20 ? '...' : '' }}</a>
+                                                    </ng-template>
+                                                </strong>
+                                            </div>
                                         </div>
-                                    </div>
-                                </th>
-                                <td class="p-3 align-middle border-light">
-                                    <p class="mb-0 small">{{ item.productId.price }}</p>
-                                </td>
-                                <td class="p-3 align-middle border-light">
+                                    </th>
+                                    <td class="p-3 align-middle border-light">
+                                        <p class="mb-0 small">{{ item.productId.price }}</p>
+                                    </td>
+                                    <td class="p-3 align-middle border-light">
                                     <div class="quantity">
                                         <button class="dec-btn p-0" (click)="decreaseQuantity(item.productId._id, item.quantity)">
                                             <i class="fas fa-caret-left"></i>
@@ -141,42 +141,6 @@
     </div>
 </section>
 
-<!-- Footer -->
-<footer class="bg-dark text-white">
-    <div class="container py-4">
-        <div class="row py-5">
-            <div class="col-md-4 mb-3 mb-md-0">
-                <h6 class="text-uppercase mb-3">Customer services</h6>
-                <ul class="list-unstyled mb-0">
-                    <li><a class="footer-link" href="#!">Help &amp; Contact Us</a></li>
-                    <li><a class="footer-link" href="#!">Returns &amp; Refunds</a></li>
-                    <li><a class="footer-link" href="#!">Online Stores</a></li>
-                    <li><a class="footer-link" href="#!">Terms &amp; Conditions</a></li>
-                </ul>
-            </div>
-            <div class="col-md-4 mb-3 mb-md-0">
-                <h6 class="text-uppercase mb-3">Company</h6>
-                <ul class="list-unstyled mb-0">
-                    <li><a class="footer-link" href="#!">What We Do</a></li>
-                    <li><a class="footer-link" href="#!">Available Services</a></li>
-                    <li><a class="footer-link" href="#!">Latest Posts</a></li>
-                    <li><a class="footer-link" href="#!">FAQs</a></li>
-                </ul>
-            </div>
-            <div class="col-md-4">
-                <h6 class="text-uppercase mb-3">Social media</h6>
-                <ul class="list-unstyled mb-0">
-                    <li><a class="footer-link" href="#!">Twitter</a></li>
-                    <li><a class="footer-link" href="#!">Instagram</a></li>
-                    <li><a class="footer-link" href="#!">Tumblr</a></li>
-                    <li><a class="footer-link" href="#!">Pinterest</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="border-top pt-4" style="border-color: #1d1d1d !important">
-            <div class="row">
 
-            </div>
-        </div>
-    </div>
-</footer>
+
+

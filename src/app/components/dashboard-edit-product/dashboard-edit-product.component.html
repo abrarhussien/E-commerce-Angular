@@ -17,6 +17,21 @@
             formControlName="title"
 
           />
+          <div
+          *ngIf="
+            product.get('title')?.touched &&
+            product.get('title')?.errors
+          "
+          class="text-danger"
+        >
+          <p *ngIf="product.get('title')?.getError('required')">
+           title is required
+          </p>
+          <p *ngIf="product.get('title')?.getError('minlength')">
+            title min length is 3 Characters
+          </p>
+
+        </div>
         </div>
         <div class="col-lg-12">
           <label class="form-label text-sm text-uppercase" for="details"
@@ -29,6 +44,21 @@
             placeholder="Enter product details"
             formControlName="description"
           />
+          <div
+          *ngIf="
+            product.get('description')?.touched &&
+            product.get('description')?.errors
+          "
+          class="text-danger"
+        >
+          <p *ngIf="product.get('description')?.getError('required')">
+            description is required
+          </p>
+          <p *ngIf="product.get('description')?.getError('minlength')">
+            description min length is 10 Characters
+          </p>
+
+        </div>
         </div>
         <div class="col-lg-12">
           <label class="form-label text-sm text-uppercase" for="price"
@@ -41,6 +71,24 @@
             placeholder="Enter price"
             formControlName="price"
           />
+          <div
+          *ngIf="
+            product.get('price')?.touched &&
+            product.get('price')?.errors
+          "
+          class="text-danger"
+        >
+          <p *ngIf="product.get('price')?.getError('required')">
+            price is required
+          </p>
+          <p *ngIf="product.get('price')?.getError('min')">
+            price min is 1
+          </p>
+          <p *ngIf="product.get('price')?.getError('max')">
+            price max is 200000
+          </p>
+
+        </div>
         </div>
         <div class="col-lg-12">
           <label class="form-label text-sm text-uppercase" for="quantity"
@@ -53,6 +101,22 @@
             placeholder="Enter quantity"
             formControlName="quantity"
           />
+          <div
+          *ngIf="
+            product.get('quantity')?.touched &&
+            product.get('quantity')?.errors
+          "
+          class="text-danger"
+        >
+          <p *ngIf="product.get('quantity')?.getError('required')">
+            quantity is required
+          </p>
+          <p *ngIf="product.get('quantity')?.getError('min')">
+            quantity min is 1
+          </p>
+
+
+        </div>
         </div>
         <div class="col-lg-6 form-group">
           <label class="form-label text-sm text-uppercase" for="category"
@@ -76,16 +140,15 @@
           <label class="form-label text-sm text-uppercase" for="image"
             >image
           </label>
-          <input
-            class="form-control form-control-lg"
-            type="text"
-            id="image"
-            formControlName="imageCover"
-          />
+<br>
+
+          <img  src="assets/images/products/{{ product.value['imageCover'] }}" width="200px" class="mb-3"  />
+          <input type="file" class="form-control form-control-lg" (change)="onFileSelected($event)">
+
         </div>
 
         <div class="col-lg-12 form-group">
-          <button class="btn btn-dark" type="submit">Edit</button>
+          <button class="btn btn-dark" [disabled]="!product.valid" type="submit">Edit</button>
         </div>
       </div>
     </form>

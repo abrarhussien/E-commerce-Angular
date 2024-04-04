@@ -8,7 +8,9 @@ import { DeleteConfirmationComponent  } from '../components/delete-confirmation/
 })
 export class DeleteConfirmationService {
 
-  constructor(private dialog: MatDialog) { }
+  constructor(
+    private dialog: MatDialog
+    ) { }
 
   openConfirmationDialog(message: string): Observable<boolean> {
     const dialogRef: MatDialogRef<DeleteConfirmationComponent > = this.dialog.open(DeleteConfirmationComponent , {
