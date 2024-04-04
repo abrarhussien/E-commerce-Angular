@@ -112,12 +112,18 @@ export class ProductComponent implements OnInit {
     addToCart(product: any) {
 
    console.log(product);
+   if(sessionStorage.getItem('role')=="user"||sessionStorage.getItem('role')=="admin"){
 
       this.cartService.addToCart(product._id, 1).subscribe({
       next: () => {
         this.router.navigate(['/cart']);
         this.cartService.incrementCartCounter();
     }})
+  }
+  else{
+    this.router.navigate(['/cart']);
+
+  }
   }
 
   getAllProducts(page: number,sortField: string , search:string): void {
