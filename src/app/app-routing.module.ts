@@ -108,7 +108,9 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
   },
   { path: 'products/:id', component: ProductDetailsComponent },
+
   { path: 'error', component: SomeThingComponent },
+
 
 
 ];

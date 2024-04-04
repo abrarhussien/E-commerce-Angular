@@ -81,7 +81,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     ErrorComponent,
     SomeThingComponent,
     DeleteConfirmationComponent,
-    DashboardSidebarComponent
+    DashboardSidebarComponent,
+    
   ],
 
   imports: [

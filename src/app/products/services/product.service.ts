@@ -13,12 +13,12 @@ export class ProductService {
 
   constructor(private httpclient: HttpClient) {}
 
-  getAllProducts(page: number, sortField:string,search:string) {
+  getAllProducts(page: number, sortField:string,search:string,limit:number) {
     console.log(page,sortField,search)
 
     return this.httpclient
       .get(
-        `${this.api}/api/v1/products?page=${page||1}${sortField?"&sort="+sortField:""}&limit=6${search&&search!==" "?"&keyword="+search:""}`
+        `${this.api}/api/v1/products?page=${page||1}${sortField?"&sort="+sortField:""}&limit=${limit}${search&&search!==" "?"&keyword="+search:""}`
       )
       .pipe(
         catchError((error: any) => {
