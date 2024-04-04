@@ -108,7 +108,8 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
   },
   { path: 'products/:id', component: ProductDetailsComponent },
-  //{ path: '**', component: ErrorComponent, pathMatch:"full" }
+  // { path: '**', component: ErrorComponent,pathMatch:'full' },
+  // { path: '**', component: SomeThingComponent },
 ];
 
 @NgModule({

@@ -122,7 +122,7 @@ export class ProductComponent implements OnInit {
 
   getAllProducts(page: number,sortField: string , search:string): void {
     //console.log(search)
-    this.productService.getAllProducts(page, sortField,search).subscribe({
+    this.productService.getAllProducts(page, sortField,search,6).subscribe({
       next: (data: any) => {
 
         this.allProduct = data.data;

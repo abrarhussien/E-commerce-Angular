@@ -20,6 +20,6 @@ import { NgbRating } from '@ng-bootstrap/ng-bootstrap';
     ReviewModule,
     NgbRating,
   ],
-  exports: [],
+  exports: [ProductComponent],
 })
 export class ProductModule {}
