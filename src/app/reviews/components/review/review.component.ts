@@ -1,3 +1,5 @@
+import { DeleteConfirmationService } from './../../../services/delete-confirmation.service';
+import { DeleteConfirmationComponent } from './../../../components/delete-confirmation/delete-confirmation.component';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Review } from '../../models/review';
 import { ReviewService } from './../../services/review.service';
@@ -30,7 +32,8 @@ export class ReviewComponent implements OnInit {
     private reviewService: ReviewService,
     private route: ActivatedRoute,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private DeleteConfirmationService:DeleteConfirmationService
   ) {
     this.getCurrentUser();
   }
@@ -122,11 +125,29 @@ export class ReviewComponent implements OnInit {
       });
   }
   add() {
-    this.addReview = true;
-    this.updateRev = false;
-    this.myForm.reset();
-    this.openModal();
-  }
+    if(sessionStorage.getItem('token')){
+
+      this.addReview = true;
+      this.updateRev = false;
+      this.myForm.reset();
+      this.openModal();
+    }else{
+      this.router.navigate(['/login'])
+    }
+    }
+
+    openConfirmationDialog(id: string): void {
+      if (id) {
+        this.DeleteConfirmationService.openConfirmationDialog('Are you sure you want to delete this item from your cart?')
+          .subscribe(result => {
+            if (result) {
+              this.deleteReview(id);
+            }
+          });
+      } else {
+        console.error('Review ID is undefined');
+      }
+    }
   deleteReview(id: any) {
     this.reviewService.deleteProductReviews(id).subscribe({
       next: (data) => {
