@@ -12,7 +12,11 @@
           <div class="col-lg-6">
             <!-- User Image -->
             <img
-              src="assets/images/users/{{ user.image }}"
+              src="assets/images/users/{{
+                user.image
+                  ? user.image
+                  : 'blank-profile-picture-973460_640.webp'
+              }}"
               alt="User Image"
               class="img-fluid rounded-circle"
               style="max-width: 150px"
