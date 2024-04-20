@@ -15,7 +15,7 @@
             <p class="text-sm mb-0 text-muted mb-3">{{ item.reviewDetails }}</p>
             <div class="d-grid gap-2 d-md-block " *ngIf="userId==item.user._id">
               <button class="btn btn-primary me-3" type="button" (click)="EditReview(item,item._id)">Edit</button>
-              <button class="btn btn-danger" type="button" (click)="deleteReview(item._id)">Delete</button>
+              <button class="btn btn-danger" type="button" (click)="openConfirmationDialog(item._id)">Delete</button>
             </div>
           </div>
         </div>
@@ -58,7 +58,7 @@ aria-selected="true">Add Comment</li> -->
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add Review</h5>
+        <h5 class="modal-title" id="exampleModalLabel" >Add Review</h5>
         <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button>
       </div>
       <form [formGroup]="myForm" (ngSubmit)="addReview ? onSubmit(myForm) : onupdata(myForm)">
