@@ -4,6 +4,12 @@
   role="tabpanel"
   aria-labelledby="reviews-tab"
 >
+<div
+  class="tab-pane"
+  id="reviews"
+  role="tabpanel"
+  aria-labelledby="reviews-tab"
+>
   <div class="p-4 p-lg-5 bg-white">
     <div class="row">
       <div class="col-lg-8">
@@ -19,8 +25,21 @@
               alt=""
               width="50"
             />
+        <div class="d-flex mb-3" *ngFor="let item of dataReview; let i = index">
+          <div class="flex-shrink-0">
+            <img
+              class="rounded-circle"
+              src="assets/images/users/{{
+                item.user.image
+                  ? item.user.image
+                  : 'blank-profile-picture-973460_640.webp'
+              }}"
+              alt=""
+              width="50"
+            />
           </div>
           <div class="ms-3 flex-shrink-1">
+            <h6 class="mb-0 text-uppercase">{{ item.user["name"] }}</h6>
             <h6 class="mb-0 text-uppercase">{{ item.user["name"] }}</h6>
             <p class="small text-muted mb-0 text-uppercase">20 May 2020</p>
             <ul class="list-inline mb-1 text-xs">
@@ -30,8 +49,31 @@
                 [rate]="item.rating"
                 [readonly]="true"
               ></ngb-rating>
+              <ngb-rating
+                [max]="5"
+                [rate]="item.rating"
+                [readonly]="true"
+              ></ngb-rating>
             </ul>
             <p class="text-sm mb-0 text-muted mb-3">{{ item.reviewDetails }}</p>
+            <div
+              class="d-grid gap-2 d-md-block"
+              *ngIf="userId == item.user._id"
+            >
+              <button
+                class="btn btn-primary me-3"
+                type="button"
+                (click)="EditReview(item, item._id)"
+              >
+                Edit
+              </button>
+              <button
+                class="btn btn-danger"
+                type="button"
+                (click)="openConfirmationDialog(item._id)"
+              >
+                Delete
+              </button>
             <div
               class="d-grid gap-2 d-md-block"
               *ngIf="userId == item.user._id"
@@ -59,7 +101,20 @@
 </div>
 
 <nav aria-label="Page navigation example" *ngIf="totalPages != 1">
+<nav aria-label="Page navigation example" *ngIf="totalPages != 1">
   <ul class="pagination justify-content-center justify-content-lg-end">
+    <li
+      class="page-item mx-1"
+      *ngFor="let page of totalPagesArray; let i = index"
+      (click)="changePage(page)"
+      [class.active]="currentPage - 1 === page"
+    >
+      <a
+        class="page-link"
+        [routerLink]="['/product-detail', this.id]"
+        [queryParams]="{ page: currentPage }"
+      >
+        {{ page + 1 }}
     <li
       class="page-item mx-1"
       *ngFor="let page of totalPagesArray; let i = index"
@@ -84,6 +139,7 @@ aria-selected="true">Add Comment</li> -->
 <!-- <app-add-review></app-add-review>
  -->
 <button type="button" class="btn btn-primary" (click)="add()">
+<button type="button" class="btn btn-primary" (click)="add()">
   Add Review
 </button>
 
@@ -99,7 +155,18 @@ aria-selected="true">Add Comment</li> -->
           aria-label="Close"
           (click)="closeModal()"
         ></button>
+        <h5 class="modal-title" id="exampleModalLabel">Add Review</h5>
+        <button
+          type="button"
+          class="btn-close"
+          aria-label="Close"
+          (click)="closeModal()"
+        ></button>
       </div>
+      <form
+        [formGroup]="myForm"
+        (ngSubmit)="addReview ? onSubmit(myForm) : onupdata(myForm)"
+      >
       <form
         [formGroup]="myForm"
         (ngSubmit)="addReview ? onSubmit(myForm) : onupdata(myForm)"
@@ -109,6 +176,22 @@ aria-selected="true">Add Comment</li> -->
             <label for="review" class="form-label">Review</label>
 
             <!-- "myForm.controls['review'].errors?.['pattern'] -->
+            <input
+              type="text"
+              class="form-control"
+              id="review"
+              aria-describedby="emailHelp"
+              formControlName="review"
+            />
+            <div
+              class="text-danger"
+              *ngIf="
+                myForm.get('review')?.invalid &&
+                (myForm.get('review')?.dirty || myForm.get('review')?.touched)
+              "
+            >
+              Please provide a valid Review
+            </div>
             <input
               type="text"
               class="form-control"
@@ -140,6 +223,21 @@ aria-selected="true">Add Comment</li> -->
         </div>
 
         <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            (click)="closeModal()"
+          >
+            Close
+          </button>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="myForm.invalid"
+            (click)="closeModal()"
+          >
+            {{ addReview ? "Add Review" : "Update Review" }}
+          </button>
           <button
             type="button"
             class="btn btn-secondary"
