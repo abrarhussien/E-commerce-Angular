@@ -1,6 +1,6 @@
-export interface IProduct{
+export interface IProduct {
   productId: any;
-total: any;
+  total: any;
   _id: string;
   title: string;
   imageCover: string;
@@ -8,7 +8,7 @@ total: any;
   description: string;
   category: { name: string };
   quantity: number;
-  rating: number;
+  ratingsAverage: number;
   image: string;
   ratingsQuantity: number;
 }

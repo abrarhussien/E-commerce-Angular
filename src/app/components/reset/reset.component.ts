@@ -100,7 +100,7 @@ export class ResetComponent {
           next: (res) => {
             this.message = 'Password changed successfully';
             this.ToastrService.success(this.message);
-            sessionStorage.setItem('token', res.token);
+            localStorage.setItem('token', res.token);
             this.close();
           },
           error: (err) => {},

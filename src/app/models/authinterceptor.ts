@@ -20,7 +20,7 @@ export class AuthInterceptor implements HttpInterceptor {
     this.NgxSpinnerService.show();
     req = req.clone({
       setHeaders: {
-        jwt: sessionStorage.getItem('token') || '',
+        jwt: localStorage.getItem('token') || '',
       },
     });
 

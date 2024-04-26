@@ -23,12 +23,12 @@ export class ProductDetailsComponent implements OnInit {
     image: '',
     imageCover: '',
     total: 0,
-    rating: 0,
-    productId: 0
+    ratingsAverage: 0,
+    productId: 0,
   };
   showDescription: boolean = true;
   showReview: boolean = false;
-  cartQuantity:number=1;
+  cartQuantity: number = 1;
 
   constructor(
     private productService: ProductService,
@@ -38,6 +38,12 @@ export class ProductDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.productService.rating.subscribe({
+      next: (res) => {
+        console.log(res);
+        this.data.ratingsAverage = (this.data.ratingsAverage + res) / 2;
+      },
+    });
     this.id = this.route.snapshot.paramMap.get('id');
     this.getProduct(this.id);
   }
@@ -47,16 +53,18 @@ export class ProductDetailsComponent implements OnInit {
       next: () => {
         this.router.navigate(['/cart']);
         this.cartService.incrementCartCounter();
-    }})
+      },
+    });
   }
-  setQuantity(quantity:number){
-    if(this.cartQuantity+quantity>=1){
-    this.cartQuantity=this.cartQuantity+quantity;}
+  setQuantity(quantity: number) {
+    if (this.cartQuantity + quantity >= 1) {
+      this.cartQuantity = this.cartQuantity + quantity;
+    }
   }
   getProduct(id: string) {
     this.productService.getProductsById(id).subscribe((data: any) => {
+      console.log(data.data);
       this.data = data.data;
     });
   }
-
 }

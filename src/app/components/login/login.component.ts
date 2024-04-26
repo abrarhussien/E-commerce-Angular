@@ -23,7 +23,7 @@ const emailRegex = '[a-z0-9]+@[a-z]+.[a-z]{2,3}';
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
-  private apiUrl = environment.apiUrl
+  private apiUrl = environment.apiUrl;
   constructor(
     private router: Router,
     private http: HttpClient,
@@ -50,7 +50,7 @@ export class LoginComponent {
     const { email, password } = this.contactForm.value;
     //console.log(email, password);
     this.http
-      .post<any>(this.apiUrl+'/api/users/login', {
+      .post<any>(this.apiUrl + '/api/users/login', {
         email,
         password,
       })
@@ -63,17 +63,17 @@ export class LoginComponent {
       )
       .subscribe((response) => {
         //console.log('Response:', response);
-        let expirationDate = new Date(new Date().getTime() + (60000 * 60))
+        let expirationDate = new Date(new Date().getTime() + 60000 * 60);
         let tokenExpir = {
           value: response['token'],
-          expirationDate: expirationDate.toISOString()
-        }
+          expirationDate: expirationDate.toISOString(),
+        };
         let roleExpir = {
           value: response['role'],
-          expirationDate: expirationDate.toISOString()
-        }
-        sessionStorage.setItem('token', response['token']);
-        sessionStorage.setItem('role',  response['role']);
+          expirationDate: expirationDate.toISOString(),
+        };
+        localStorage.setItem('token', response['token']);
+        localStorage.setItem('role', response['role']);
 
         //localStorage.setItem('id', response['id']);
         const role = response['role'];

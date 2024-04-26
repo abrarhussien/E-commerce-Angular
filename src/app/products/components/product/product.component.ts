@@ -21,12 +21,12 @@ export class ProductComponent implements OnInit {
   currentPage: number = 0;
   totalPages: number = 0;
   page: any;
-  categoryId:any;
-  limit:number=6;
+  categoryId: any;
+  limit: number = 6;
   totalPagesArray: number[] = [];
   //sortField='category', sortOrder
   sortField: any;
-    id: any;
+  id: any;
   data: IProduct = {
     _id: '',
     title: '',
@@ -38,34 +38,28 @@ export class ProductComponent implements OnInit {
     image: '',
     imageCover: '',
     total: 0,
-    rating: 0,
-    productId: 0
+    ratingsAverage: 0,
+    productId: 0,
   };
 
-  searchfilter:any;
+  searchfilter: any;
 
-  allCategors:Category[]=[];
+  allCategors: Category[] = [];
   constructor(
     private productService: ProductService,
     private router: Router,
     private route: ActivatedRoute,
 
     private cartService: CartService,
-    private categoryService:CategoriesService
-
-
-
+    private categoryService: CategoriesService
   ) {}
   // this.userService.getAll().subscribe((data)=>{
   //   this.allUsers=data;
   // })
   ngOnInit(): void {
-
-
-    this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
-  )
-      .subscribe(event => {
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((event) => {
         console.log(event);
         this.page = this.route.snapshot.queryParamMap.get('page');
         this.searchfilter = this.route.snapshot.queryParamMap.get('title');
@@ -73,31 +67,44 @@ export class ProductComponent implements OnInit {
         this.currentPage = this.page || 1;
 
         this.categoryId = this.route.snapshot.paramMap.get('id');
-        console.log(this.sortField)
-        if(this.categoryId){
-          this.getProductsByCategoryId(this.categoryId,this.currentPage, this.sortField,this.searchfilter)
-        }else{
-          this.getAllProducts(this.currentPage, this.sortField,this.searchfilter);
+        console.log(this.sortField);
+        if (this.categoryId) {
+          this.getProductsByCategoryId(
+            this.categoryId,
+            this.currentPage,
+            this.sortField,
+            this.searchfilter
+          );
+        } else {
+          this.getAllProducts(
+            this.currentPage,
+            this.sortField,
+            this.searchfilter
+          );
         }
-          //console.log((event as NavigationEnd));
-
+        //console.log((event as NavigationEnd));
       });
 
-      this.page = this.route.snapshot.queryParamMap.get('page');
-      this.currentPage = this.page || 1;
+    this.page = this.route.snapshot.queryParamMap.get('page');
+    this.currentPage = this.page || 1;
 
-      this.searchfilter = this.route.snapshot.queryParamMap.get('title');
-      this.sortField = this.route.snapshot.queryParamMap.get('sort');
+    this.searchfilter = this.route.snapshot.queryParamMap.get('title');
+    this.sortField = this.route.snapshot.queryParamMap.get('sort');
 
-      this.categoryId = this.route.snapshot.paramMap.get('id');
+    this.categoryId = this.route.snapshot.paramMap.get('id');
 
-      if(this.categoryId){
-        this.getProductsByCategoryId(this.categoryId,this.currentPage, this.sortField,this.searchfilter)
-      }else{
-        this.getAllProducts(this.currentPage, this.sortField,this.searchfilter);
-      }
+    if (this.categoryId) {
+      this.getProductsByCategoryId(
+        this.categoryId,
+        this.currentPage,
+        this.sortField,
+        this.searchfilter
+      );
+    } else {
+      this.getAllProducts(this.currentPage, this.sortField, this.searchfilter);
+    }
 
-      this.findAllCategories();
+    this.findAllCategories();
 
     //this.searchfilter = this.route.snapshot.queryParamMap.get('title')||"";
     // this.productService.searchKeyword.subscribe({
@@ -105,85 +112,89 @@ export class ProductComponent implements OnInit {
     //     this.searchfilter=data
     //   }
     // })
-
-
   }
 
-    addToCart(product: any) {
-
-   console.log(product);
-   if(sessionStorage.getItem('role')=="user"||sessionStorage.getItem('role')=="admin"){
-
+  addToCart(product: any) {
+    console.log(product);
+    if (
+      localStorage.getItem('role') == 'user' ||
+      localStorage.getItem('role') == 'admin'
+    ) {
       this.cartService.addToCart(product._id, 1).subscribe({
-      next: () => {
-        this.router.navigate(['/cart']);
-        this.cartService.incrementCartCounter();
-    }})
+        next: () => {
+          this.router.navigate(['/cart']);
+          this.cartService.incrementCartCounter();
+        },
+      });
+    } else {
+      this.router.navigate(['/cart']);
+    }
   }
-  else{
-    this.router.navigate(['/cart']);
 
-  }
-  }
-
-  getAllProducts(page: number,sortField: string , search:string): void {
+  getAllProducts(page: number, sortField: string, search: string): void {
     //console.log(search)
-    this.productService.getAllProducts(page, sortField,search,6).subscribe({
+    this.productService.getAllProducts(page, sortField, search, 6).subscribe({
       next: (data: any) => {
-
         this.allProduct = data.data;
         this.currentPage = data.paginationResult.currentPage;
-        this.limit=data.paginationResult.limit;
+        this.limit = data.paginationResult.limit;
         this.totalPages = data.paginationResult.numberPages;
 
-        console.log(data ,"total",this.totalPages )
+        console.log(data, 'total', this.totalPages);
         this.totalPagesArray = Array.from(
           { length: this.totalPages },
           (_, i) => i
         );
       },
-      error: (err) => {alert('Error'); console.log(err)},
+      error: (err) => {
+        alert('Error');
+        console.log(err);
+      },
     });
   }
 
-
-  getProductsByCategoryId(id:any,page: number,sortField: string,search:string): void {
-    this.productService.getProductsByCategory(id,page, sortField,search).subscribe({
-      next: (data: any) => {
-        //console.log(data)
-        this.allProduct = data.data;
-        this.currentPage = data.paginationResult.currentPage;
-        this.limit=data.paginationResult.limit;
-        this.totalPages = data.paginationResult.numberPages;
-        this.totalPagesArray = Array.from(
-          { length: this.totalPages },
-          (_, i) => i
-        );
-      },
-      error: (err) => alert('Error'),
-    });
+  getProductsByCategoryId(
+    id: any,
+    page: number,
+    sortField: string,
+    search: string
+  ): void {
+    this.productService
+      .getProductsByCategory(id, page, sortField, search)
+      .subscribe({
+        next: (data: any) => {
+          //console.log(data)
+          this.allProduct = data.data;
+          this.currentPage = data.paginationResult.currentPage;
+          this.limit = data.paginationResult.limit;
+          this.totalPages = data.paginationResult.numberPages;
+          this.totalPagesArray = Array.from(
+            { length: this.totalPages },
+            (_, i) => i
+          );
+        },
+        error: (err) => alert('Error'),
+      });
   }
 
   changePage(newPage: number): void {
     if (newPage >= 0 && newPage < this.totalPages) {
-      if(this.categoryId){
-      this.currentPage = newPage;
-      // this.router.navigate(['/home/category', this.categoryId, 'product'], {
-      //   queryParams: { page: this.currentPage + 1 },
-      // });
-      this.router.navigate([], {
-        relativeTo: this.route,
-        queryParams: {
-          page: this.currentPage + 1
-        },
-        queryParamsHandling: 'merge',
-      });
-      // this.getAllProducts(this.currentPage , this.sortField);
+      if (this.categoryId) {
+        this.currentPage = newPage;
+        // this.router.navigate(['/home/category', this.categoryId, 'product'], {
+        //   queryParams: { page: this.currentPage + 1 },
+        // });
+        this.router.navigate([], {
+          relativeTo: this.route,
+          queryParams: {
+            page: this.currentPage + 1,
+          },
+          queryParamsHandling: 'merge',
+        });
+        // this.getAllProducts(this.currentPage , this.sortField);
 
-
-       // this.getProductsByCategoryId(this.categoryId,this.currentPage+1, this.sortField,this.searchfilter)
-
-      }else{
+        // this.getProductsByCategoryId(this.categoryId,this.currentPage+1, this.sortField,this.searchfilter)
+      } else {
         this.currentPage = newPage;
         // this.router.navigate(['/products'], {
         //   queryParams: { page: this.currentPage + 1 },
@@ -191,7 +202,7 @@ export class ProductComponent implements OnInit {
         this.router.navigate([], {
           relativeTo: this.route,
           queryParams: {
-            page: this.currentPage + 1
+            page: this.currentPage + 1,
           },
           queryParamsHandling: 'merge',
         });
@@ -201,14 +212,13 @@ export class ProductComponent implements OnInit {
     }
   }
   sorting(event: any) {
-
     // this.getAllProducts(this.currentPage, sortField);
-    if(this.categoryId){
+    if (this.categoryId) {
       let value = event.target.value;
       //console.log(value);
       //let value = event.target.value;
       //console.log(value); // Just for debugging, you can remove this line
-      const sortField= value
+      const sortField = value;
       this.sortField = value;
       // this.sortOrder = sortOrder;
       // this.router.navigate(['/category', this.categoryId, 'product'], {
@@ -218,17 +228,17 @@ export class ProductComponent implements OnInit {
         relativeTo: this.route,
         queryParams: {
           sortField,
-          page:1
+          page: 1,
         },
         queryParamsHandling: 'merge',
       });
-     //this.getProductsByCategoryId(this.categoryId,this.currentPage, this.sortField,this.searchfilter)
-    }else{
+      //this.getProductsByCategoryId(this.categoryId,this.currentPage, this.sortField,this.searchfilter)
+    } else {
       let value = event.target.value;
       //console.log(value);
       //let value = event.target.value;
       //console.log(value); // Just for debugging, you can remove this line
-      const sortField= value
+      const sortField = value;
       this.sortField = value;
       // this.sortOrder = sortOrder;
       // this.router.navigate(['/products'], {
@@ -238,7 +248,7 @@ export class ProductComponent implements OnInit {
         relativeTo: this.route,
         queryParams: {
           sortField,
-          page:1
+          page: 1,
         },
         queryParamsHandling: 'merge',
       });
@@ -246,11 +256,11 @@ export class ProductComponent implements OnInit {
     }
   }
 
-
-  findAllCategories(){
+  findAllCategories() {
     this.categoryService.getCategories().subscribe({
-      next:(result:any)=>{
-        this.allCategors=result.data;
-      }})
+      next: (result: any) => {
+        this.allCategors = result.data;
+      },
+    });
   }
 }

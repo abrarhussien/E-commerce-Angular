@@ -11,7 +11,7 @@ import { IProduct } from '../../models/product.model';
   templateUrl: './dashboard-add-product.component.html',
   styleUrl: './dashboard-add-product.component.css',
 })
-export class DashboardAddProductComponent implements OnDestroy ,OnInit {
+export class DashboardAddProductComponent implements OnDestroy, OnInit {
   constructor(
     private productService: ProductService,
     private categoriesService: CategoriesService,
@@ -20,18 +20,18 @@ export class DashboardAddProductComponent implements OnDestroy ,OnInit {
   ngOnInit(): void {
     this.subscriptions.add(
       this.categoriesService.getCategories().subscribe({
-        next: (categories:any) => {
+        next: (categories: any) => {
           this.categories = categories.data;
         },
         error: (err) => {
           console.log(err.message);
-        }
+        },
       })
-      )
+    );
   }
 
   subscriptions = new Subscription();
-  selectedFile:any;
+  selectedFile: any;
 
   product = new FormGroup({
     title: new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -46,21 +46,24 @@ export class DashboardAddProductComponent implements OnDestroy ,OnInit {
     ]),
     category: new FormControl('', [Validators.required]),
     imageCover: new FormControl('', [Validators.required]),
-    quantity:new FormControl(0,[Validators.required,Validators.min(1)]),
-
+    quantity: new FormControl(0, [Validators.required, Validators.min(1)]),
   });
 
-  categories:any;
+  categories: any;
 
   onFileSelected(event: Event) {
     //@ts-ignore
-    this.selectedFile = (event.target as HTMLInputElement)['files'][0]
+    this.selectedFile = (event.target as HTMLInputElement)['files'][0];
     //console.log(this.selectedFile)
-    console.log(this.product.value.title)
-
+    console.log(this.product.value.title);
+    // onFileSelected(event: Event) {
+    //   this.selectedFile = (event.target as HTMLInputElement).files[0];
+    //   if (this.selectedFile) {
+    //     const timestamp = new Date().getTime();
+    //     // Append timestamp to the selected file name
+    //     this.selectedFile.imageUrl = `${this.selectedFile.name}?timestamp=${timestamp}`;
+    //   }
   }
-
-
 
   addProduct() {
     if (!this.product.valid) return;
@@ -69,24 +72,23 @@ export class DashboardAddProductComponent implements OnDestroy ,OnInit {
     }
 
     let formData = new FormData();
-    console.log(this.selectedFile, this.selectedFile.name)
+    console.log(this.selectedFile, this.selectedFile.name);
     console.log(formData);
 
     formData.append('imageCover', this.selectedFile, this.selectedFile.name);
-    const title=this.product.value.title
+    const title = this.product.value.title;
     formData.append('title', title as string);
-    const description=this.product.value.description
+    const description = this.product.value.description;
     formData.append('description', description as string);
-    const price=""+this.product.value.price
+    const price = '' + this.product.value.price;
     formData.append('price', price as string);
-    const quantity=""+this.product.value.quantity
+    const quantity = '' + this.product.value.quantity;
     formData.append('quantity', quantity as string);
-    const category=""+this.product.value.category
+    const category = '' + this.product.value.category;
     formData.append('category', category as string);
     //console.log(formData);
 
     //formData.append('text', this.product.value.quantity, this.selectedFile.name);
-
 
     //@ts-ignore
     this.subscriptions.add(
@@ -96,7 +98,7 @@ export class DashboardAddProductComponent implements OnDestroy ,OnInit {
         },
         error: (err) => {
           alert(err.message);
-          console.log(err)
+          console.log(err);
         },
       })
     );

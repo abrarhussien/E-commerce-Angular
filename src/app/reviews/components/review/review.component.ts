@@ -16,6 +16,7 @@ import {
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { filter } from 'rxjs';
+import { ProductService } from '../../../products/services/product.service';
 
 @Component({
   selector: 'app-review',
@@ -33,7 +34,8 @@ export class ReviewComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private formBuilder: FormBuilder,
-    private DeleteConfirmationService:DeleteConfirmationService
+    private DeleteConfirmationService: DeleteConfirmationService,
+    private productService: ProductService
   ) {
     this.getCurrentUser();
   }
@@ -67,7 +69,7 @@ export class ReviewComponent implements OnInit {
     reviewDetails: '',
     user: '',
     product: '',
-    rating: 0,
+    ratingsAverage: 0,
   };
   dataEdit: object = {
     reviewDetails: '',
@@ -100,7 +102,7 @@ export class ReviewComponent implements OnInit {
           Validators.minLength(3),
         ],
       ],
-      rating: [0, [Validators.required]],
+      ratingsAverage: [0, [Validators.required]],
     });
 
     this.getProductReviews(this.currentPage);
@@ -114,6 +116,7 @@ export class ReviewComponent implements OnInit {
     this.reviewService
       .getProductReviews(page, this.id)
       .subscribe((data: any) => {
+        console.log(data.data);
         this.dataReview = data.data;
         this.currentPage = data.paginationResult.currentPage;
         this.limit = data.paginationResult.limit;
@@ -125,29 +128,29 @@ export class ReviewComponent implements OnInit {
       });
   }
   add() {
-    if(sessionStorage.getItem('token')){
-
+    if (localStorage.getItem('token')) {
       this.addReview = true;
       this.updateRev = false;
       this.myForm.reset();
       this.openModal();
-    }else{
-      this.router.navigate(['/login'])
+    } else {
+      this.router.navigate(['/login']);
     }
-    }
+  }
 
-    openConfirmationDialog(id: string): void {
-      if (id) {
-        this.DeleteConfirmationService.openConfirmationDialog('Are you sure you want to delete this item from your cart?')
-          .subscribe(result => {
-            if (result) {
-              this.deleteReview(id);
-            }
-          });
-      } else {
-        console.error('Review ID is undefined');
-      }
+  openConfirmationDialog(id: string): void {
+    if (id) {
+      this.DeleteConfirmationService.openConfirmationDialog(
+        'Are you sure you want to delete this item from your cart?'
+      ).subscribe((result) => {
+        if (result) {
+          this.deleteReview(id);
+        }
+      });
+    } else {
+      console.error('Review ID is undefined');
     }
+  }
   deleteReview(id: any) {
     this.reviewService.deleteProductReviews(id).subscribe({
       next: (data) => {
@@ -169,18 +172,27 @@ export class ReviewComponent implements OnInit {
     }
   }
   onSubmit(form: FormGroup) {
-    console.log(this.id);
+    console.log(form.value);
     if (form.valid) {
-      console.log('form.value.rating', form.value.rating);
+      console.log('form.value.ratingsAverage', form.value.ratingsAverage);
       this.dataEnter = {
         reviewDetails: form.value.review,
-        rating: form.value.rating,
+        ratingsAverage: form.value.ratingsAverage,
         user: this.userId,
         product: this.id,
       };
       this.reviewService.addroductReviews(this.id, this.dataEnter).subscribe({
-        next: (data) => console.log(data),
-        complete: () => this.getProductReviews(this.currentPage),
+        next: (data) => {
+          console.log(data);
+          //@ts-ignore
+          this.productService.rating.next(data.rating);
+        },
+        complete: () => {
+          this.router.navigate(['/product-detail/', this.id]);
+
+          this.getProductReviews(this.currentPage);
+          console.log(' this.id this.id', this.id);
+        },
       });
       console.log('id', 'this.dataReview)');
     }

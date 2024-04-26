@@ -4,37 +4,36 @@ import { BehaviorSubject } from 'rxjs';
 import { environment } from '../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class UserService  {
-  private apiUrl = environment.apiUrl
+export class UserService {
+  private apiUrl = environment.apiUrl;
 
-   public roleObservable: BehaviorSubject<string>= new BehaviorSubject("");
+  public roleObservable: BehaviorSubject<string> = new BehaviorSubject('');
 
-  constructor(private httpClient:HttpClient) { }
+  constructor(private httpClient: HttpClient) {}
 
-  getCurrentUser(){
+  getCurrentUser() {
     const url = `${this.apiUrl}/api/profile`;
-    return this.httpClient.get(url)
+    return this.httpClient.get(url);
   }
 
-isUser(){
-  if (sessionStorage.getItem('role')==='user'){
-    return true
+  isUser() {
+    if (localStorage.getItem('role') === 'user') {
+      return true;
+    }
+    return false;
   }
-  return false
-}
-isAdmin(){
-
-  if (sessionStorage.getItem('role')==='admin'){
-    return true
+  isAdmin() {
+    if (localStorage.getItem('role') === 'admin') {
+      return true;
+    }
+    return false;
   }
-  return false
-}
-isVesitor(){
-  if (!sessionStorage.getItem('role')){
-    return true
+  isVesitor() {
+    if (!localStorage.getItem('role')) {
+      return true;
+    }
+    return false;
   }
-  return false
-}
 }
